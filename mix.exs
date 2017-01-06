@@ -36,7 +36,7 @@ defmodule Shopify.Mixfile do
       files: ["lib", "mix.exs", "README*"],
       maintainers: ["Nicholas Sweeting"],
       licenses: ["MIT"],
-      links:  %{"GitHub" => "https://github.com/nsweeting/redis_pool"}
+      links:  %{"GitHub" => "https://github.com/nsweeting/shopify"}
     ]
   end
 
