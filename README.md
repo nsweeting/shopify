@@ -65,7 +65,7 @@ session = Shopify.session(:oauth, {"shop-name", "access-token"})
 Shopify.Product.find(session, 1)
 ```
 
-Here are some examples of various types of the various types of requests that can be made.
+Here are some examples of the various types of requests that can be made.
 
 ```elixir
 # Create a session struct
@@ -77,10 +77,10 @@ session = Shopify.session(:oauth, {"shop-name", "access-token"})
 # Find a resource and select fields
 {:ok, resource} = session |> Shopify.Product.find(id, %{fields: "id,images,title"})
 
-# Find resources
+# All resources
 {:ok, resources} = session |> Shopify.Product.all
 
-# Find resources with query params
+# All resources with query params
 {:ok, resources} = session |> Shopify.Product.all(%{page: 1, limit: 5})
 
 # Find a resource and update it
