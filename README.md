@@ -102,10 +102,10 @@ new_product = %Shopify.Product{
     }
 {:ok, resource} = session |> Shopify.Product.create(new_product)
 
-# Count all resources
+# Count resources
 {:ok, count} = session |> Shopify.Product.count
 
-# Count all resources with query params
+# Count resources with query params
 {:ok, count} = session |> Shopify.Product.count(%{vendor: "Fancy Vendor"})
 
 
