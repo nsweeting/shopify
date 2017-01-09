@@ -1,10 +1,10 @@
 defmodule Shopify.Product do
   @derive [Poison.Encoder]
-  @resource "product"
-  @resources "products"
+  @singular "product"
+  @plural "products"
 
-  use Shopify.Base
-  use Shopify.Count
+  use Shopify.Resource,
+    import: [:find, :all, :count, :create, :update, :delete]
 
   alias Shopify.{Product, Variant, Image, Option}
 
@@ -28,11 +28,17 @@ defmodule Shopify.Product do
     :vendor
   ]
 
-  def new do
+  def empty_resource do
     %Product{
       variants: [%Variant{}],
       images: [%Image{}],
       options: [%Option{}]
     }
   end
+
+  def find_url(id), do: @plural <>  "/#{id}.json"
+
+  def all_url, do: @plural <> ".json"
+
+  def count_url, do: @plural <> "/count.json"
 end

@@ -3,7 +3,7 @@ defmodule Shopify.Mixfile do
 
   def project do
     [app: :shopify,
-     version: "0.1.0",
+     version: "0.1.1",
      elixir: "~> 1.4-rc",
      description: description(),
      package: package(),
@@ -18,9 +18,9 @@ defmodule Shopify.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [
-      mod: {Shopify, []},
       extra_applications: [
-        :logger
+        :logger,
+        :httpoison
       ]
     ]
   end
@@ -36,7 +36,7 @@ defmodule Shopify.Mixfile do
       files: ["lib", "mix.exs", "README*"],
       maintainers: ["Nicholas Sweeting"],
       licenses: ["MIT"],
-      links:  %{"GitHub" => "https://github.com/nsweeting/redis_pool"}
+      links:  %{"GitHub" => "https://github.com/nsweeting/shopify"}
     ]
   end
 
@@ -53,7 +53,7 @@ defmodule Shopify.Mixfile do
     [
       {:httpoison, "~> 0.10.0"},
       {:poison, "~> 3.0"},
-      {:poolboy, "~> 1.5.1"}
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 end

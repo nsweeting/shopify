@@ -1,11 +1,10 @@
 defmodule Shopify.Customer do
   @derive [Poison.Encoder]
-  @resource "customer"
-  @resources "customers"
+  @singular "customer"
+  @plural "customers"
 
-  use Shopify.Base
-  use Shopify.Count
-  use Shopify.Search
+  use Shopify.Resource,
+    import: [:find, :all, :count, :create, :update, :delete, :search]
 
   alias Shopify.{Customer, Address}
 
@@ -32,10 +31,18 @@ defmodule Shopify.Customer do
     :verified_email
   ]
 
-  def new do
+  def empty_resource do
     %Customer{
       addresses: [%Address{}],
       default_address: %Address{}
     }
   end
+
+  def find_url(id), do: @plural <>  "/#{id}.json"
+
+  def all_url, do: @plural <> ".json"
+
+  def count_url, do: @plural <> "/count.json"
+
+  def search_url, do: @plural <> "/search.json"
 end

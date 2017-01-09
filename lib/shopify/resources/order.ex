@@ -1,17 +1,24 @@
 defmodule Shopify.Order do
   @derive [Poison.Encoder]
-  @resource "order"
-  @resources "orders"
+  @singular "order"
+  @plural "orders"
 
-  use Shopify.Base
-  use Shopify.Count
+  use Shopify.Resource,
+    import: [:find, :all, :count, :create, :update, :delete]
 
   alias Shopify.{
     Order,
+    Address,
+    Customer,
     PaymentDetails,
     ClientDetails,
     BillingAddress,
-    LineItem
+    ShippingAddress,
+    ShippingLine,
+    LineItem,
+    DiscountCode,
+    Fullfillment,
+    TaxLine
   }
 
   defstruct [
@@ -29,7 +36,7 @@ defmodule Shopify.Order do
     :discount_codes,
     :email,
     :financial_status,
-    :fulfillments,
+    :fullfillments,
     :fulfillment_status,
     :tags,
     :id,
@@ -64,12 +71,26 @@ defmodule Shopify.Order do
     :order_status_url
   ]
 
-  def new do
+  def empty_resource do
     %Order{
+      customer: %Customer{
+        default_address: %Address{}
+      },
       payment_details: %PaymentDetails{},
       client_details: %ClientDetails{},
       billing_address: %BillingAddress{},
-      line_items: [%LineItem{}]
+      shipping_address: %ShippingAddress{},
+      shipping_lines: [%ShippingLine{}],
+      line_items: [%LineItem{}],
+      discount_codes: [%DiscountCode{}],
+      fullfillments: [%Fullfillment{}],
+      tax_lines: [%TaxLine{}]
     }
   end
+
+  def find_url(id), do: @plural <>  "/#{id}.json"
+
+  def all_url, do: @plural <> ".json"
+
+  def count_url, do: @plural <> "/count.json"
 end
