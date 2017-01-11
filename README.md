@@ -39,17 +39,38 @@ Shopify.session
 Alternatively, we can create a one-off session.
 
 ```elixir
-Shopify.session(:basic, {"my-shop-name", "my-api-key", "my-password"})
+Shopify.session("my-shop-name", "my-api-key", "my-password")
 ```
 
 ### OAuth Apps
 
-**Support for access toke creation coming soon**
-
-We can also access the API with valid OAuth credentials.
+Once you have a shopify app client ID and secret, setup your `config/confix.exs`.
 
 ```elixir
-Shopify.session(:oauth, {"shop-name", "access-token"})
+config :shopify, [
+  client_id: "my-client-id",
+  client_secret: "my-client-secret"
+]
+```
+
+To gain access to a shop via OAuth, first, generate a permission url based on your requirments.
+
+```elixir
+params = %{scope: "read_orders,read_products", redirect_uri: "http://my-redirect_uri.com/"}
+permission_url = Shopify.session("shop-name") |> Shopify.OAuth.permission_url(params)
+```
+
+After a shop has authorized access, they will be redirected to your URI above. The redirect will include
+a payload that contains a 'code'. We can now generate an access token.
+
+```elixir
+{:ok, oauth} = Shopify.session("shop-name") |> Shopify.OAuth.request_token(code)
+```
+
+We can now easily create a new OAuth API session.
+
+```elixir
+Shopify.session("shop-name", oauth.access_token)
 ```
 
 ## Making Requests
@@ -57,11 +78,11 @@ Shopify.session(:oauth, {"shop-name", "access-token"})
 All API requests require a session struct to begin.
 
 ```elixir
-Shopify.session(:oauth, {"shop-name", "access-token"}) |> Shopify.Product.find(1)
+Shopify.session("shop-name", "access-token") |> Shopify.Product.find(1)
 
 # OR
 
-session = Shopify.session(:oauth, {"shop-name", "access-token"})
+session = Shopify.session("shop-name", "access-token")
 Shopify.Product.find(session, 1)
 ```
 
@@ -69,7 +90,7 @@ Here are some examples of the various types of requests that can be made.
 
 ```elixir
 # Create a session struct
-session = Shopify.session(:oauth, {"shop-name", "access-token"})
+session = Shopify.session("shop-name", "access-token")
 
 # Find a resource by ID
 {:ok, resource} = session |> Shopify.Product.find(id)
@@ -108,7 +129,6 @@ new_product = %Shopify.Product{
 # Count resources with query params
 {:ok, count} = session |> Shopify.Product.count(%{vendor: "Fancy Vendor"})
 
-
 # Search for resources
 {:ok, resource} = session |> Shopify.Customer.search(%{query: "country:United States"})
 
@@ -120,7 +140,7 @@ Results are all returned in the form of a two-item tuple.
 
 ```elixir
 # Create a session struct
-session = Shopify.session(:oauth, {"shop-name", "access-token"})
+session = Shopify.session("shop-name", "access-token")
 
 # 'resource' is returned as a %Shopify.Product struct
 {:ok, resource} = session |> Shopify.Product.find(id)
@@ -149,10 +169,9 @@ session = Shopify.session(:oauth, {"shop-name", "access-token"})
 - Product (find, all, create, update, delete, count)
 - ShippingAddress
 - ShippingLine
+- Shop (current)
 - TaxLine
 - Variant
 
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/shopify](https://hexdocs.pm/shopify).
+Documentation is generated with [ExDoc](https://github.com/elixir-lang/ex_doc).
+They can be found at [https://hexdocs.pm/shopify](https://hexdocs.pm/shopify).
