@@ -48,8 +48,8 @@ Once you have a shopify app client ID and secret, setup your `config/confix.exs`
 
 ```elixir
 config :shopify, [
-  client_id: "my-client-id",
-  client_secret: "my-client-secret"
+  client_id: System.get_env("SHOPIFY_CLIENT_ID"),
+  client_secret: System.get_env("SHOPIFY_CLIENT_SECRET")
 ]
 ```
 
