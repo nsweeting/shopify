@@ -1,4 +1,6 @@
 defmodule Shopify.Session do
+  @moduledoc false
+
   alias Shopify.Config
   
   defstruct [
@@ -13,29 +15,7 @@ defmodule Shopify.Session do
     headers: []
   ]
 
-  def new(:oauth, {shop_name, access_token}) do
-    %Shopify.Session{
-      type: :oauth,
-      shop_name: shop_name,
-      access_token: access_token,
-      headers: ["X-Shopify-Access-Token": access_token,
-                "Content-Type": "application/json"],
-      base_url: "https://#{shop_name}.myshopify.com/admin/",
-    }
-  end
-
-  def new(:oauth, shop_name) do
-    %Shopify.Session{
-      type: :oauth,
-      shop_name: shop_name,
-      headers: ["Content-Type": "application/json"],
-      base_url: "https://#{shop_name}.myshopify.com/admin/",
-      client_id: Config.get(:client_id),
-      client_secret: Config.get(:client_secret)
-    }
-  end
-
-  def new(:basic, {shop_name, api_key, password}) do
+  def new(shop_name, api_key, password) do
     %Shopify.Session{
       type: :basic,
       shop_name: shop_name,
@@ -46,5 +26,29 @@ defmodule Shopify.Session do
     }
   end
 
-  def new, do: new(:basic, Config.basic_auth)
+  def new(shop_name, access_token) do
+    %Shopify.Session{
+      type: :oauth,
+      shop_name: shop_name,
+      access_token: access_token,
+      headers: ["X-Shopify-Access-Token": access_token,
+                "Content-Type": "application/json"],
+      base_url: "https://#{shop_name}.myshopify.com/admin/",
+    }
+  end
+
+  def new(shop_name) do
+    %Shopify.Session{
+      type: :oauth,
+      shop_name: shop_name,
+      headers: ["Content-Type": "application/json"],
+      base_url: "https://#{shop_name}.myshopify.com/admin/",
+      client_id: Config.get(:client_id),
+      client_secret: Config.get(:client_secret)
+    }
+  end
+
+  def new do
+    new(Config.shop_name, Config.api_key, Config.password)
+  end
 end

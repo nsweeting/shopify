@@ -1,4 +1,6 @@
 defmodule Shopify.PaymentDetails do
+  @moduledoc false
+  
   @derive [Poison.Encoder]
 
   defstruct [

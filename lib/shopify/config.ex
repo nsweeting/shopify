@@ -1,26 +1,13 @@
 defmodule Shopify.Config do
-  @doc """
-  Retrieves a key value from the configuration.
-
-    iex> Shopify.Config.get(:shop_name)
-    "my-shop-name"
-  """
+  @moduledoc false
+  
   def get(name, default \\ nil) do
     Application.get_env(:shopify, name, default)
   end
 
-  @doc """
-  Retrieves a three-element tuple for basic auth using Application config.
+  def shop_name, do: get(:shop_name)
 
-  Returns {shop_name, api_key, password}
+  def api_key, do: get(:api_key)
 
-  ## Examples
-
-    iex> Shopify.Config.basic_auth
-    {"my-shop-name", "my-api-key", "my-password"}
-  """
-
-  def basic_auth do
-    {get(:shop_name), get(:api_key), get(:password)}
-  end
+  def password, do: get(:password)
 end

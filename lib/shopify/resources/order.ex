@@ -71,6 +71,7 @@ defmodule Shopify.Order do
     :order_status_url
   ]
 
+  @doc false
   def empty_resource do
     %Order{
       customer: %Customer{
@@ -88,9 +89,12 @@ defmodule Shopify.Order do
     }
   end
 
+  @doc false
   def find_url(id), do: @plural <>  "/#{id}.json"
 
+  @doc false
   def all_url, do: @plural <> ".json"
 
+  @doc false
   def count_url, do: @plural <> "/count.json"
 end

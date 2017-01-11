@@ -1,4 +1,6 @@
 defmodule Shopify.Fullfillment do
+  @moduledoc false
+  
   @derive [Poison.Encoder]
 
   defstruct [

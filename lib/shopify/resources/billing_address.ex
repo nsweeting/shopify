@@ -1,4 +1,6 @@
 defmodule Shopify.BillingAddress do
+  @moduledoc false
+  
   @derive [Poison.Encoder]
 
   defstruct [

@@ -1,4 +1,6 @@
 defmodule Shopify.ShippingLine do
+  @moduledoc false
+  
   @derive [Poison.Encoder]
 
   defstruct [

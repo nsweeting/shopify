@@ -31,6 +31,7 @@ defmodule Shopify.Customer do
     :verified_email
   ]
 
+  @doc false
   def empty_resource do
     %Customer{
       addresses: [%Address{}],
@@ -38,11 +39,15 @@ defmodule Shopify.Customer do
     }
   end
 
+  @doc false
   def find_url(id), do: @plural <>  "/#{id}.json"
 
+  @doc false
   def all_url, do: @plural <> ".json"
 
+  @doc false
   def count_url, do: @plural <> "/count.json"
 
+  @doc false
   def search_url, do: @plural <> "/search.json"
 end

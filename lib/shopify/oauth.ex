@@ -7,18 +7,59 @@ defmodule Shopify.OAuth do
     :associated_user
   ]
 
-  def permission_url(session, scopes \\ [], redirct_uri \\ "", options \\ %{}) do
-    scopes = scopes |> Enum.join(",")
-    session.base_url <> authorize_url <> "?client_id=#{session.client_id}&scope=#{scopes}&redirect_uri=#{redirct_uri}&state=#{options[:state]}&grant_options[]=#{options[:grant_options]}"
+  alias Shopify.Request
+
+  @doc """
+  Builds a new permission url for a shop.
+
+  Returns "https://shop-name.myshopify.com/admin/oauth/authorize?"
+
+  ## Parameters
+    - session: A %Shopify.Session{} struct.
+    - params: A map of additional query params.
+    
+  ## Examples
+      iex> Shopify.session("shop-name") |> Shopify.OAuth.permission_url(%{scope: "read_orders", redirect_uri: "http://my-url.com/"})
+      "https://shop-name.myshopify.com/admin/oauth/authorize?client_id=CLIENTID&redirect_uri=http%3A%2F%2Fmy-url.com%2F&scope=read_orders"
+  """
+  def permission_url(session, params \\ %{}) do
+    params = params
+      |> Map.merge(%{client_id: session.client_id})
+      |> URI.encode_query
+    session.base_url <> "oauth/authorize?" <> params
   end
 
+  @doc """
+  Requests a new access token for a shop.
+
+  Returns `{:ok, %Shopify.Oauth{}}` or `{:error, %Shopify.Error{}}`
+
+  ## Parameters
+    - session: A %Shopify.Session{} struct.
+    - code: The code returned to your redirect_uri after permission has been granted.
+    
+  ## Examples
+      iex> Shopify.session("shop-name") |> Shopify.OAuth.request_token("code")
+      %Shopify.OAuth{access_token: "access-token", associated_user: nil, associated_user_scope: nil, expires_in: nil, scope: "read_orders"}}
+  """
   def request_token(session, code) do
+    body = %{
+      code: code,
+      client_id: session.client_id,
+      client_secret: session.client_secret
+    } |> Poison.encode!
+
     session
-      |> Request.new(access_url(), %{}, %Shopify.OAuth{})
-      |> Request.get
+      |> Request.new("oauth/access_token", %{}, %Shopify.OAuth{}, body)
+      |> Request.post
+      |> handle_response
   end
 
-  def authorize_url, do: "oauth/authorize"
-
-  def access_url, do: "oauth/access_token"
+  @doc false
+  defp handle_response({:ok, response}) do
+    {:ok, response}
+  end
+  defp handle_response({:error, response}) do 
+    response |> Shopify.Error.from_response
+  end
 end

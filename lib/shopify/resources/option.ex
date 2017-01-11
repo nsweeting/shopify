@@ -1,4 +1,6 @@
 defmodule Shopify.Option do
+  @moduledoc false
+  
   @derive [Poison.Encoder]
 
   defstruct [

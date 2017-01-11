@@ -52,6 +52,7 @@ defmodule Shopify.Checkout do
     :updated_at
   ]
 
+  @doc false
   def empty_resource do
     %Checkout{
       billing_address: %BillingAddress{},
@@ -68,7 +69,9 @@ defmodule Shopify.Checkout do
     }
   end
 
+  @doc false
   def all_url, do: @plural <> ".json"
 
+  @doc false
   def count_url, do: @plural <> "/count.json"
 end

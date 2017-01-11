@@ -1,4 +1,6 @@
 defmodule Shopify.Image do
+  @moduledoc false
+  
   @derive [Poison.Encoder]
 
   defstruct [
