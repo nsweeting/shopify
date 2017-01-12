@@ -1,4 +1,4 @@
-defmodule Shopify.Resource do
+defmodule Shopify.NestedResource do
   defmacro __using__(options) do
     import_functions = options[:import] || []
     
@@ -13,16 +13,17 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
-          - id: The id of the resource.
+          - id1: The id of the top-level resource.
+          - id2: The id of the nested resource.
           - params: Any additional query params.
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.find(id)
             {:ok, %Shopify.Product{}}
         """
-        def find(%Session{} = session, id, params \\ %{}) do
+        def find(%Session{} = session, id1 , id2, params \\ %{}) do
           session
-            |> Request.new(find_url(id), params, singular_resource())
+            |> Request.new(find_url(id1, id2), params, singular_resource())
             |> Request.get
             |> handle_response
         end
@@ -36,15 +37,16 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
+          - id1: The id of the top-level resource.
           - params: Any additional query params.
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.all
             {:ok, [%Shopify.Product{}]}
         """
-        def all(%Session{} = session, params \\ %{}) do
+        def all(%Session{} = session, id1, params \\ %{}) do
           session
-            |> Request.new(all_url(), params, plural_resource())
+            |> Request.new(all_url(id1), params, plural_resource())
             |> Request.get
             |> handle_response
         end
@@ -58,15 +60,16 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
+          - id1: The id of the top-level resource.
           - params: Any additional query params.
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.count
             {:ok, 1}
         """
-        def count(%Session{} = session, params \\ %{}) do
+        def count(%Session{} = session, id1, params \\ %{}) do
           session
-            |> Request.new(count_url(), params, nil)
+            |> Request.new(count_url(id1), params, nil)
             |> Request.get
             |> handle_response
         end
@@ -80,6 +83,7 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
+          - id1: The id of the top-level resource.
           - params: Any additional query params.
           
         ## Examples
@@ -102,16 +106,17 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
+          - id1: The id of the top-level resource.
           - new_resource: A struct of the resource being created.
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.create(%Shopify.Product{})
             {:ok, %Shopify.Product{}}
         """
-        def create(%Session{} = session, new_resource) do
+        def create(%Session{} = session, id1, new_resource) do
           body = new_resource |> to_json
           session
-            |> Request.new(all_url(), %{}, singular_resource(), body)
+            |> Request.new(all_url(id1), %{}, singular_resource(), body)
             |> Request.post
             |> handle_response
         end
@@ -125,17 +130,18 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
-          - id: The id of the resource.
+          - id1: The id of the top-level resource.
+          - id2: The id of the nested resource.
           - updated_resource: A struct of the resource being updated.
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.update(id, %Shopify.Product{})
             {:ok, %Shopify.Product{}}
         """
-        def update(%Session{} = session, id, updated_resource) do
+        def update(%Session{} = session, id1, id2, updated_resource) do
           body = updated_resource |> to_json
           session
-            |> Request.new(find_url(id), %{}, singular_resource(), body)
+            |> Request.new(find_url(id1, id2), %{}, singular_resource(), body)
             |> Request.put
             |> handle_response
         end
@@ -149,15 +155,16 @@ defmodule Shopify.Resource do
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
-          - id: The id of the resource.
+          - id1: The id of the top-level resource.
+          - id2: The id of the nested resource.
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.delete(id)
             {:ok, nil}
         """
-        def delete(%Session{} = session, id) do
+        def delete(%Session{} = session, id1, id2) do
           session
-            |> Request.new(find_url(id), %{}, nil)
+            |> Request.new(find_url(id1, id2), %{}, nil)
             |> Request.delete
             |> handle_response
         end

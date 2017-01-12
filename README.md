@@ -159,6 +159,7 @@ session = Shopify.session("shop-name", "access-token")
 - Checkout (all, count)
 - ClientDetails
 - Customer (find, all, create, update, delete, count, search)
+- CustomerAddress (find, all, create, delete)
 - DiscountCode
 - Fullfillment
 - Image
@@ -167,11 +168,14 @@ session = Shopify.session("shop-name", "access-token")
 - Order (find, all, create, update, delete, count)
 - PaymentDetails
 - Product (find, all, create, update, delete, count)
+- RecurringApplicationCharge (find, all, create, activate, delete)
 - ShippingAddress
 - ShippingLine
 - Shop (current)
 - TaxLine
+- Transaction (find, all, create, count)
 - Variant
+- Webhook (find, all, create, update, delete, count)
 
 Documentation is generated with [ExDoc](https://github.com/elixir-lang/ex_doc).
 They can be found at [https://hexdocs.pm/shopify](https://hexdocs.pm/shopify).
