@@ -9,7 +9,7 @@ defmodule Shopify.ShippingAddress do
     :city,
     :company,
     :country,
-    :coutry_code,
+    :country_code,
     :first_name,
     :last_name,
     :latitude,

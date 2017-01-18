@@ -16,7 +16,6 @@ defmodule Shopify.Customer do
     :email,
     :first_name,
     :id,
-    :metafield,
     :multipass_identifier,
     :last_name,
     :last_order_id,

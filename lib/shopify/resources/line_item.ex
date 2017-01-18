@@ -23,6 +23,8 @@ defmodule Shopify.LineItem do
     :properties,
     :taxable,
     :tax_lines,
-    :total_discount
+    :total_discount,
+    :product_exists,
+    :variant_inventory_management
   ]
 end

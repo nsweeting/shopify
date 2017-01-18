@@ -10,4 +10,6 @@ defmodule Shopify.Config do
   def api_key, do: get(:api_key)
 
   def password, do: get(:password)
+
+  def version, do: Mix.Project.config[:version]
 end

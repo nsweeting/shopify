@@ -64,7 +64,7 @@ After a shop has authorized access, they will be redirected to your URI above. T
 a payload that contains a 'code'. We can now generate an access token.
 
 ```elixir
-{:ok, oauth} = Shopify.session("shop-name") |> Shopify.OAuth.request_token(code)
+{:ok, %Shopify.Response{data: oauth}} = Shopify.session("shop-name") |> Shopify.OAuth.request_token(code)
 ```
 
 We can now easily create a new OAuth API session.
@@ -93,21 +93,21 @@ Here are some examples of the various types of requests that can be made.
 session = Shopify.session("shop-name", "access-token")
 
 # Find a resource by ID
-{:ok, resource} = session |> Shopify.Product.find(id)
+{:ok, response} = session |> Shopify.Product.find(id)
 
 # Find a resource and select fields
-{:ok, resource} = session |> Shopify.Product.find(id, %{fields: "id,images,title"})
+{:ok, response} = session |> Shopify.Product.find(id, %{fields: "id,images,title"})
 
 # All resources
-{:ok, resources} = session |> Shopify.Product.all
+{:ok, response} = session |> Shopify.Product.all
 
 # All resources with query params
-{:ok, resources} = session |> Shopify.Product.all(%{page: 1, limit: 5})
+{:ok, response} = session |> Shopify.Product.all(%{page: 1, limit: 5})
 
 # Find a resource and update it
-{:ok, resource} = session |> Shopify.Product.find(id)
+{:ok, response} = session |> Shopify.Product.find(id)
 updated_resource = %{resource | title: "New Title"}
-{:ok, resource} = session |> Shopify.Product.update(updated_resource.id, updated_resource)
+{:ok, response} = session |> Shopify.Product.update(updated_resource.id, updated_resource)
 
 # Create a resource
 new_product = %Shopify.Product{
@@ -121,36 +121,43 @@ new_product = %Shopify.Product{
     		sku: 123
    		}]
     }
-{:ok, resource} = session |> Shopify.Product.create(new_product)
+{:ok, response} = session |> Shopify.Product.create(new_product)
 
 # Count resources
-{:ok, count} = session |> Shopify.Product.count
+{:ok, response} = session |> Shopify.Product.count
 
 # Count resources with query params
-{:ok, count} = session |> Shopify.Product.count(%{vendor: "Fancy Vendor"})
+{:ok, response} = session |> Shopify.Product.count(%{vendor: "Fancy Vendor"})
 
 # Search for resources
-{:ok, resource} = session |> Shopify.Customer.search(%{query: "country:United States"})
+{:ok, response} = session |> Shopify.Customer.search(%{query: "country:United States"})
 
 # Delete a resource
 {:ok, _} = session |> Shopify.Product.delete(id)
 ```
 
-Results are all returned in the form of a two-item tuple.
+## Handling Responses
+
+Responses are all returned in the form of a two-item tuple. Any response that has a status
+code below 300 returns `{:ok, response}`. Codes above 300 are returned as `{:error, response}`.
 
 ```elixir
 # Create a session struct
 session = Shopify.session("shop-name", "access-token")
 
-# 'resource' is returned as a %Shopify.Product struct
-{:ok, resource} = session |> Shopify.Product.find(id)
+# 'data' is returned as a %Shopify.Product struct
+{:ok, %Shopify.Response{code: 200, data: data}} = session |> Shopify.Product.find(id)
 
-# 'resources' is returned as a list of %Shopify.Product structs
-{:ok, resources} = session |> Shopify.Product.all
+# 'data' is returned as a list of %Shopify.Product structs
+{:ok, %Shopify.Response{code: 200, data: data}} = session |> Shopify.Product.all
 
-# 'error' is returned as a %Shopify.Error struct
-{:error, error} = session |> Shopify.Product.find(1)
+# 'message' is a text description of the error.
+{:error, %Shopify.Response{code: 404, data: message}} = session |> Shopify.Product.find(1)
 ```
+
+The `%Shopify.Response{}` struct contains two fields: code and data. Code is the HTTP
+status code that is returned from Shopify. A successful request will either set the data field
+with a single struct, or list of structs of the resource or resources requested.
 
 ## Current Resources
 

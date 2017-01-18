@@ -5,7 +5,7 @@ defmodule Shopify.RecurringApplicationCharge  do
 
   use Shopify.Resource, import: [:find, :all, :create, :delete]
 
-  alias Shopify.{RecurringApplicationCharge}
+  alias Shopify.{Client, Request, RecurringApplicationCharge}
 
   defstruct [
     :activated_on,
@@ -42,8 +42,7 @@ defmodule Shopify.RecurringApplicationCharge  do
   def activate(session, id) do
     session
       |> Request.new(activate_url(id), %{}, singular_resource())
-      |> Request.post
-      |> handle_response
+      |> Client.post
   end
 
   @doc false

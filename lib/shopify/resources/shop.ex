@@ -1,7 +1,7 @@
 defmodule Shopify.Shop do
   @derive [Poison.Encoder]
 
-  alias Shopify.{Shop, Request}
+  alias Shopify.{Shop, Client, Request}
 
   defstruct [
     :address1,
@@ -63,15 +63,6 @@ defmodule Shopify.Shop do
   def current(session) do
     session
       |> Request.new("shop.json", %{}, %{"shop" => %Shop{}})
-      |> Request.get
-      |> handle_response
-  end
-
-  @doc false
-  defp handle_response({:ok, response}) do
-    {:ok, response |> Map.values |> List.first}
-  end
-  defp handle_response({:error, response}) do 
-    response |> Shopify.Error.from_response
+      |> Client.get
   end
 end

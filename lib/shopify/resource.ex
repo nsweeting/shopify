@@ -3,13 +3,13 @@ defmodule Shopify.Resource do
     import_functions = options[:import] || []
     
     quote bind_quoted: [import_functions: import_functions] do
-      alias Shopify.{Request, Session}
+      alias Shopify.{Client, Request, Session}
 
       if :find in import_functions do
         @doc """
         Requests a resource by id.
 
-        Returns `{:ok, resource}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -18,13 +18,12 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.find(id)
-            {:ok, %Shopify.Product{}}
+            {:ok, %Shopify.Response{}}
         """
-        def find(%Session{} = session, id, params \\ %{}) do
+        def find(session, id, params \\ %{}) do
           session
             |> Request.new(find_url(id), params, singular_resource())
-            |> Request.get
-            |> handle_response
+            |> Client.get
         end
       end
 
@@ -32,7 +31,7 @@ defmodule Shopify.Resource do
         @doc """
         Requests all resources.
 
-        Returns `{:ok, [resources]}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -40,13 +39,12 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.all
-            {:ok, [%Shopify.Product{}]}
+            {:ok, %Shopify.Response{}}
         """
-        def all(%Session{} = session, params \\ %{}) do
+        def all(session, params \\ %{}) do
           session
             |> Request.new(all_url(), params, plural_resource())
-            |> Request.get
-            |> handle_response
+            |> Client.get
         end
       end
 
@@ -54,7 +52,7 @@ defmodule Shopify.Resource do
         @doc """
         Requests the resource count.
 
-        Returns `{:ok, integer}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -62,13 +60,12 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.count
-            {:ok, 1}
+            {:ok, %Shopify.Response{}}
         """
-        def count(%Session{} = session, params \\ %{}) do
+        def count(session, params \\ %{}) do
           session
             |> Request.new(count_url(), params, nil)
-            |> Request.get
-            |> handle_response
+            |> Client.get
         end
       end
 
@@ -76,7 +73,7 @@ defmodule Shopify.Resource do
         @doc """
         Requests all resources based of search params.
 
-        Returns `{:ok, [resources]}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -84,13 +81,13 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.search
-            {:ok, [%Shopify.Product{}]}
+            {:ok, %Shopify.Response{}}
         """
-        def search(%Session{} = session, params \\ %{}) do
+        @spec search(%Shopify.Session{}, map) :: {:ok, list} | {:error, map}
+        def search(session, params \\ %{}) do
           session
             |> Request.new(search_url(), params, plural_resource())
-            |> Request.get
-            |> handle_response
+            |> Client.get
         end
       end
 
@@ -98,7 +95,7 @@ defmodule Shopify.Resource do
         @doc """
         Requests to create a new resource.
 
-        Returns `{:ok, resource}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -106,14 +103,14 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.create(%Shopify.Product{})
-            {:ok, %Shopify.Product{}}
+            {:ok, %Shopify.Response{}}
         """
-        def create(%Session{} = session, new_resource) do
+        @spec create(%Shopify.Session{}, map) :: {:ok, list} | {:error, map}
+        def create(session, new_resource) do
           body = new_resource |> to_json
           session
             |> Request.new(all_url(), %{}, singular_resource(), body)
-            |> Request.post
-            |> handle_response
+            |> Client.post
         end
       end
 
@@ -121,7 +118,7 @@ defmodule Shopify.Resource do
         @doc """
         Requests to update a resource by id.
 
-        Returns `{:ok, resource}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -130,14 +127,13 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.update(id, %Shopify.Product{})
-            {:ok, %Shopify.Product{}}
+            {:ok, %Shopify.Response{}}
         """
-        def update(%Session{} = session, id, updated_resource) do
+        def update(session, id, updated_resource) do
           body = updated_resource |> to_json
           session
             |> Request.new(find_url(id), %{}, singular_resource(), body)
-            |> Request.put
-            |> handle_response
+            |> Client.put
         end
       end
 
@@ -145,7 +141,7 @@ defmodule Shopify.Resource do
         @doc """
         Requests to delete a resource by id.
 
-        Returns `{:ok, resource}` or `{:error, %Shopify.Error{}}`
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
@@ -153,24 +149,28 @@ defmodule Shopify.Resource do
           
         ## Examples
             iex> Shopify.session |> Shopify.Product.delete(id)
-            {:ok, nil}
+            {:ok, %Shopify.Response{}}
         """
-        def delete(%Session{} = session, id) do
+        def delete(session, id) do
           session
             |> Request.new(find_url(id), %{}, nil)
-            |> Request.delete
-            |> handle_response
+            |> Client.delete
         end
       end
 
       @doc false
-      def singular_resource, do:  %{@singular => empty_resource()}
+      def singular_resource do
+        %{@singular => empty_resource()}
+      end
       @doc false
       def singular_resource(new_resource) do
         %{@singular => new_resource}
       end
+
       @doc false
-      def plural_resource, do: %{@plural => [empty_resource()]}
+      def plural_resource do
+        %{@plural => [empty_resource()]}
+      end
 
       @doc false
       def to_json(resource) do
@@ -180,14 +180,6 @@ defmodule Shopify.Resource do
           |> Enum.into(%{})
           |> singular_resource
           |> Poison.encode!
-      end
-
-      @doc false
-      def handle_response({:ok, response}) do
-        {:ok, response |> Map.values |> List.first}
-      end
-      def handle_response({:error, response}) do 
-        response |> Shopify.Error.from_response
       end
     end
   end

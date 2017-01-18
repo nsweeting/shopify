@@ -27,8 +27,4 @@ use Mix.Config
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-config :shopify, [
-  shop_name: "localhost-7",
-  api_key: "cdd828bdc36ac6fad0973e77b598ac10",
-  password: "43e0003f17ea668a14c5492000b07604"
-]
+import_config "#{Mix.env}.exs"

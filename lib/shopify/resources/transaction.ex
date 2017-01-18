@@ -34,11 +34,13 @@ defmodule Shopify.Transaction do
   end
 
   @doc false
-  def find_url(id1, id2), do: "orders/#{id1}/" <> @plural <>  "/#{id2}.json"
+  def find_url(top_id, nest_id) do 
+    "orders/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
+  end
 
   @doc false
-  def all_url(id1), do: "orders/#{id1}/" <> @plural <> ".json"
+  def all_url(top_id), do: "orders/#{top_id}/" <> @plural <> ".json"
 
   @doc false
-  def count_url(id1), do: "orders/#{id1}/" <> @plural <> "/count.json"
+  def count_url(top_id), do: "orders/#{top_id}/" <> @plural <> "/count.json"
 end

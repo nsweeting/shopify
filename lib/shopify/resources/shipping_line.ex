@@ -10,6 +10,9 @@ defmodule Shopify.ShippingLine do
     :title,
     :tax_lines,
     :carrier_identifier,
-    :requested_fulfillment_service_id
+    :requested_fulfillment_service_id,
+    :delivery_category,
+    :id,
+    :phone
   ]
 end

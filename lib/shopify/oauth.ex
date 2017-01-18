@@ -7,7 +7,7 @@ defmodule Shopify.OAuth do
     :associated_user
   ]
 
-  alias Shopify.Request
+  alias Shopify.{Client, Request}
 
   @doc """
   Builds a new permission url for a shop.
@@ -23,16 +23,15 @@ defmodule Shopify.OAuth do
       "https://shop-name.myshopify.com/admin/oauth/authorize?client_id=CLIENTID&redirect_uri=http%3A%2F%2Fmy-url.com%2F&scope=read_orders"
   """
   def permission_url(session, params \\ %{}) do
-    params = params
-      |> Map.merge(%{client_id: session.client_id})
-      |> URI.encode_query
-    session.base_url <> "oauth/authorize?" <> params
+    params = Map.merge(params, %{client_id: session.client_id})
+    request = session |> Request.new("oauth/authorize", params, nil)
+    request.full_url
   end
 
   @doc """
   Requests a new access token for a shop.
 
-  Returns `{:ok, %Shopify.Oauth{}}` or `{:error, %Shopify.Error{}}`
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
 
   ## Parameters
     - session: A %Shopify.Session{} struct.
@@ -40,7 +39,8 @@ defmodule Shopify.OAuth do
     
   ## Examples
       iex> Shopify.session("shop-name") |> Shopify.OAuth.request_token("code")
-      %Shopify.OAuth{access_token: "access-token", associated_user: nil, associated_user_scope: nil, expires_in: nil, scope: "read_orders"}}
+      %Shopify.Response{code: 200, data: %Shopify.OAuth{access_token: "access-token", associated_user: nil, associated_user_scope: nil, expires_in: nil, scope: "read_orders"}}
+      
   """
   def request_token(session, code) do
     body = %{
@@ -51,15 +51,6 @@ defmodule Shopify.OAuth do
 
     session
       |> Request.new("oauth/access_token", %{}, %Shopify.OAuth{}, body)
-      |> Request.post
-      |> handle_response
-  end
-
-  @doc false
-  defp handle_response({:ok, response}) do
-    {:ok, response}
-  end
-  defp handle_response({:error, response}) do 
-    response |> Shopify.Error.from_response
+      |> Client.post
   end
 end

@@ -8,6 +8,7 @@ defmodule Shopify.Order do
 
   alias Shopify.{
     Order,
+    Attribute,
     Address,
     Customer,
     PaymentDetails,
@@ -17,7 +18,7 @@ defmodule Shopify.Order do
     ShippingLine,
     LineItem,
     DiscountCode,
-    Fullfillment,
+    Fulfillment,
     TaxLine
   }
 
@@ -36,7 +37,7 @@ defmodule Shopify.Order do
     :discount_codes,
     :email,
     :financial_status,
-    :fullfillments,
+    :fulfillments,
     :fulfillment_status,
     :tags,
     :id,
@@ -68,24 +69,46 @@ defmodule Shopify.Order do
     :total_weight,
     :updated_at,
     :user_id,
-    :order_status_url
+    :order_status_url,
+    :landing_site_ref,
+    :checkout_token,
+    :confirmed,
+    :test,
+    :total_price_usd,
+    :gateway,
+    :source_url,
+    :checkout_id,
+    :contact_email,
+    :device_id,
+    :source_identifier,
+    :reference
   ]
 
   @doc false
   def empty_resource do
     %Order{
       customer: %Customer{
-        default_address: %Address{}
+        default_address: %Address{},
+        addresses: [%Address{}]
       },
       payment_details: %PaymentDetails{},
       client_details: %ClientDetails{},
       billing_address: %BillingAddress{},
       shipping_address: %ShippingAddress{},
       shipping_lines: [%ShippingLine{}],
-      line_items: [%LineItem{}],
+      line_items: [%LineItem{
+        properties: [%Attribute{}],
+        tax_lines: [%TaxLine{}]
+      }],
       discount_codes: [%DiscountCode{}],
-      fullfillments: [%Fullfillment{}],
-      tax_lines: [%TaxLine{}]
+      fulfillments: [%Fulfillment{
+        line_items: [%LineItem{
+          properties: [%Attribute{}],
+          tax_lines: [%TaxLine{}]
+        }]
+      }],
+      tax_lines: [%TaxLine{}],
+      note_attributes: [%Attribute{}]
     }
   end
 

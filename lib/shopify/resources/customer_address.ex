@@ -30,8 +30,10 @@ defmodule Shopify.CustomerAddress do
   end
 
   @doc false
-  def find_url(id1, id2), do: "customers/#{id1}/" <> @plural <>  "/#{id2}.json"
+  def find_url(top_id, nest_id) do 
+    "customers/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
+  end
 
   @doc false
-  def all_url(id1), do: "customers/#{id1}/" <> @plural <> ".json"
+  def all_url(top_id), do: "customers/#{top_id}/" <> @plural <> ".json"
 end

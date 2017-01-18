@@ -9,7 +9,7 @@ defmodule Shopify.Address do
     :city,
     :company,
     :country,
-    :coutry_code,
+    :country_code,
     :country_name,
     :default,
     :first_name,

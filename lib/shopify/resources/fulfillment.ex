@@ -1,4 +1,4 @@
-defmodule Shopify.Fullfillment do
+defmodule Shopify.Fulfillment do
   @moduledoc false
   
   @derive [Poison.Encoder]
@@ -12,6 +12,11 @@ defmodule Shopify.Fullfillment do
     :status,
     :tracking_company,
     :tracking_number,
-    :updated_at
+    :tracking_numbers,
+    :tracking_url,
+    :tracking_urls,
+    :updated_at,
+    :service,
+    :shipment_status,
   ]
 end

@@ -1,51 +1,46 @@
 defmodule Shopify.Request do
   @moduledoc false
-  
+
+  @headers [
+    "Content-Type": "application/json",
+    "user-agent": "ShopifyElixir/#{Shopify.Config.version}"
+  ]
+
   defstruct [
-    :session,
-    :url,
-    :params,
+    :type,
+    :full_url,
+    :path,
     :resource,
-    :body
+    :body,
+    :headers
   ]
 
   def new(session, path, params \\ %{}, resource, body \\ nil) do
     %Shopify.Request{
-      session: session,
-      url: session.base_url <> path,
-      params: params,
+      full_url: session |> build_full_url(path) |> add_query(params),
+      path: path,
       resource: resource,
-      body: body
+      body: body,
+      headers: session |> build_headers,
     }
   end
 
-  def get(request) do
-    HTTPoison.get(request.url, request.session.headers, params: request.params)
-      |> parse_json(request.resource)
+  defp build_headers(session) do
+    case session.type do
+      :basic -> @headers
+      :oauth -> @headers ++ ["X-Shopify-Access-Token": session.access_token]
+    end
   end
 
-  def post(request) do
-    HTTPoison.post(request.url, request.body, request.session.headers)
-      |> parse_json(request.resource)
+  defp build_full_url(session, path) do
+    shop_path = case session.type do
+      :basic -> "#{session.api_key}:#{session.password}@#{session.shop_name}"
+      :oauth -> session.shop_name
+    end
+    "https://#{shop_path}.myshopify.com/admin/" <> path
   end
 
-  def put(request) do
-    HTTPoison.put(request.url, request.body, request.session.headers)
-      |> parse_json(request.resource)
-  end
-
-  def delete(request) do
-    HTTPoison.delete(request.url, request.session.headers)
-      |> parse_json(request.resource)
-  end
-
-  defp parse_json({:ok, %HTTPoison.Response{status_code: 200, body: body}}, resource) do
-    Poison.decode(body, as: resource)
-  end
-  defp parse_json({:ok, %HTTPoison.Response{status_code: 201, body: body}}, resource) do
-    Poison.decode(body, as: resource)
-  end
-  defp parse_json({:ok, response}, _) do
-    {:error, response}
+  defp add_query(full_url, params) do
+    full_url <> "?" <> URI.encode_query(params)
   end
 end
