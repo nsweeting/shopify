@@ -64,7 +64,7 @@ After a shop has authorized access, they will be redirected to your URI above. T
 a payload that contains a 'code'. We can now generate an access token.
 
 ```elixir
-{:ok, %Shopify.Response{data: oauth}} = Shopify.session("shop-name") |> Shopify.OAuth.request_token(oauth.code)
+{:ok, %Shopify.Response{data: oauth}} = Shopify.session("shop-name") |> Shopify.OAuth.request_token(code)
 ```
 
 We can now easily create a new OAuth API session.
