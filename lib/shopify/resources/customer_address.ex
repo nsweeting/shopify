@@ -3,9 +3,16 @@ defmodule Shopify.CustomerAddress do
   @singular "customer_address"
   @plural "addresses"
 
-  use Shopify.NestedResource, import: [:find, :all, :create, :delete]
+  use Shopify.NestedResource, import: [
+    :find,
+    :all,
+    :create,
+    :delete
+  ]
 
-  alias Shopify.{CustomerAddress}
+  alias Shopify.{
+    CustomerAddress
+  }
 
   defstruct [
     :address1,

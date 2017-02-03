@@ -3,8 +3,14 @@ defmodule Shopify.Order do
   @singular "order"
   @plural "orders"
 
-  use Shopify.Resource,
-    import: [:find, :all, :count, :create, :update, :delete]
+  use Shopify.Resource, import: [
+    :find,
+    :all, 
+    :count,
+    :create,
+    :update,
+    :delete
+  ]
 
   alias Shopify.{
     Order,
@@ -96,10 +102,12 @@ defmodule Shopify.Order do
       billing_address: %BillingAddress{},
       shipping_address: %ShippingAddress{},
       shipping_lines: [%ShippingLine{}],
-      line_items: [%LineItem{
-        properties: [%Attribute{}],
-        tax_lines: [%TaxLine{}]
-      }],
+      line_items: [
+        %LineItem{
+          properties: [%Attribute{}],
+          tax_lines: [%TaxLine{}]
+        }
+      ],
       discount_codes: [%DiscountCode{}],
       fulfillments: [%Fulfillment{
         line_items: [%LineItem{

@@ -3,9 +3,17 @@ defmodule Shopify.Transaction do
   @singular "transaction"
   @plural "transactions"
 
-  use Shopify.NestedResource, import: [:find, :all, :create, :count]
+  use Shopify.NestedResource, import: [
+    :find,
+    :all,
+    :create,
+    :count
+  ]
 
-  alias Shopify.{Transaction, PaymentDetails}
+  alias Shopify.{
+    Transaction,
+    PaymentDetails
+  }
 
   defstruct [
     :amount,

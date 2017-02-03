@@ -2,9 +2,11 @@ defmodule Shopify.Checkout do
   @derive [Poison.Encoder]
   @singular "checkout"
   @plural "checkouts"
-
-  use Shopify.Resource,
-    import: [:all, :count]
+  
+  use Shopify.Resource, import: [
+    :all,
+    :count
+  ]
 
   alias Shopify.{
     Checkout,

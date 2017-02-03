@@ -1,26 +1,20 @@
-defmodule Shopify.RecurringApplicationCharge  do
-  @derive[Poison.Encoder]
-  @singular "recurring_application_charge"
-  @plural "recurring_application_charges"
-
+defmodule Shopify.ApplicationCharge do
+  @derive [Poison.Encoder]
+  @singular "application_charge"
+  @plural "application_charges"
+  
   use Shopify.Resource, import: [
     :find,
     :all,
     :create,
-    :delete
+    :activate
   ]
 
   alias Shopify.{
-    Client,
-    Request,
-    RecurringApplicationCharge
+    ApplicationCharge
   }
 
   defstruct [
-    :activated_on,
-    :billing_on,
-    :cancelled_on,
-    :capped_amount,
     :confirmation_url,
     :created_at,
     :id,
@@ -28,15 +22,17 @@ defmodule Shopify.RecurringApplicationCharge  do
     :price,
     :return_url,
     :status,
-    :terms,
     :test,
-    :trial_days,
-    :trial_ends_on,
     :updated_at
   ]
 
+  @doc false
+  def empty_resource do
+    %ApplicationCharge{}
+  end
+
   @doc """
-  Requests to activate the recurring charge.
+  Requests to activate the application charge.
 
   Returns `{:ok, resource}` or `{:error, %Shopify.Error{}}`
 
@@ -45,18 +41,13 @@ defmodule Shopify.RecurringApplicationCharge  do
     - id: The id of the resource.
     
   ## Examples
-      iex> Shopify.session |> Shopify.RecurringApplicationCharge.activate(id)
-      {:ok, %Shopify.RecurringApplicationCharge{}}
+      iex> Shopify.session |> Shopify.ApplicationCharge.activate(id)
+      {:ok, %Shopify.Response{}}
   """
   def activate(session, id) do
     session
       |> Request.new(activate_url(id), %{}, singular_resource())
       |> Client.post
-  end
-
-  @doc false
-  def empty_resource do
-    %RecurringApplicationCharge{}
   end
 
   @doc false

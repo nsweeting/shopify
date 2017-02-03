@@ -10,7 +10,7 @@ The package can be installed by adding `shopify` to your list of dependencies in
 
 ```elixir
 def deps do
-  [{:shopify, "~> 0.1.4"}]
+  [{:shopify, "~> 0.1.5"}]
 end
 ```
 
@@ -162,14 +162,22 @@ with a single struct, or list of structs of the resource or resources requested.
 ## Current Resources
 
 - Address
+- ApplicationCharge (find, all, create, activate)
+- ApplicationCredit (find, all, create)
+- Attribute
 - BillingAddress
+- Blog (find, all, create, update, delete, count)
+- CarrierService (find, all, create, update, delete)
 - Checkout (all, count)
 - ClientDetails
+- Collect (find, all, create, delete, count)
+- CollectionListing (find, all)
+- CustomCollection (find, all, create, update, delete, count)
 - Customer (find, all, create, update, delete, count, search)
 - CustomerAddress (find, all, create, delete)
 - DiscountCode
 - Fullfillment
-- Image
+- Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
 - Option
 - Order (find, all, create, update, delete, count)
@@ -181,6 +189,7 @@ with a single struct, or list of structs of the resource or resources requested.
 - Shop (current)
 - TaxLine
 - Transaction (find, all, create, count)
+- UsageCharge (find, all, create)
 - Variant
 - Webhook (find, all, create, update, delete, count)
 

@@ -2,11 +2,21 @@ defmodule Shopify.Customer do
   @derive [Poison.Encoder]
   @singular "customer"
   @plural "customers"
+  
+  use Shopify.Resource, import: [
+    :find,
+    :all,
+    :count,
+    :create,
+    :update,
+    :delete,
+    :search
+  ]
 
-  use Shopify.Resource,
-    import: [:find, :all, :count, :create, :update, :delete, :search]
-
-  alias Shopify.{Customer, Address}
+  alias Shopify.{
+    Customer,
+    Address
+  }
 
   defstruct [
     :accepts_marketing,

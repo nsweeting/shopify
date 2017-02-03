@@ -1,35 +1,39 @@
-defmodule Shopify.Webhook do
-  @derive[Poison.Encoder]
-  @singular "webhook"
-  @plural "webhooks"
-
+defmodule Shopify.CustomCollection do
+  @derive [Poison.Encoder]
+  @singular "custom_collection"
+  @plural "custom_collections"
+   
   use Shopify.Resource, import: [
     :find,
     :all,
-    :count,
     :create,
+    :count,
     :update,
     :delete
   ]
 
   alias Shopify.{
-    Webhook
+    CustomCollection
   }
 
   defstruct [
-    :address,
-    :created_at,
-    :fields,
-    :format,
+    :body_html,
+    :handle,
+    :image,
     :id,
-    :metafield_namespaces,
-    :topic,
+    :metafield,
+    :published,
+    :published_at,
+    :published_scope,
+    :sort_order,
+    :template_suffix,
+    :title,
     :updated_at
   ]
 
   @doc false
   def empty_resource do
-    %Webhook{}
+    %CustomCollection{}
   end
 
   @doc false

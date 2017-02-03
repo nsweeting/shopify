@@ -3,10 +3,21 @@ defmodule Shopify.Product do
   @singular "product"
   @plural "products"
 
-  use Shopify.Resource,
-    import: [:find, :all, :count, :create, :update, :delete]
+  use Shopify.Resource, import: [
+    :find,
+    :all,
+    :count,
+    :create,
+    :update,
+    :delete
+  ]
 
-  alias Shopify.{Product, Variant, Image, Option}
+  alias Shopify.{
+    Product,
+    Variant,
+    Image,
+    Option
+  }
 
   defstruct [
     :body_html,

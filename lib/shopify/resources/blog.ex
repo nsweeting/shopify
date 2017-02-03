@@ -1,35 +1,38 @@
-defmodule Shopify.Webhook do
-  @derive[Poison.Encoder]
-  @singular "webhook"
-  @plural "webhooks"
-
+defmodule Shopify.Blog do
+  @derive [Poison.Encoder]
+  @singular "blog"
+  @plural "blogs"
+  
   use Shopify.Resource, import: [
     :find,
     :all,
-    :count,
     :create,
+    :count,
     :update,
     :delete
   ]
 
   alias Shopify.{
-    Webhook
+    Blog
   }
 
   defstruct [
-    :address,
+    :commentable,
     :created_at,
-    :fields,
-    :format,
+    :feedburner,
+    :feedburner_location,
+    :handle,
     :id,
-    :metafield_namespaces,
-    :topic,
+    :metafield,
+    :tags,
+    :template_suffix,
+    :title,
     :updated_at
   ]
 
   @doc false
   def empty_resource do
-    %Webhook{}
+    %Blog{}
   end
 
   @doc false
