@@ -28,16 +28,7 @@ defmodule Shopify.Refund do
 
   @doc false
   def empty_resource do
-    %Refund{
-      refund_line_items: [
-        %RefundLineItem{
-          line_item:  %LineItem{
-            properties: [%Attribute{}],
-            tax_lines: [%TaxLine{}]
-          }
-        }
-      ]
-    }
+    %Refund{}
   end
 
   @doc false

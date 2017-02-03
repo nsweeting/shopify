@@ -10,8 +10,7 @@ defmodule Shopify.UsageCharge do
   ]
 
   alias Shopify.{
-    UsageCharge,
-    RecurringApplicationCharge
+    UsageCharge
   }
 
   defstruct [
