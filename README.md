@@ -93,44 +93,44 @@ Here are some examples of the various types of requests that can be made.
 session = Shopify.session("shop-name", "access-token")
 
 # Find a resource by ID
-{:ok, response} = session |> Shopify.Product.find(id)
+{:ok, %Shopify.Response{data: product}} = session |> Shopify.Product.find(id)
 
 # Find a resource and select fields
-{:ok, response} = session |> Shopify.Product.find(id, %{fields: "id,images,title"})
+{:ok, %Shopify.Response{data: product}} = session |> Shopify.Product.find(id, %{fields: "id,images,title"})
 
 # All resources
-{:ok, response} = session |> Shopify.Product.all
+{:ok, %Shopify.Response{data: products}} = session |> Shopify.Product.all
 
 # All resources with query params
-{:ok, response} = session |> Shopify.Product.all(%{page: 1, limit: 5})
+{:ok, %Shopify.Response{data: products}} = session |> Shopify.Product.all(%{page: 1, limit: 5})
 
 # Find a resource and update it
-{:ok, response} = session |> Shopify.Product.find(id)
-updated_resource = %{resource | title: "New Title"}
-{:ok, response} = session |> Shopify.Product.update(updated_resource.id, updated_resource)
+{:ok, %Shopify.Response{data: product}} = session |> Shopify.Product.find(id)
+updated_product = %{product | title: "New Title"}
+{:ok, response} = session |> Shopify.Product.update(product.id, updated_product)
 
 # Create a resource
 new_product = %Shopify.Product{
-	title: "Fancy Shirt",
+    title: "Fancy Shirt",
     body_html: "<strong>Good shirt!<\/strong>",
     vendor: "Fancy Vendor",
     product_type: "shirt",
     variants: [
     	%{
-   			price: "10.00",
+   		price: "10.00",
     		sku: 123
-   		}]
+   	}]
     }
 {:ok, response} = session |> Shopify.Product.create(new_product)
 
 # Count resources
-{:ok, response} = session |> Shopify.Product.count
+{:ok, %Shopify.Response{data: count}} = session |> Shopify.Product.count
 
 # Count resources with query params
-{:ok, response} = session |> Shopify.Product.count(%{vendor: "Fancy Vendor"})
+{:ok, %Shopify.Response{data: count}} = session |> Shopify.Product.count(%{vendor: "Fancy Vendor"})
 
 # Search for resources
-{:ok, response} = session |> Shopify.Customer.search(%{query: "country:United States"})
+{:ok, %Shopify.Response{data: customers}} = session |> Shopify.Customer.search(%{query: "country:United States"})
 
 # Delete a resource
 {:ok, _} = session |> Shopify.Product.delete(id)
