@@ -4,22 +4,22 @@ defmodule Shopify.Adapters.HTTP do
   @behaviour Shopify.Adapters.Base
 
   def get(request) do
-    HTTPoison.get(request.full_url, request.headers)
+    HTTPoison.get(request.full_url, request.headers, hackney: [pool: :shopify])
       |> handle_response(request.resource)
   end
 
   def post(request) do
-    HTTPoison.post(request.full_url, request.body, request.headers)
+    HTTPoison.post(request.full_url, request.body, request.headers, hackney: [pool: :shopify])
       |> handle_response(request.resource)
   end
 
   def put(request) do
-    HTTPoison.put(request.full_url, request.body, request.headers)
+    HTTPoison.put(request.full_url, request.body, request.headers, hackney: [pool: :shopify])
       |> handle_response(request.resource)
   end
 
   def delete(request) do
-    HTTPoison.delete(request.full_url, request.headers)
+    HTTPoison.delete(request.full_url, request.headers, hackney: [pool: :shopify])
       |> handle_response(request.resource)
   end
 
