@@ -2,7 +2,7 @@ defmodule Shopify.Adapters.HTTP do
   @moduledoc false
 
   @behaviour Shopify.Adapters.Base
-  @options %{hackney: [pool: :shopify], ssl: [{:versions, [:'tlsv1.2']}]}
+  @options [hackney: [pool: :shopify], ssl: [{:versions, [:'tlsv1.2']}]]
 
   def get(request) do
     HTTPoison.get(request.full_url, request.headers, @options)
