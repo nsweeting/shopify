@@ -1,7 +1,7 @@
 defmodule Shopify.Client do
   @moduledoc false
 
-  @adapter Shopify.Config.get(:client_adapter)
+  @adapter Shopify.Config.get(:client_adapter) || Shopify.Adapters.HTTP
 
   def get(request), do: @adapter.get(request)
 
