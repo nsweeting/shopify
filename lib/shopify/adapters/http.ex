@@ -11,7 +11,6 @@ defmodule Shopify.Adapters.HTTP do
 
   def post(request) do
     HTTPoison.post(request.full_url, request.body, request.headers, @options)
-    |> IO.inspect 
       |> handle_response(request.resource)
   end
 

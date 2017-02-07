@@ -22,7 +22,7 @@ defmodule Shopify.Response do
 
   defp parse_json(resource, body) do
     case Poison.decode(body, as: resource) do
-      {:ok, resource} -> resource |> Map.values |> List.first
+      {:ok, resource} -> resource
       {:error, _} -> nil
     end
   end
