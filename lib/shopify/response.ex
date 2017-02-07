@@ -22,7 +22,8 @@ defmodule Shopify.Response do
 
   defp parse_json(resource, body) do
     case Poison.decode(body, as: resource) do
-      {:ok, resource} -> resource
+      {:ok, %Shopify.OAuth{} = oauth} -> oauth
+      {:ok, resource} -> resource |> Map.values |> List.first
       {:error, _} -> nil
     end
   end
