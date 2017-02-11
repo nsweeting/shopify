@@ -184,6 +184,7 @@ with a single struct, or list of structs of the resource or resources requested.
 - PaymentDetails
 - Product (find, all, create, update, delete, count)
 - RecurringApplicationCharge (find, all, create, activate, delete)
+- ScriptTag (find, all, create, count, delete)
 - ShippingAddress
 - ShippingLine
 - Shop (current)

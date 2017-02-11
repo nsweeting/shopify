@@ -12,8 +12,8 @@ defmodule Shopify.Response do
     {:ok,  %Response{code: code, data: resource |> parse_json(body)}}
   end
 
-  def new(code, body, res) do
-    {:error,  %Response{code: code, data: res |> parse_json(body)}}
+  def new(code, body, error) do
+    {:error,  %Response{code: code, data: error |> parse_json(body)}}
   end
 
   defp parse_json(_, nil) do
