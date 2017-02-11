@@ -12,8 +12,8 @@ defmodule Shopify.Response do
     {:ok,  %Response{code: code, data: resource |> parse_json(body)}}
   end
 
-  def new(code, body, _) do
-    {:error,  %Response{code: code, data: nil |> parse_json(body)}}
+  def new(code, body, error) do
+    {:error,  %Response{code: code, data: error |> parse_json(body)}}
   end
 
   defp parse_json(_, nil) do
@@ -22,6 +22,7 @@ defmodule Shopify.Response do
 
   defp parse_json(resource, body) do
     case Poison.decode(body, as: resource) do
+      {:ok, %Shopify.OAuth{} = oauth} -> oauth
       {:ok, resource} -> resource |> Map.values |> List.first
       {:error, _} -> nil
     end
