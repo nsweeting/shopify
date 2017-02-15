@@ -10,7 +10,7 @@ The package can be installed by adding `shopify` to your list of dependencies in
 
 ```elixir
 def deps do
-  [{:shopify, "~> 0.1.5"}]
+  [{:shopify, "~> 0.1.6"}]
 end
 ```
 
