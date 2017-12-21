@@ -2,7 +2,7 @@
 
 **Currently a Work in Progress**
 
-This package allows Elixir developers to easily access the admin Shopify API. 
+This package allows Elixir developers to easily access the admin Shopify API.
 
 ## Installation
 
@@ -182,6 +182,8 @@ with a single struct, or list of structs of the resource or resources requested.
 - Option
 - Order (find, all, create, update, delete, count)
 - PaymentDetails
+- PriceRule (find, all, create, update, delete)
+- PriceRule.DiscountCode (find, all, create, update, delete)
 - Product (find, all, create, update, delete, count)
 - RecurringApplicationCharge (find, all, create, activate, delete)
 - ScriptTag (find, all, create, count, delete)
