@@ -196,5 +196,10 @@ with a single struct, or list of structs of the resource or resources requested.
 - Variant
 - Webhook (find, all, create, update, delete, count)
 
+## Contributors
+
+Marcelo Oliveira - https://github.com/overallduka
+Fabian Zitter - https://github.com/Ninigi
+
 Documentation is generated with [ExDoc](https://github.com/elixir-lang/ex_doc).
 They can be found at [https://hexdocs.pm/shopify](https://hexdocs.pm/shopify).
