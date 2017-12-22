@@ -1,7 +1,7 @@
 defmodule Shopify.Resource do
   defmacro __using__(options) do
     import_functions = options[:import] || []
-    
+
     quote bind_quoted: [import_functions: import_functions] do
       alias Shopify.{Client, Request, Session}
 
@@ -15,7 +15,7 @@ defmodule Shopify.Resource do
           - session: A `%Shopify.Session{}` struct.
           - id: The id of the resource.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.find(id)
             {:ok, %Shopify.Response{}}
@@ -36,7 +36,7 @@ defmodule Shopify.Resource do
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.all
             {:ok, %Shopify.Response{}}
@@ -57,7 +57,7 @@ defmodule Shopify.Resource do
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.count
             {:ok, %Shopify.Response{}}
@@ -78,7 +78,7 @@ defmodule Shopify.Resource do
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.search
             {:ok, %Shopify.Response{}}
@@ -100,7 +100,7 @@ defmodule Shopify.Resource do
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
           - new_resource: A struct of the resource being created.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.create(%Shopify.Product{})
             {:ok, %Shopify.Response{}}
@@ -124,7 +124,7 @@ defmodule Shopify.Resource do
           - session: A `%Shopify.Session{}` struct.
           - id: The id of the resource.
           - updated_resource: A struct of the resource being updated.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.update(id, %Shopify.Product{})
             {:ok, %Shopify.Response{}}
@@ -146,7 +146,7 @@ defmodule Shopify.Resource do
         ## Parameters
           - session: A `%Shopify.Session{}` struct.
           - id: The id of the resource.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Product.delete(id)
             {:ok, %Shopify.Response{}}

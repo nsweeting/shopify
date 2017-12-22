@@ -1,0 +1,56 @@
+{
+    "price_rules": [
+        {
+            "id": 1,
+            "value_type": "fixed_amount",
+            "value": "-500.0",
+            "customer_selection": "prerequisite",
+            "target_type": "line_item",
+            "target_selection": "entitled",
+            "allocation_method": "across",
+            "once_per_customer": false,
+            "usage_limit": 1,
+            "starts_at": "2017-12-19T02:17:08-05:00",
+            "ends_at": null,
+            "created_at": "2017-12-19T02:17:08-05:00",
+            "updated_at": "2017-12-19T02:17:08-05:00",
+            "entitled_product_ids": [
+                1
+            ],
+            "entitled_variant_ids": [],
+            "entitled_collection_ids": [],
+            "entitled_country_ids": [],
+            "prerequisite_saved_search_ids": [
+                1
+            ],
+            "prerequisite_subtotal_range": null,
+            "prerequisite_shipping_price_range": null,
+            "title": "74NSJ3SK08M0"
+        },
+        {
+            "id": 2,
+            "value_type": "percentage",
+            "value": "-10.0",
+            "customer_selection": "all",
+            "target_type": "line_item",
+            "target_selection": "all",
+            "allocation_method": "across",
+            "once_per_customer": false,
+            "usage_limit": null,
+            "starts_at": "2017-12-19T02:13:17-05:00",
+            "ends_at": null,
+            "created_at": "2017-12-19T02:13:18-05:00",
+            "updated_at": "2017-12-19T02:13:18-05:00",
+            "entitled_product_ids": [],
+            "entitled_variant_ids": [],
+            "entitled_collection_ids": [],
+            "entitled_country_ids": [],
+            "prerequisite_saved_search_ids": [],
+            "prerequisite_subtotal_range": {
+                "greater_than_or_equal_to": "5000.0"
+            },
+            "prerequisite_shipping_price_range": null,
+            "title": "2M42ZNSW82TA"
+        }
+    ]
+}
