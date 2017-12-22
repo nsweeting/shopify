@@ -10,7 +10,7 @@ The package can be installed by adding `shopify` to your list of dependencies in
 
 ```elixir
 def deps do
-  [{:shopify, "~> 0.1.6"}]
+  [{:shopify, "~> 0.1.7"}]
 end
 ```
 
@@ -198,8 +198,8 @@ with a single struct, or list of structs of the resource or resources requested.
 
 ## Contributors
 
-Marcelo Oliveira - https://github.com/overallduka
-Fabian Zitter - https://github.com/Ninigi
+* Marcelo Oliveira - https://github.com/overallduka
+* Fabian Zitter - https://github.com/Ninigi
 
 Documentation is generated with [ExDoc](https://github.com/elixir-lang/ex_doc).
 They can be found at [https://hexdocs.pm/shopify](https://hexdocs.pm/shopify).
