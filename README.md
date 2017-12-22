@@ -179,6 +179,7 @@ with a single struct, or list of structs of the resource or resources requested.
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
+- Metafield (find, all, create, update, delete, count)
 - Option
 - Order (find, all, create, update, delete, count)
 - PaymentDetails
