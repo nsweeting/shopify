@@ -1,7 +1,18 @@
 defmodule Shopify.Variant do
-  @moduledoc false
-  
   @derive [Poison.Encoder]
+  @singular "variant"
+  @plural "variants"
+
+  use Shopify.Resource, import: [
+    :find,
+    :all,
+    :count,
+    :create,
+    :update,
+    :delete
+  ]
+
+  alias __MODULE__
 
   defstruct [
     :barcode,
@@ -27,4 +38,18 @@ defmodule Shopify.Variant do
     :title,
     :updated_at
   ]
+
+  @doc false
+  def empty_resource do
+    %Variant{}
+  end
+
+  @doc false
+  def find_url(id), do: @plural <>  "/#{id}.json"
+
+  @doc false
+  def all_url, do: @plural <> ".json"
+
+  @doc false
+  def count_url, do: @plural <> "/count.json"
 end

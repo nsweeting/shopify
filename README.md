@@ -193,7 +193,7 @@ with a single struct, or list of structs of the resource or resources requested.
 - TaxLine
 - Transaction (find, all, create, count)
 - UsageCharge (find, all, create)
-- Variant
+- Variant (find, all, create, update, delete, count)
 - Webhook (find, all, create, update, delete, count)
 
 ## Contributors
