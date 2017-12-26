@@ -14,4 +14,8 @@ defmodule Shopify.Config do
   def password, do: get(:password)
 
   def version, do: Mix.Project.config[:version]
+
+  def fixtures_path do
+    get(:fixtures_path) || Path.expand("../../test/fixtures/", __DIR__)
+  end
 end

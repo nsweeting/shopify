@@ -3,7 +3,11 @@ defmodule Shopify.Adapters.Mock do
 
   @behaviour Shopify.Adapters.Base
 
-  alias Shopify.{Request, Response}
+  alias Shopify.{
+    Request,
+    Response,
+    Config
+  }
 
   def get(request) do
     request
@@ -50,7 +54,7 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def load_resource(%Request{path: path, body: nil}) do
-    Path.expand("../../../test/fixtures/#{path}", __DIR__)
+    Config.fixtures_path <> "/" <> path
       |> File.read
   end
 
