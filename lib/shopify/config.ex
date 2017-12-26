@@ -1,9 +1,11 @@
 defmodule Shopify.Config do
   @moduledoc false
-  
+
   def get(name, default \\ nil) do
     Application.get_env(:shopify, name, default)
   end
+
+  def client_adapter, do: get(:client_adapter, Shopify.Adapters.HTTP)
 
   def shop_name, do: get(:shop_name)
 
