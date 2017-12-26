@@ -74,6 +74,6 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def oauth_auth(_) do
-    
+
   end
 end
