@@ -59,7 +59,19 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def load_resource(%Request{body: body}) do
-    {:ok, body}
+    case Poison.decode(body) do
+      {:ok, resource} -> resource |> put_id |> Poison.encode
+      {:error, _} -> {:error, nil}
+    end
+  end
+
+  defp put_id(resource) do
+    key = resource |> Map.keys |> List.first
+    resource
+      |> Map.values
+      |> List.first
+      |> Map.put_new("id", 1)
+      |> (fn parsed -> %{key => parsed} end).()
   end
 
   def authorize(request) do
