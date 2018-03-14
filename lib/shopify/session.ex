@@ -2,7 +2,7 @@ defmodule Shopify.Session do
   @moduledoc false
 
   alias Shopify.Config
-  
+
   defstruct [
     :type,
     :shop_name,
@@ -17,7 +17,7 @@ defmodule Shopify.Session do
   def new(shop_name, api_key, password) do
     %Shopify.Session{
       type: :basic,
-      shop_name: shop_name,
+      shop_name: Shopify.scrub_shop_name(shop_name),
       api_key: api_key,
       password: password
     }
@@ -27,7 +27,7 @@ defmodule Shopify.Session do
   def new(shop_name, access_token) do
     %Shopify.Session{
       type: :oauth,
-      shop_name: shop_name,
+      shop_name: Shopify.scrub_shop_name(shop_name),
       access_token: access_token,
     }
   end
@@ -36,7 +36,7 @@ defmodule Shopify.Session do
   def new(shop_name) do
     %Shopify.Session{
       type: :oauth,
-      shop_name: shop_name,
+      shop_name: Shopify.scrub_shop_name(shop_name),
       client_id: Config.get(:client_id),
       client_secret: Config.get(:client_secret)
     }
@@ -44,6 +44,6 @@ defmodule Shopify.Session do
 
   @spec new :: %Shopify.Session{}
   def new do
-    new(Config.shop_name, Config.api_key, Config.password)
+    new(Shopify.scrub_shop_name(Config.shop_name), Config.api_key, Config.password)
   end
 end

@@ -34,8 +34,7 @@ defmodule Shopify do
   """
   def session(shop_name, api_key, password) do
     shop_name
-    |> scrub_shop_name()
-    |> Shopify.Session.new(api_key, password)
+    |>  Shopify.Session.new(api_key, password)
   end
 
   @doc """
@@ -57,7 +56,6 @@ defmodule Shopify do
   """
   def session(shop_name, access_token) do
     shop_name
-    |> scrub_shop_name()
     |> Shopify.Session.new(access_token)
   end
 
@@ -72,7 +70,7 @@ defmodule Shopify do
       iex> with %Shopify.Session{shop_name: "shop_name"} <- Shopify.session("shop_name"), do: :passed
       :passed
   """
-  def session(shop_name), do: shop_name |> scrub_shop_name() |> Shopify.Session.new()
+  def session(shop_name), do: Shopify.Session.new(shop_name)
 
   @doc """
   Create a new Shopify session for a private app using Application config.
