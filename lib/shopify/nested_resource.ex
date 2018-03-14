@@ -1,7 +1,7 @@
 defmodule Shopify.NestedResource do
   defmacro __using__(options) do
     import_functions = options[:import] || []
-    
+
     quote bind_quoted: [import_functions: import_functions] do
       alias Shopify.{Client, Request, Session}
 
@@ -16,12 +16,12 @@ defmodule Shopify.NestedResource do
           - top_id: The id of the top-level resource.
           - nest_id: The id of the nest-level resource.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Transaction.find(order_id, transaction_id)
             {:ok, %Shopify.Response{}}
         """
-        def find(%Session{} = session, top_id, nest_id, params \\ %{}) do
+        def find(%Session{} = session, top_id, nest_id, params \\ %{}) when not is_map(nest_id) do
           session
             |> Request.new(find_url(top_id, nest_id), params, singular_resource())
             |> Client.get
@@ -38,12 +38,12 @@ defmodule Shopify.NestedResource do
           - session: A `%Shopify.Session{}` struct.
           - top_id: The id of the top-level resource.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Transaction.all(order_id)
             {:ok, %Shopify.Response{}}
         """
-        def all(%Session{} = session, top_id, params \\ %{}) do
+        def all(%Session{} = session, top_id, params \\ %{}) when not is_map(top_id) do
           session
             |> Request.new(all_url(top_id), params, plural_resource())
             |> Client.get
@@ -60,12 +60,12 @@ defmodule Shopify.NestedResource do
           - session: A `%Shopify.Session{}` struct.
           - top_id: The id of the top-level resource.
           - params: Any additional query params.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Transaction.count(order_id)
             {:ok, %Shopify.Response{}}
         """
-        def count(%Session{} = session, top_id, params \\ %{}) do
+        def count(%Session{} = session, top_id, params \\ %{}) when not is_map(top_id) do
           session
             |> Request.new(count_url(top_id), params, nil)
             |> Client.get
@@ -82,7 +82,7 @@ defmodule Shopify.NestedResource do
           - session: A `%Shopify.Session{}` struct.
           - top_id: The id of the top-level resource.
           - new_resource: A struct of the resource being created.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.Transaction.create(order_id)
             {:ok, %Shopify.Response{}}
@@ -106,7 +106,7 @@ defmodule Shopify.NestedResource do
           - top_id: The id of the top-level resource.
           - nest_id: The id of the nested-level resource.
           - updated_resource: A struct of the resource being updated.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.CustomerAddress.update(customer_id, address_id)
             {:ok, %Shopify.Response{}}
@@ -129,7 +129,7 @@ defmodule Shopify.NestedResource do
           - session: A `%Shopify.Session{}` struct.
           - top_id: The id of the top-level resource.
           - nest_id: The id of the nested resource.
-          
+
         ## Examples
             iex> Shopify.session |> Shopify.CustomerAddress.delete(customer_id, address_id)
             {:ok, %Shopify.Response{}}
