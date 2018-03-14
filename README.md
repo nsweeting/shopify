@@ -1,6 +1,6 @@
 # Shopify API
 
-![Hex.pm](https://img.shields.io/hexpm/v/shopify.svg)
+![https://hex.pm/packages/shopify](https://img.shields.io/hexpm/v/shopify.svg)
 
 **Currently a Work in Progress**
 
