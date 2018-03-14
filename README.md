@@ -1,5 +1,7 @@
 # Shopify API
 
+![Hex.pm](https://img.shields.io/hexpm/v/plug.svg)
+
 **Currently a Work in Progress**
 
 This package allows Elixir developers to easily access the admin Shopify API.
