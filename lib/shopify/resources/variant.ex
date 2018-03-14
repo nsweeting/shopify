@@ -4,10 +4,13 @@ defmodule Shopify.Variant do
   @plural "variants"
 
   use Shopify.Resource, import: [
-    :find,
+    :find
+  ]
+
+  use Shopify.NestedResource, import: [
+    :create,
     :all,
     :count,
-    :create,
     :update,
     :delete
   ]
@@ -38,7 +41,7 @@ defmodule Shopify.Variant do
     :title,
     :updated_at
   ]
- 
+
   @doc false
   def empty_resource do
     %Variant{}
@@ -47,9 +50,14 @@ defmodule Shopify.Variant do
   @doc false
   def find_url(id), do: @plural <>  "/#{id}.json"
 
-  @doc false
-  def all_url, do: @plural <> ".json"
+  def find_url(product_id, id), do: url_prefix(product_id) <> @plural <>  "/#{id}.json"
 
   @doc false
-  def count_url, do: @plural <> "/count.json"
+  def all_url(product_id), do: url_prefix(product_id) <> @plural <> ".json"
+
+  @doc false
+  def count_url(product_id), do: url_prefix(product_id) <> @plural <> "/count.json"
+
+  @doc false
+  defp url_prefix(product_id), do: "products/#{product_id}/"
 end
