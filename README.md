@@ -161,6 +161,45 @@ The `%Shopify.Response{}` struct contains two fields: code and data. Code is the
 status code that is returned from Shopify. A successful request will either set the data field
 with a single struct, or list of structs of the resource or resources requested.
 
+## Testing
+
+For testing a mock adapter can be configured to use fixture yaml files instead of doing real requests.
+
+Lets say you have a test config file in `your_project/config/test.exs` and tests in `your_project/test` you could use this configuration:
+
+```elixir
+# your_project/config/test.exs
+config :shopify, [
+  shop_name: "test",
+  api_key: "test-key",
+  password: "test-paswword",
+  client_secret: "test-secret",
+  client_adapter: Shopify.Adapters.Mock, # Use included Mock adapter
+  fixtures_path: Path.expand("../test/fixtures/shopify", __DIR__) # Use fixures in this directory
+]
+```
+
+### Test Adapter
+
+This plugin provides a test adapter called `Shopify.Adapters.Mock` to use out of the box. It makes certain assumptions about your fixtures and is limited to the responses provided in corresponding fixture files, and for create actions it will put the resource id as 1.
+
+If you would like to roll your own adapter, you can do so by implementing `@behaviour Shopify.Adapters.Base`.
+
+```elixir
+defmodule Shopify.Adapters.Mock do
+  @moduledoc false
+
+  @behaviour Shopify.Adapters.Base
+
+  def get(%Shopify.Request{} = request) do
+    data =  %{resource: %{id: 123, attribute: "attribute"}}
+    {:ok,  %Shopify.Response{code: 200, data: data}}
+  end
+
+  # ...
+end
+```
+
 ## Current Resources
 
 - Address
