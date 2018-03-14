@@ -163,7 +163,7 @@ with a single struct, or list of structs of the resource or resources requested.
 
 ## Testing
 
-For testing a mock adapter can be configured to use fixture yaml files instead of doing real requests.
+For testing a mock adapter can be configured to use fixture json files instead of doing real requests.
 
 Lets say you have a test config file in `your_project/config/test.exs` and tests in `your_project/test` you could use this configuration:
 
@@ -198,6 +198,36 @@ defmodule Shopify.Adapters.Mock do
 
   # ...
 end
+```
+
+### Fixtures
+
+Fixture files must follow a certain structure, so the adapter is able to find them. If your resource is `Shopify.Product.all()` you need to provide a file at `path_you_provided_in_config/products.json` and must include a valid response json
+
+```
+{
+  "orders": [
+    {
+      "buyer_accepts_marketing": false,
+      "cancel_reason": null,
+      "cancelled_at": null,
+      ...
+    }
+  ]
+}
+```
+
+Or for `Shopify.Product.find(1)`
+
+```
+# path_you_provided_in_config/products/1.json
+{
+  "order": {
+    "id": 1,
+    "email": "bob.mctest@test.com",
+    ...
+  }
+}
 ```
 
 ## Current Resources
