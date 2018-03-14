@@ -32,7 +32,7 @@ defmodule Shopify.Image do
   end
 
   @doc false
-  def find_url(top_id, nest_id) do 
+  def find_url(top_id, nest_id) do
     "products/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
   end
 

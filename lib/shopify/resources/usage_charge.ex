@@ -2,7 +2,7 @@ defmodule Shopify.UsageCharge do
   @derive [Poison.Encoder]
   @singular "usage_charge"
   @plural "usage_charges"
-  
+
   use Shopify.NestedResource, import: [
     :find,
     :all,
@@ -28,7 +28,7 @@ defmodule Shopify.UsageCharge do
   end
 
   @doc false
-  def find_url(top_id, nest_id) do 
+  def find_url(top_id, nest_id) do
     "recurring_application_charges/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
   end
 

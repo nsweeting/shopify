@@ -38,7 +38,7 @@ defmodule Shopify.Variant do
     :title,
     :updated_at
   ]
-
+ 
   @doc false
   def empty_resource do
     %Variant{}

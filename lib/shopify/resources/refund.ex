@@ -1,6 +1,6 @@
 defmodule Shopify.Refund do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
   @singular "refund"
   @plural "refunds"
@@ -32,7 +32,7 @@ defmodule Shopify.Refund do
   end
 
   @doc false
-  def find_url(top_id, nest_id) do 
+  def find_url(top_id, nest_id) do
     "orders/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
   end
 

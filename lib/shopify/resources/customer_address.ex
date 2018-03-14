@@ -37,7 +37,7 @@ defmodule Shopify.CustomerAddress do
   end
 
   @doc false
-  def find_url(top_id, nest_id) do 
+  def find_url(top_id, nest_id) do
     "customers/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
   end
 

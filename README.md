@@ -20,7 +20,7 @@ The Shopify API can be accessed in two ways - either with private apps via basic
 
 ### Private Apps
 
-Once you have a valid API key and password, setup your `config/confix.exs`.
+Once you have a valid API key and password, setup your `config/config.exs`.
 
 ```elixir
 config :shopify, [
@@ -44,7 +44,7 @@ Shopify.session("my-shop-name", "my-api-key", "my-password")
 
 ### OAuth Apps
 
-Once you have a shopify app client ID and secret, setup your `config/confix.exs`.
+Once you have a shopify app client ID and secret, setup your `config/config.exs`.
 
 ```elixir
 config :shopify, [
