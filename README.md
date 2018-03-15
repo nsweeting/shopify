@@ -250,6 +250,7 @@ Or for `Shopify.Product.find(1)`
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
+- Metafield (find, all, create, update, delete, count)
 - Option
 - Order (find, all, create, update, delete, count)
 - PaymentDetails
