@@ -22,8 +22,8 @@ defmodule Shopify.Resource do
         """
         def find(session, id, params \\ %{}) do
           session
-            |> Request.new(find_url(id), params, singular_resource())
-            |> Client.get
+          |> Request.new(find_url(id), params, singular_resource())
+          |> Client.get()
         end
       end
 
@@ -43,8 +43,8 @@ defmodule Shopify.Resource do
         """
         def all(session, params \\ %{}) do
           session
-            |> Request.new(all_url(), params, plural_resource())
-            |> Client.get
+          |> Request.new(all_url(), params, plural_resource())
+          |> Client.get()
         end
       end
 
@@ -64,8 +64,8 @@ defmodule Shopify.Resource do
         """
         def count(session, params \\ %{}) do
           session
-            |> Request.new(count_url(), params, nil)
-            |> Client.get
+          |> Request.new(count_url(), params, nil)
+          |> Client.get()
         end
       end
 
@@ -86,8 +86,8 @@ defmodule Shopify.Resource do
         @spec search(%Shopify.Session{}, map) :: {:ok, list} | {:error, map}
         def search(session, params \\ %{}) do
           session
-            |> Request.new(search_url(), params, plural_resource())
-            |> Client.get
+          |> Request.new(search_url(), params, plural_resource())
+          |> Client.get()
         end
       end
 
@@ -108,9 +108,10 @@ defmodule Shopify.Resource do
         @spec create(%Shopify.Session{}, map) :: {:ok, list} | {:error, map}
         def create(session, new_resource) do
           body = new_resource |> to_json
+
           session
-            |> Request.new(all_url(), %{}, singular_resource(), body)
-            |> Client.post
+          |> Request.new(all_url(), %{}, singular_resource(), body)
+          |> Client.post()
         end
       end
 
@@ -131,9 +132,10 @@ defmodule Shopify.Resource do
         """
         def update(session, id, updated_resource) do
           body = updated_resource |> to_json
+
           session
-            |> Request.new(find_url(id), %{}, singular_resource(), body)
-            |> Client.put
+          |> Request.new(find_url(id), %{}, singular_resource(), body)
+          |> Client.put()
         end
       end
 
@@ -153,8 +155,8 @@ defmodule Shopify.Resource do
         """
         def delete(session, id) do
           session
-            |> Request.new(find_url(id), %{}, nil)
-            |> Client.delete
+          |> Request.new(find_url(id), %{}, nil)
+          |> Client.delete()
         end
       end
 
@@ -162,6 +164,7 @@ defmodule Shopify.Resource do
       def singular_resource do
         %{@singular => empty_resource()}
       end
+
       @doc false
       def singular_resource(new_resource) do
         %{@singular => new_resource}
@@ -175,11 +178,11 @@ defmodule Shopify.Resource do
       @doc false
       def to_json(resource) do
         resource
-          |> Map.from_struct
-          |> Enum.filter(fn {_, v} -> v != nil end)
-          |> Enum.into(%{})
-          |> singular_resource
-          |> Poison.encode!
+        |> Map.from_struct()
+        |> Enum.filter(fn {_, v} -> v != nil end)
+        |> Enum.into(%{})
+        |> singular_resource
+        |> Poison.encode!()
       end
     end
   end

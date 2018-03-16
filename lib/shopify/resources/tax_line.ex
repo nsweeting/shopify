@@ -1,6 +1,6 @@
 defmodule Shopify.TaxLine do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [

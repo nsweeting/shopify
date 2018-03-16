@@ -2,16 +2,17 @@ defmodule Shopify.Customer do
   @derive [Poison.Encoder]
   @singular "customer"
   @plural "customers"
-  
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :count,
-    :create,
-    :update,
-    :delete,
-    :search
-  ]
+
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :count,
+      :create,
+      :update,
+      :delete,
+      :search
+    ]
 
   alias Shopify.{
     Customer,
@@ -49,7 +50,7 @@ defmodule Shopify.Customer do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"

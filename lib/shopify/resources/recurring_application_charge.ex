@@ -1,14 +1,15 @@
-defmodule Shopify.RecurringApplicationCharge  do
+defmodule Shopify.RecurringApplicationCharge do
   @derive[Poison.Encoder]
   @singular "recurring_application_charge"
   @plural "recurring_application_charges"
 
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :create,
-    :delete
-  ]
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :delete
+    ]
 
   alias Shopify.{
     Client,
@@ -50,8 +51,8 @@ defmodule Shopify.RecurringApplicationCharge  do
   """
   def activate(session, id) do
     session
-      |> Request.new(activate_url(id), %{}, singular_resource())
-      |> Client.post
+    |> Request.new(activate_url(id), %{}, singular_resource())
+    |> Client.post()
   end
 
   @doc false
@@ -60,11 +61,11 @@ defmodule Shopify.RecurringApplicationCharge  do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"
 
   @doc false
-  def activate_url(id), do: @plural <>  "/#{id}/activate.json"
+  def activate_url(id), do: @plural <> "/#{id}/activate.json"
 end

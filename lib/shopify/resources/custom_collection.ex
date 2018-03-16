@@ -2,15 +2,16 @@ defmodule Shopify.CustomCollection do
   @derive [Poison.Encoder]
   @singular "custom_collection"
   @plural "custom_collections"
-   
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :create,
-    :count,
-    :update,
-    :delete
-  ]
+
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :count,
+      :update,
+      :delete
+    ]
 
   alias Shopify.{
     CustomCollection
@@ -37,7 +38,7 @@ defmodule Shopify.CustomCollection do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"

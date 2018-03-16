@@ -1,6 +1,6 @@
 defmodule Shopify.ClientDetails do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [

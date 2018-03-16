@@ -62,7 +62,7 @@ defmodule Shopify.Shop do
   """
   def current(session) do
     session
-      |> Request.new("shop.json", %{}, %{"shop" => %Shop{}})
-      |> Client.get
+    |> Request.new("shop.json", %{}, %{"shop" => %Shop{}})
+    |> Client.get()
   end
 end

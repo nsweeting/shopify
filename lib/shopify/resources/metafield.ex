@@ -1,6 +1,6 @@
 defmodule Shopify.Metafield do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [

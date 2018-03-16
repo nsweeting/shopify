@@ -3,13 +3,14 @@ defmodule Shopify.PriceRule.DiscountCode do
   @singular "discount_code"
   @plural "discount_codes"
 
-  use Shopify.NestedResource, import: [
-    :find,
-    :all,
-    :create,
-    :update,
-    :delete
-  ]
+  use Shopify.NestedResource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :update,
+      :delete
+    ]
 
   defstruct [
     :id,
@@ -26,7 +27,7 @@ defmodule Shopify.PriceRule.DiscountCode do
   end
 
   @doc false
-  def find_url(price_rule_id, id), do: url_prefix(price_rule_id) <>  @plural <>  "/#{id}.json"
+  def find_url(price_rule_id, id), do: url_prefix(price_rule_id) <> @plural <> "/#{id}.json"
 
   @doc false
   def all_url(price_rule_id), do: url_prefix(price_rule_id) <> @plural <> ".json"

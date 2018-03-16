@@ -2,14 +2,16 @@ defmodule Shopify.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :shopify,
-     version: "0.1.7",
-     elixir: "~> 1.4-rc",
-     description: description(),
-     package: package(),
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :shopify,
+      version: "0.1.7",
+      elixir: "~> 1.4-rc",
+      description: description(),
+      package: package(),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -36,7 +38,7 @@ defmodule Shopify.Mixfile do
       files: ["lib", "mix.exs", "README*"],
       maintainers: ["Nicholas Sweeting"],
       licenses: ["MIT"],
-      links:  %{"GitHub" => "https://github.com/nsweeting/shopify"}
+      links: %{"GitHub" => "https://github.com/nsweeting/shopify"}
     ]
   end
 

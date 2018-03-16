@@ -28,7 +28,7 @@ defmodule Shopify.Session do
     %Shopify.Session{
       type: :oauth,
       shop_name: Shopify.scrub_shop_name(shop_name),
-      access_token: access_token,
+      access_token: access_token
     }
   end
 
@@ -44,6 +44,6 @@ defmodule Shopify.Session do
 
   @spec new :: %Shopify.Session{}
   def new do
-    new(Shopify.scrub_shop_name(Config.shop_name), Config.api_key, Config.password)
+    new(Shopify.scrub_shop_name(Config.shop_name()), Config.api_key(), Config.password())
   end
 end

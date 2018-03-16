@@ -2,14 +2,15 @@ defmodule Shopify.CarrierService do
   @derive [Poison.Encoder]
   @singular "carrier_service"
   @plural "carrier_services"
-  
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :create,
-    :update,
-    :delete
-  ]
+
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :update,
+      :delete
+    ]
 
   alias Shopify.{
     CarrierService
@@ -30,7 +31,7 @@ defmodule Shopify.CarrierService do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"

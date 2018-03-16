@@ -1,15 +1,16 @@
 defmodule Shopify.ScriptTag do
   @derive [Poison.Encoder]
   @singular "script_tag"
-  @plural "script_tags"  
+  @plural "script_tags"
 
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :create,
-    :count,
-    :delete
-  ]
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :count,
+      :delete
+    ]
 
   alias Shopify.{
     ScriptTag
@@ -30,7 +31,7 @@ defmodule Shopify.ScriptTag do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"
@@ -38,4 +39,3 @@ defmodule Shopify.ScriptTag do
   @doc false
   def count_url, do: @plural <> "/count.json"
 end
-
