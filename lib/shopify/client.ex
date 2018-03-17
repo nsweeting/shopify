@@ -3,11 +3,11 @@ defmodule Shopify.Client do
 
   alias Shopify.Config
 
-  def get(request), do: Config.client_adapter.get(request)
+  def get(request), do: Config.client_adapter().get(request)
 
-  def post(request), do: Config.client_adapter.post(request)
+  def post(request), do: Config.client_adapter().post(request)
 
-  def put(request), do: Config.client_adapter.put(request)
+  def put(request), do: Config.client_adapter().put(request)
 
-  def delete(request), do: Config.client_adapter.delete(request)
+  def delete(request), do: Config.client_adapter().delete(request)
 end

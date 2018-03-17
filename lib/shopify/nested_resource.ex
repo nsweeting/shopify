@@ -23,8 +23,8 @@ defmodule Shopify.NestedResource do
         """
         def find(%Session{} = session, top_id, nest_id, params \\ %{}) when not is_map(nest_id) do
           session
-            |> Request.new(find_url(top_id, nest_id), params, singular_resource())
-            |> Client.get
+          |> Request.new(find_url(top_id, nest_id), params, singular_resource())
+          |> Client.get()
         end
       end
 
@@ -45,8 +45,8 @@ defmodule Shopify.NestedResource do
         """
         def all(%Session{} = session, top_id, params \\ %{}) when not is_map(top_id) do
           session
-            |> Request.new(all_url(top_id), params, plural_resource())
-            |> Client.get
+          |> Request.new(all_url(top_id), params, plural_resource())
+          |> Client.get()
         end
       end
 
@@ -67,8 +67,8 @@ defmodule Shopify.NestedResource do
         """
         def count(%Session{} = session, top_id, params \\ %{}) when not is_map(top_id) do
           session
-            |> Request.new(count_url(top_id), params, nil)
-            |> Client.get
+          |> Request.new(count_url(top_id), params, nil)
+          |> Client.get()
         end
       end
 
@@ -89,9 +89,10 @@ defmodule Shopify.NestedResource do
         """
         def create(%Session{} = session, top_id, new_resource) do
           body = new_resource |> to_json
+
           session
-            |> Request.new(all_url(top_id), %{}, singular_resource(), body)
-            |> Client.post
+          |> Request.new(all_url(top_id), %{}, singular_resource(), body)
+          |> Client.post()
         end
       end
 
@@ -113,9 +114,10 @@ defmodule Shopify.NestedResource do
         """
         def update(%Session{} = session, top_id, nest_id, updated_resource) do
           body = updated_resource |> to_json
+
           session
-            |> Request.new(find_url(top_id, nest_id), %{}, singular_resource(), body)
-            |> Client.put
+          |> Request.new(find_url(top_id, nest_id), %{}, singular_resource(), body)
+          |> Client.put()
         end
       end
 
@@ -136,8 +138,8 @@ defmodule Shopify.NestedResource do
         """
         def delete(%Session{} = session, top_id, nest_id) do
           session
-            |> Request.new(find_url(top_id, nest_id), %{}, nil)
-            |> Client.delete
+          |> Request.new(find_url(top_id, nest_id), %{}, nil)
+          |> Client.delete()
         end
       end
 
@@ -145,6 +147,7 @@ defmodule Shopify.NestedResource do
       def singular_resource do
         %{@singular => empty_resource()}
       end
+
       @doc false
       def singular_resource(new_resource) do
         %{@singular => new_resource}
@@ -158,11 +161,11 @@ defmodule Shopify.NestedResource do
       @doc false
       def to_json(resource) do
         resource
-          |> Map.from_struct
-          |> Enum.filter(fn {_, v} -> v != nil end)
-          |> Enum.into(%{})
-          |> singular_resource
-          |> Poison.encode!
+        |> Map.from_struct()
+        |> Enum.filter(fn {_, v} -> v != nil end)
+        |> Enum.into(%{})
+        |> singular_resource
+        |> Poison.encode!()
       end
     end
   end

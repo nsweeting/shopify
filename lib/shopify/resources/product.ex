@@ -3,14 +3,15 @@ defmodule Shopify.Product do
   @singular "product"
   @plural "products"
 
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :count,
-    :create,
-    :update,
-    :delete
-  ]
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :count,
+      :create,
+      :update,
+      :delete
+    ]
 
   alias Shopify.{
     Product,
@@ -49,7 +50,7 @@ defmodule Shopify.Product do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"

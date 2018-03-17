@@ -2,13 +2,14 @@ defmodule Shopify.ApplicationCharge do
   @derive [Poison.Encoder]
   @singular "application_charge"
   @plural "application_charges"
-  
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :create,
-    :activate
-  ]
+
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :activate
+    ]
 
   alias Shopify.{
     ApplicationCharge
@@ -46,16 +47,16 @@ defmodule Shopify.ApplicationCharge do
   """
   def activate(session, id) do
     session
-      |> Request.new(activate_url(id), %{}, singular_resource())
-      |> Client.post
+    |> Request.new(activate_url(id), %{}, singular_resource())
+    |> Client.post()
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"
 
   @doc false
-  def activate_url(id), do: @plural <>  "/#{id}/activate.json"
+  def activate_url(id), do: @plural <> "/#{id}/activate.json"
 end

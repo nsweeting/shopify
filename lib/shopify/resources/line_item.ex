@@ -1,6 +1,6 @@
 defmodule Shopify.LineItem do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [

@@ -3,14 +3,15 @@ defmodule Shopify.Order do
   @singular "order"
   @plural "orders"
 
-  use Shopify.Resource, import: [
-    :find,
-    :all, 
-    :count,
-    :create,
-    :update,
-    :delete
-  ]
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :count,
+      :create,
+      :update,
+      :delete
+    ]
 
   alias Shopify.{
     Order,
@@ -109,19 +110,23 @@ defmodule Shopify.Order do
         }
       ],
       discount_codes: [%DiscountCode{}],
-      fulfillments: [%Fulfillment{
-        line_items: [%LineItem{
-          properties: [%Attribute{}],
-          tax_lines: [%TaxLine{}]
-        }]
-      }],
+      fulfillments: [
+        %Fulfillment{
+          line_items: [
+            %LineItem{
+              properties: [%Attribute{}],
+              tax_lines: [%TaxLine{}]
+            }
+          ]
+        }
+      ],
       tax_lines: [%TaxLine{}],
       note_attributes: [%Attribute{}]
     }
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"

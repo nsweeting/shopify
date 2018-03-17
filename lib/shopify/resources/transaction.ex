@@ -3,12 +3,13 @@ defmodule Shopify.Transaction do
   @singular "transaction"
   @plural "transactions"
 
-  use Shopify.NestedResource, import: [
-    :find,
-    :all,
-    :create,
-    :count
-  ]
+  use Shopify.NestedResource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :count
+    ]
 
   alias Shopify.{
     Transaction,
@@ -43,7 +44,7 @@ defmodule Shopify.Transaction do
 
   @doc false
   def find_url(top_id, nest_id) do
-    "orders/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
+    "orders/#{top_id}/" <> @plural <> "/#{nest_id}.json"
   end
 
   @doc false

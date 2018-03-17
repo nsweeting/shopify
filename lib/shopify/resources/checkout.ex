@@ -2,11 +2,12 @@ defmodule Shopify.Checkout do
   @derive [Poison.Encoder]
   @singular "checkout"
   @plural "checkouts"
-  
-  use Shopify.Resource, import: [
-    :all,
-    :count
-  ]
+
+  use Shopify.Resource,
+    import: [
+      :all,
+      :count
+    ]
 
   alias Shopify.{
     Checkout,
@@ -62,9 +63,11 @@ defmodule Shopify.Checkout do
       customer: %Customer{
         default_address: %Address{}
       },
-      line_items: [%LineItem{
-        tax_lines: [%TaxLine{}]
-      }],
+      line_items: [
+        %LineItem{
+          tax_lines: [%TaxLine{}]
+        }
+      ],
       shipping_lines: [%ShippingLine{}],
       tax_lines: [%TaxLine{}],
       discount_codes: [%DiscountCode{}]

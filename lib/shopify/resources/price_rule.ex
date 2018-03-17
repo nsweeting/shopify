@@ -3,13 +3,14 @@ defmodule Shopify.PriceRule do
   @singular "price_rule"
   @plural "price_rules"
 
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :create,
-    :update,
-    :delete
-  ]
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :create,
+      :update,
+      :delete
+    ]
 
   defstruct [
     :id,
@@ -42,7 +43,7 @@ defmodule Shopify.PriceRule do
   end
 
   @doc false
-  def find_url(id), do: @plural <>  "/#{id}.json"
+  def find_url(id), do: @plural <> "/#{id}.json"
 
   @doc false
   def all_url, do: @plural <> ".json"

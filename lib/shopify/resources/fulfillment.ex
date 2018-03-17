@@ -1,6 +1,6 @@
 defmodule Shopify.Fulfillment do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [
@@ -17,6 +17,6 @@ defmodule Shopify.Fulfillment do
     :tracking_urls,
     :updated_at,
     :service,
-    :shipment_status,
+    :shipment_status
   ]
 end

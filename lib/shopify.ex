@@ -34,7 +34,7 @@ defmodule Shopify do
   """
   def session(shop_name, api_key, password) do
     shop_name
-    |>  Shopify.Session.new(api_key, password)
+    |> Shopify.Session.new(api_key, password)
   end
 
   @doc """
@@ -82,5 +82,5 @@ defmodule Shopify do
       iex> with %Shopify.Session{} <- Shopify.session, do: :passed
       :passed
   """
-  def session, do: Shopify.Session.new
+  def session, do: Shopify.Session.new()
 end

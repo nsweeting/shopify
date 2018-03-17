@@ -1,6 +1,6 @@
 defmodule Shopify.DiscountCode do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [

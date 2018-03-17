@@ -5,11 +5,12 @@ defmodule Shopify.Refund do
   @singular "refund"
   @plural "refunds"
 
-  use Shopify.NestedResource, import: [
-    :find,
-    :all,
-    :create
-  ]
+  use Shopify.NestedResource,
+    import: [
+      :find,
+      :all,
+      :create
+    ]
 
   alias Shopify.{
     Refund
@@ -33,7 +34,7 @@ defmodule Shopify.Refund do
 
   @doc false
   def find_url(top_id, nest_id) do
-    "orders/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
+    "orders/#{top_id}/" <> @plural <> "/#{nest_id}.json"
   end
 
   @doc false
@@ -41,6 +42,6 @@ defmodule Shopify.Refund do
 
   @doc false
   def calculate_url(top_id) do
-    @plural <>  "orders/#{top_id}/" <> @plural <> "/calculate.json"
+    @plural <> "orders/#{top_id}/" <> @plural <> "/calculate.json"
   end
 end

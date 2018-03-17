@@ -4,7 +4,7 @@ defmodule Shopify.Request do
   @headers [
     "Content-Type": "application/json",
     "Keep-Alive": "timeout=15, max=100",
-    "user-agent": "ShopifyElixir/#{Shopify.Config.version}"
+    "user-agent": "ShopifyElixir/#{Shopify.Config.version()}"
   ]
 
   defstruct [
@@ -22,7 +22,7 @@ defmodule Shopify.Request do
       path: path,
       resource: resource,
       body: body,
-      headers: session |> build_headers,
+      headers: session |> build_headers
     }
   end
 
@@ -34,10 +34,12 @@ defmodule Shopify.Request do
   end
 
   defp build_full_url(session, path) do
-    shop_path = case session.type do
-      :basic -> "#{session.api_key}:#{session.password}@#{session.shop_name}"
-      :oauth -> session.shop_name
-    end
+    shop_path =
+      case session.type do
+        :basic -> "#{session.api_key}:#{session.password}@#{session.shop_name}"
+        :oauth -> session.shop_name
+      end
+
     "https://#{shop_path}.myshopify.com/admin/" <> path
   end
 

@@ -3,14 +3,15 @@ defmodule Shopify.Image do
   @singular "image"
   @plural "images"
 
-  use Shopify.NestedResource, import: [
-    :find,
-    :all,
-    :count,
-    :create,
-    :update,
-    :delete
-  ]
+  use Shopify.NestedResource,
+    import: [
+      :find,
+      :all,
+      :count,
+      :create,
+      :update,
+      :delete
+    ]
 
   alias Shopify.{
     Image
@@ -33,7 +34,7 @@ defmodule Shopify.Image do
 
   @doc false
   def find_url(top_id, nest_id) do
-    "products/#{top_id}/" <> @plural <>  "/#{nest_id}.json"
+    "products/#{top_id}/" <> @plural <> "/#{nest_id}.json"
   end
 
   @doc false

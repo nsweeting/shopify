@@ -11,24 +11,25 @@ defmodule Shopify.Adapters.Mock do
 
   def get(request) do
     request
-      |> authorize
-      |> respond
+    |> authorize
+    |> respond
   end
 
   def post(request) do
     request
-      |> authorize
-      |> respond
+    |> authorize
+    |> respond
   end
 
   def put(request) do
     request
-      |> authorize
-      |> respond
+    |> authorize
+    |> respond
   end
 
   def delete(request) do
     auth = request |> authorize
+
     case auth do
       {:passed, _} -> Response.new(200, nil, request.resource)
       {:failed, _} -> respond(auth)
@@ -41,37 +42,38 @@ defmodule Shopify.Adapters.Mock do
 
   def respond({:passed, request}) do
     request
-      |> load_resource
-      |> respond(request)
+    |> load_resource
+    |> respond(request)
   end
 
-  def respond({:ok, body},  request)  do
+  def respond({:ok, body}, request) do
     Response.new(200, body, request.resource)
   end
 
-  def respond({:error, _}, request)  do
+  def respond({:error, _}, request) do
     Response.new(404, nil, request.resource)
   end
 
   def load_resource(%Request{path: path, body: nil}) do
-    Config.fixtures_path <> "/" <> path
-      |> File.read
+    (Config.fixtures_path() <> "/" <> path)
+    |> File.read()
   end
 
   def load_resource(%Request{body: body}) do
     case Poison.decode(body) do
-      {:ok, resource} -> resource |> put_id |> Poison.encode
+      {:ok, resource} -> resource |> put_id |> Poison.encode()
       {:error, _} -> {:error, nil}
     end
   end
 
   defp put_id(resource) do
-    key = resource |> Map.keys |> List.first
+    key = resource |> Map.keys() |> List.first()
+
     resource
-      |> Map.values
-      |> List.first
-      |> Map.put_new("id", 1)
-      |> (fn parsed -> %{key => parsed} end).()
+    |> Map.values()
+    |> List.first()
+    |> Map.put_new("id", 1)
+    |> (fn parsed -> %{key => parsed} end).()
   end
 
   def authorize(request) do
@@ -90,6 +92,5 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def oauth_auth(_) do
-
   end
 end

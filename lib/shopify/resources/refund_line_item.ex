@@ -1,6 +1,6 @@
 defmodule Shopify.RefundLineItem do
   @moduledoc false
-  
+
   @derive [Poison.Encoder]
 
   defstruct [

@@ -43,14 +43,16 @@ defmodule Shopify.OAuth do
       
   """
   def request_token(session, code) do
-    body = %{
-      code: code,
-      client_id: session.client_id,
-      client_secret: session.client_secret
-    } |> Poison.encode!
+    body =
+      %{
+        code: code,
+        client_id: session.client_id,
+        client_secret: session.client_secret
+      }
+      |> Poison.encode!()
 
     session
-      |> Request.new("oauth/access_token", %{}, %Shopify.OAuth{}, body)
-      |> Client.post
+    |> Request.new("oauth/access_token", %{}, %Shopify.OAuth{}, body)
+    |> Client.post()
   end
 end

@@ -1,5 +1,3 @@
 use Mix.Config
 
-config :shopify, [
-  client_adapter: Shopify.Adapters.HTTP
-]
+config :shopify, client_adapter: Shopify.Adapters.HTTP
