@@ -235,6 +235,7 @@ Or for `Shopify.Product.find(1)`
 - Address
 - ApplicationCharge (find, all, create, activate)
 - ApplicationCredit (find, all, create)
+- Article (find, all, create, update, delete, count)
 - Attribute
 - BillingAddress
 - Blog (find, all, create, update, delete, count)
