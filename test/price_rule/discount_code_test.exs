@@ -1,10 +1,7 @@
 defmodule Shopify.PriceRule.DiscountCodeTest do
   use ExUnit.Case, async: true
 
-  alias Shopify.{
-    PriceRule.DiscountCode,
-    PriceRule
-  }
+  alias Shopify.PriceRule.DiscountCode
 
   @fixtures_path "../test/fixtures/price_rules/1/"
 
