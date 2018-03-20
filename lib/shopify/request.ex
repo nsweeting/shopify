@@ -44,6 +44,11 @@ defmodule Shopify.Request do
   end
 
   defp add_query(full_url, params) do
-    full_url <> "?" <> URI.encode_query(params)
+    query = URI.encode_query(params)
+    if String.contains?(full_url, "?") do
+      full_url <> "&" <> query
+    else
+      full_url <> "?" <> query
+    end
   end
 end
