@@ -266,6 +266,8 @@ Or for `Shopify.Product.find(1)`
 - ShippingLine
 - Shop (current)
 - TaxLine
+- Theme (find, all, create, update, delete)
+- Theme.Asset (find, all, delete)
 - Transaction (find, all, create, count)
 - UsageCharge (find, all, create)
 - Variant (find, all, create, update, delete, count)
