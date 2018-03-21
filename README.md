@@ -246,9 +246,9 @@ Or for `Shopify.Product.find(1)`
 - ClientDetails
 - Collect (find, all, create, delete, count)
 - CollectionListing (find, all)
+- Comment (find, all, create, update, spam, not_spam, approve, remove, restore)
 - Country (find, all, create, update, delete, count)
 - Country.Province (find, all, update, count)
-- Comment (find, all, create, update, spam, not_spam, approve, remove, restore)
 - CustomCollection (find, all, create, update, delete, count)
 - Customer (find, all, create, update, delete, count, search)
 - CustomerAddress (find, all, create, delete)
