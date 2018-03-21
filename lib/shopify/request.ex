@@ -45,6 +45,7 @@ defmodule Shopify.Request do
 
   defp add_query(full_url, params) do
     query = URI.encode_query(params)
+
     if String.contains?(full_url, "?") do
       full_url <> "&" <> query
     else

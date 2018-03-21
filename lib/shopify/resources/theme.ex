@@ -3,13 +3,14 @@ defmodule Shopify.Theme do
   @singular "theme"
   @plural "themes"
 
-  use Shopify.Resource, import: [
-    :all,
-    :find,
-    :create,
-    :delete,
-    :update
-  ]
+  use Shopify.Resource,
+    import: [
+      :all,
+      :find,
+      :create,
+      :delete,
+      :update
+    ]
 
   defstruct [
     :created_at,

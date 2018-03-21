@@ -7,7 +7,14 @@ defmodule Shopify.Theme.AssetTest do
     assert {:ok, response} = Shopify.session() |> Theme.Asset.find(1, "test_asset")
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/themes/1/assets.json?asset[key]=test_asset", "asset", Theme.Asset.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/themes/1/assets.json?asset[key]=test_asset",
+        "asset",
+        Theme.Asset.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -15,7 +22,12 @@ defmodule Shopify.Theme.AssetTest do
     assert {:ok, response} = Shopify.session() |> Theme.Asset.all(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/themes/1/assets.json", "assets", [Theme.Asset.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/themes/1/assets.json", "assets", [
+        Theme.Asset.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
