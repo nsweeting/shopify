@@ -7,7 +7,14 @@ defmodule Shopify.Country.ProvinceTest do
     assert {:ok, response} = Shopify.session() |> Province.find(1, 1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/countries/1/provinces/1.json", "province", Province.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/countries/1/provinces/1.json",
+        "province",
+        Province.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -15,7 +22,12 @@ defmodule Shopify.Country.ProvinceTest do
     assert {:ok, response} = Shopify.session() |> Province.all(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/countries/1/provinces.json", "provinces", [Province.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/countries/1/provinces.json", "provinces", [
+        Province.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 

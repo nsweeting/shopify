@@ -7,7 +7,10 @@ defmodule Shopify.CountryTest do
     assert {:ok, response} = Shopify.session() |> Country.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/countries/1.json", "country", Country.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/countries/1.json", "country", Country.empty_resource())
+
     assert fixture == response.data
   end
 
@@ -15,7 +18,10 @@ defmodule Shopify.CountryTest do
     assert {:ok, response} = Shopify.session() |> Country.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/countries.json", "countries", [Country.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/countries.json", "countries", [Country.empty_resource()])
+
     assert fixture == response.data
   end
 
@@ -28,11 +34,16 @@ defmodule Shopify.CountryTest do
   end
 
   test "client can request to create an country" do
-    fixture = Fixture.load("../test/fixtures/countries/1.json", "country", Country.empty_resource())
+    fixture =
+      Fixture.load("../test/fixtures/countries/1.json", "country", Country.empty_resource())
+
     assert {:ok, response} = Shopify.session() |> Country.create(fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/countries/1.json", "country", Country.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/countries/1.json", "country", Country.empty_resource())
+
     assert fixture == response.data
   end
 
