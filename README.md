@@ -252,6 +252,8 @@ Or for `Shopify.Product.find(1)`
 - CustomCollection (find, all, create, update, delete, count)
 - Customer (find, all, create, update, delete, count, search)
 - CustomerAddress (find, all, create, delete)
+- CustomerSavedSearch (find, all, create, update, delete, count)
+- CustomerSavedSearch.Customer (all)
 - DiscountCode
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
