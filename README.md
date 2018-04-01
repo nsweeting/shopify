@@ -255,6 +255,8 @@ Or for `Shopify.Product.find(1)`
 - CustomerSavedSearch (find, all, create, update, delete, count)
 - CustomerSavedSearch.Customer (all)
 - DiscountCode
+- DraftOrder (find, all, create, update, delete, count, complete) *`complete` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
+- DraftOrder.DraftOrderInvoice (create)
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem

@@ -43,6 +43,9 @@ defmodule Shopify.Request do
     "https://#{shop_path}.myshopify.com/admin/" <> path
   end
 
+  defp add_query(full_url, params)
+  defp add_query(full_url, params) when map_size(params) == 0, do: full_url
+
   defp add_query(full_url, params) do
     query = URI.encode_query(params)
 
