@@ -122,7 +122,7 @@ defmodule Shopify.DraftOrder do
       iex> Shopify.session |> Shopify.DraftOrder.send_invoice(1, %Shopify.DraftOrder.DraftOrderInvoice{})
       {:ok, %Shopify.Response{}}
   """
-  @spec complete(%Shopify.Session{}, integer, %DraftOrderInvoice{}) ::
+  @spec send_invoice(%Shopify.Session{}, integer, %DraftOrderInvoice{}) ::
           {:ok, %__MODULE__{}} | {:error, map}
   def send_invoice(session, id, draft_order_invoice),
     do: session |> DraftOrderInvoice.create(id, draft_order_invoice)
