@@ -257,16 +257,19 @@ Or for `Shopify.Product.find(1)`
 - DiscountCode
 - DraftOrder (find, all, create, update, delete, count, complete) *`complete` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
 - DraftOrder.DraftOrderInvoice (create)
+- Event (find, all, count)
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
 - OAuth.AccessScope (all)
 - Option
 - Order (find, all, create, update, delete, count)
+- Order.Event (all)
 - PaymentDetails
 - PriceRule (find, all, create, update, delete)
 - PriceRule.DiscountCode (find, all, create, update, delete)
 - Product (find, all, create, update, delete, count)
+- Product.Event (all)
 - RecurringApplicationCharge (find, all, create, activate, delete)
 - ScriptTag (find, all, create, count, delete)
 - ShippingAddress
