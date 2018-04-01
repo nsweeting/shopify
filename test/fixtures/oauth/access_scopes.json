@@ -1,0 +1,34 @@
+{
+    "access_scopes": [
+        {
+            "handle": "write_content"
+        },
+        {
+            "handle": "write_customers"
+        },
+        {
+            "handle": "write_orders"
+        },
+        {
+            "handle": "write_price_rules"
+        },
+        {
+            "handle": "write_products"
+        },
+        {
+            "handle": "read_content"
+        },
+        {
+            "handle": "read_customers"
+        },
+        {
+            "handle": "read_orders"
+        },
+        {
+            "handle": "read_price_rules"
+        },
+        {
+            "handle": "read_products"
+        }
+    ]
+}

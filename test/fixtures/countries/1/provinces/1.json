@@ -1,0 +1,13 @@
+{
+  "province": {
+    "id": 1,
+    "country_id": 1,
+    "name": "Quebec",
+    "code": "QC",
+    "tax": 0.09,
+    "tax_name": "HST",
+    "tax_type": "compounded",
+    "shipping_zone_id": null,
+    "tax_percentage": 9.0
+  }
+}

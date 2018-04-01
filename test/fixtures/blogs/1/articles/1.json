@@ -1,0 +1,17 @@
+{
+    "article": {
+      "id": 1,
+      "title": "Others have awesome stuff, too!",
+      "created_at": "2018-03-19T23:49:18-04:00",
+      "body_html": "Damn, really didn't take that into account... What now?",
+      "blog_id": 5622595626,
+      "author": "Bob McTest",
+      "user_id": 5858852906,
+      "published_at": null,
+      "updated_at": "2018-03-19T23:49:18-04:00",
+      "summary_html": "",
+      "template_suffix": null,
+      "handle": "others-have-awesome-stuff-too",
+      "tags": ""
+    }
+}

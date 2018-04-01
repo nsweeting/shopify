@@ -15,7 +15,7 @@ defmodule Shopify.Adapters.HTTP do
   end
 
   def put(request) do
-    HTTPoison.put(request.full_url, request.body, request.headers, @options)
+    HTTPoison.put(request.full_url, request.body || "", request.headers, @options)
     |> handle_response(request.resource)
   end
 

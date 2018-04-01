@@ -235,6 +235,9 @@ Or for `Shopify.Product.find(1)`
 - Address
 - ApplicationCharge (find, all, create, activate)
 - ApplicationCredit (find, all, create)
+- Article (find, all, create, update, delete, count)
+- Article.Author (all)
+- Article.Tag (all)
 - Attribute
 - BillingAddress
 - Blog (find, all, create, update, delete, count)
@@ -243,25 +246,38 @@ Or for `Shopify.Product.find(1)`
 - ClientDetails
 - Collect (find, all, create, delete, count)
 - CollectionListing (find, all)
+- Comment (find, all, create, update, spam, not_spam, approve, remove, restore)
+- Country (find, all, create, update, delete, count)
+- Country.Province (find, all, update, count)
 - CustomCollection (find, all, create, update, delete, count)
 - Customer (find, all, create, update, delete, count, search)
 - CustomerAddress (find, all, create, delete)
+- CustomerSavedSearch (find, all, create, update, delete, count)
+- CustomerSavedSearch.Customer (all)
 - DiscountCode
+- DraftOrder (find, all, create, update, delete, count, complete, send_invoice) *`send_invoice` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
+- DraftOrder.DraftOrderInvoice (create)
+- Event (find, all, count)
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
+- OAuth.AccessScope (all)
 - Option
 - Order (find, all, create, update, delete, count)
+- Order.Event (all)
 - PaymentDetails
 - PriceRule (find, all, create, update, delete)
 - PriceRule.DiscountCode (find, all, create, update, delete)
 - Product (find, all, create, update, delete, count)
+- Product.Event (all)
 - RecurringApplicationCharge (find, all, create, activate, delete)
 - ScriptTag (find, all, create, count, delete)
 - ShippingAddress
 - ShippingLine
 - Shop (current)
 - TaxLine
+- Theme (find, all, create, update, delete)
+- Theme.Asset (find, all, delete)
 - Transaction (find, all, create, count)
 - UsageCharge (find, all, create)
 - Variant (find, all, create, update, delete, count)
