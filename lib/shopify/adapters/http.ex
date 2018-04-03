@@ -10,7 +10,7 @@ defmodule Shopify.Adapters.HTTP do
   end
 
   def post(request) do
-    HTTPoison.post(request.full_url, request.body, request.headers, @options)
+    HTTPoison.post(request.full_url, request.body || "", request.headers, @options)
     |> handle_response(request.resource)
   end
 
