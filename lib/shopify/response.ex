@@ -16,9 +16,7 @@ defmodule Shopify.Response do
     {:error, %Response{code: code, data: error |> parse_json(body)}}
   end
 
-  defp parse_json(_, nil) do
-    nil
-  end
+  defp parse_json(_, body) when is_nil(body) or body == "", do: nil
 
   defp parse_json(resource, body) do
     case Poison.decode(body, as: resource) do
