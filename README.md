@@ -285,8 +285,18 @@ Or for `Shopify.Product.find(1)`
 
 ## Contributors
 
-* Marcelo Oliveira - https://github.com/overallduka
-* Fabian Zitter - https://github.com/Ninigi
+<!-- Contributors START
+Marcelo Oliveira https://github.com/overallduka code
+Fabian Zitter https://github.com/Ninigi code prReview doc
+Zach Garwood https://github.com/zachgarwood code
+David Becerra https://github.com/DavidVII code
+Bryan Bryce https://github.com/BryanJBryce doc
+Contributors END -->
+<!-- Contributors table START -->
+| <img src="https://avatars.githubusercontent.com/Oliveira?s=100" width="100" alt="Marcelo" /><br /><sub>Marcelo</sub>](https://github.com/overallduka)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Oliveira) | <img src="https://avatars.githubusercontent.com/Zitter?s=100" width="100" alt="Fabian" /><br /><sub>Fabian</sub>](https://github.com/Ninigi)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Zitter) 👀 [📖](git@github.com:nsweeting/shopify/commits?author=Zitter) | <img src="https://avatars.githubusercontent.com/Garwood?s=100" width="100" alt="Zach" /><br /><sub>Zach</sub>](https://github.com/zachgarwood)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Garwood) | <img src="https://avatars.githubusercontent.com/Becerra?s=100" width="100" alt="David" /><br /><sub>David</sub>](https://github.com/DavidVII)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Becerra) | <img src="https://avatars.githubusercontent.com/Bryce?s=100" width="100" alt="Bryan" /><br /><sub>Bryan</sub>](https://github.com/BryanJBryce)<br />[📖](git@github.com:nsweeting/shopify/commits?author=Bryce) |
+| :---: | :---: | :---: | :---: | :---: |
+<!-- Contributors table END -->
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
 Documentation is generated with [ExDoc](https://github.com/elixir-lang/ex_doc).
 They can be found at [https://hexdocs.pm/shopify](https://hexdocs.pm/shopify).
