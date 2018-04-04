@@ -286,14 +286,14 @@ Or for `Shopify.Product.find(1)`
 ## Contributors
 
 <!-- Contributors START
-Marcelo Oliveira https://github.com/overallduka code
-Fabian Zitter https://github.com/Ninigi code prReview doc
-Zach Garwood https://github.com/zachgarwood code
-David Becerra https://github.com/DavidVII code
-Bryan Bryce https://github.com/BryanJBryce doc
+Marcelo_Oliveira overallduka https://github.com/overallduka code
+Fabian_Zitter Ninigi https://github.com/Ninigi code prReview doc
+Zach_Garwood zachgarwood https://github.com/zachgarwood code
+David_Becerra DavidVII https://github.com/DavidVII code
+Bryan_Bryce BryanJBryce https://github.com/BryanJBryce doc
 Contributors END -->
 <!-- Contributors table START -->
-| <img src="https://avatars.githubusercontent.com/Oliveira?s=100" width="100" alt="Marcelo" /><br /><sub>Marcelo</sub>](https://github.com/overallduka)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Oliveira) | <img src="https://avatars.githubusercontent.com/Zitter?s=100" width="100" alt="Fabian" /><br /><sub>Fabian</sub>](https://github.com/Ninigi)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Zitter) 👀 [📖](git@github.com:nsweeting/shopify/commits?author=Zitter) | <img src="https://avatars.githubusercontent.com/Garwood?s=100" width="100" alt="Zach" /><br /><sub>Zach</sub>](https://github.com/zachgarwood)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Garwood) | <img src="https://avatars.githubusercontent.com/Becerra?s=100" width="100" alt="David" /><br /><sub>David</sub>](https://github.com/DavidVII)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Becerra) | <img src="https://avatars.githubusercontent.com/Bryce?s=100" width="100" alt="Bryan" /><br /><sub>Bryan</sub>](https://github.com/BryanJBryce)<br />[📖](git@github.com:nsweeting/shopify/commits?author=Bryce) |
+| <img src="https://avatars.githubusercontent.com/overallduka?s=100" width="100" alt="Marcelo Oliveira" /><br /><sub>[Marcelo Oliveira</sub>](https://github.com/overallduka)<br />[💻](git@github.com:nsweeting/shopify/commits?author=overallduka) | <img src="https://avatars.githubusercontent.com/Ninigi?s=100" width="100" alt="Fabian Zitter" /><br /><sub>F[abian Zitter</sub>](https://github.com/Ninigi)<br />[💻](git@github.com:nsweeting/shopify/commits?author=Ninigi) 👀 [📖](git@github.com:nsweeting/shopify/commits?author=Ninigi) | <img src="https://avatars.githubusercontent.com/zachgarwood?s=100" width="100" alt="Zach Garwood" /><br /><sub>[Zach Garwood</sub>](https://github.com/zachgarwood)<br />[💻](git@github.com:nsweeting/shopify/commits?author=zachgarwood) | <img src="https://avatars.githubusercontent.com/DavidVII?s=100" width="100" alt="David Becerra" /><br /><sub>[David Becerra</sub>](https://github.com/DavidVII)<br />[💻](git@github.com:nsweeting/shopify/commits?author=DavidVII) | <img src="https://avatars.githubusercontent.com/BryanJBryce?s=100" width="100" alt="Bryan Bryce" /><br /><sub>[Bryan Bryce</sub>](https://github.com/BryanJBryce)<br />[📖](git@github.com:nsweeting/shopify/commits?author=BryanJBryce) |
 | :---: | :---: | :---: | :---: | :---: |
 <!-- Contributors table END -->
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
