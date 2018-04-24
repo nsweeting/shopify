@@ -56,9 +56,9 @@ defmodule Shopify.Metafield do
   |> Enum.each(fn (names) ->
     parent_name = Enum.at(names, 0)
     child_name  = Enum.at(names, 1)
-    def unquote(child_name)(session, parent_id, sub_id, params \\ %{}) do
+    def unquote(child_name)(session, parent_id, child_id, params \\ %{}) do
       session
-      |> Request.new(parent_sub_url(Atom.to_string(unquote(parent_name)), parent_id,Atom.to_string(unquote(child_name)), sub_id), params, plural_resource())
+      |> Request.new(parent_child_url(Atom.to_string(unquote(parent_name)), parent_id,Atom.to_string(unquote(child_name)), child_id), params, plural_resource())
       |> Client.get()
     end
   end)
@@ -78,7 +78,7 @@ defmodule Shopify.Metafield do
   end
 
   @doc false
-  def parent_sub_url(parent_name, parent_id, child_name, sub_id) do
-    parent_name <> "/#{parent_id}/" <> child_name <> "/#{sub_id}/" <> @plural <> ".json"
+  def parent_child_url(parent_name, parent_id, child_name, child_id) do
+    parent_name <> "/#{parent_id}/" <> child_name <> "/#{child_id}/" <> @plural <> ".json"
   end
 end
