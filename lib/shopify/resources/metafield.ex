@@ -3,6 +3,23 @@ defmodule Shopify.Metafield do
 
   @derive [Poison.Encoder]
 
+  @singular "metafield"
+  @plural "metafields"
+
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :count,
+      :create,
+      :update,
+      :delete
+    ]
+
+  alias Shopify.{
+    Metafield
+  }
+
   defstruct [
     :created_at,
     :description,
@@ -15,4 +32,53 @@ defmodule Shopify.Metafield do
     :value_type,
     :updated_at
   ]
+
+  @doc false
+  def empty_resource do
+    %Metafield{
+      key: "",
+      value: "",
+      value_type: "string",
+      namespace: ""
+    }
+  end
+
+  [:blogs, :collections, :customers, :draft_orders, :orders, :pages, :products]
+  |> Enum.each(fn (name) ->
+    def unquote(name)(session, top_id, params \\ %{}) do
+      session
+      |> Request.new(parent_url(Atom.to_string(unquote(name)), top_id), params, plural_resource())
+      |> Client.get()
+    end
+  end)
+
+  [[:blogs, :articles], [:products, :variants]]
+  |> Enum.each(fn (names) ->
+    parent_name = Enum.at(names, 0)
+    child_name  = Enum.at(names, 1)
+    def unquote(child_name)(session, parent_id, sub_id, params \\ %{}) do
+      session
+      |> Request.new(parent_sub_url(Atom.to_string(unquote(parent_name)), parent_id,Atom.to_string(unquote(child_name)), sub_id), params, plural_resource())
+      |> Client.get()
+    end
+  end)
+
+  @doc false
+  def find_url(id), do: @plural <> "/#{id}.json"
+
+  @doc false
+  def all_url, do: @plural <> ".json"
+
+  @doc false
+  def count_url, do: @plural <> "/count.json"
+
+  @doc false
+  def parent_url(top_name, top_id) do
+    top_name <> "/#{top_id}/" <> @plural <> ".json"
+  end
+
+  @doc false
+  def parent_sub_url(parent_name, parent_id, child_name, sub_id) do
+    parent_name <> "/#{parent_id}/" <> child_name <> "/#{sub_id}/" <> @plural <> ".json"
+  end
 end
