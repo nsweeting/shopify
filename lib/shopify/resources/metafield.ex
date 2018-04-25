@@ -43,22 +43,20 @@ defmodule Shopify.Metafield do
     }
   end
 
-  [:blogs, :collections, :customers, :draft_orders, :orders, :pages, :products]
+  ~w(blogs collections customers draft_orders orders pages products)
   |> Enum.each(fn (name) ->
-    def unquote(name)(session, parent_id, params \\ %{}) do
+    def unquote(:"#{name}")(session, parent_id, params \\ %{}) do
       session
-      |> Request.new(metafield_url(Atom.to_string(unquote(name)), parent_id), params, plural_resource())
+      |> Request.new(metafield_url(unquote(name), parent_id), params, plural_resource())
       |> Client.get()
     end
   end)
 
-  [[:blogs, :articles], [:products, :variants]]
-  |> Enum.each(fn (names) ->
-    parent_name = Enum.at(names, 0)
-    child_name  = Enum.at(names, 1)
-    def unquote(child_name)(session, parent_id, child_id, params \\ %{}) do
+  [["blogs", "articles"], ["products", "variants"]]
+  |> Enum.each(fn ([parent_name, child_name]) ->
+    def unquote(:"#{child_name}")(session, parent_id, child_id, params \\ %{}) do
       session
-      |> Request.new(metafield_url(Atom.to_string(unquote(parent_name)), parent_id,Atom.to_string(unquote(child_name)), child_id), params, plural_resource())
+      |> Request.new(metafield_url(unquote(parent_name), parent_id,unquote(child_name), child_id), params, plural_resource())
       |> Client.get()
     end
   end)
