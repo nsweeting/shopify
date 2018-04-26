@@ -72,7 +72,7 @@ defmodule Shopify.Metafield do
 
     def unquote(:"count_#{singular_name}_metafields")(session, parent_id) do
       session
-      |> Request.new(metafield_url_for_object(unquote(name), parent_id, 'count'), %{}, nil)
+      |> Request.new(metafield_url_for_object(unquote(name), parent_id, "count"), %{}, nil)
       |> Client.get()
     end
 
@@ -116,7 +116,7 @@ defmodule Shopify.Metafield do
 
     def unquote(:"count_#{singular_name}_metafields")(session, parent_id, child_id) do
       session
-      |> Request.new(metafield_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id, 'count'), %{}, nil)
+      |> Request.new(metafield_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id, "count"), %{}, nil)
       |> Client.get()
     end
 
