@@ -1,0 +1,14 @@
+{
+  "metafield": {
+    "id": 8451366454,
+    "namespace": "translations",
+    "key": "title_fr",
+    "value": "variante de produit",
+    "value_type": "string",
+    "description": "French product variant title",
+    "owner_id": 632910392,
+    "created_at": "2018-03-21T11:32:36-04:00",
+    "updated_at": "2018-03-21T11:32:36-04:00",
+    "owner_resource": "product_variant"
+  }
+}
