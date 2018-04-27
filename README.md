@@ -272,10 +272,12 @@ Or for `Shopify.Product.find(1)`
 - Product (find, all, create, update, delete, count)
 - Product.Event (all)
 - RecurringApplicationCharge (find, all, create, activate, delete)
+- Redirect (find, all, create, update, delete, count)
 - ScriptTag (find, all, create, count, delete)
 - ShippingAddress
 - ShippingLine
 - Shop (current)
+- SmartCollection (find, all, create, count, update, delete)
 - TaxLine
 - Theme (find, all, create, update, delete)
 - Theme.Asset (find, all, delete)
