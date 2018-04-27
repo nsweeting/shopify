@@ -7,15 +7,15 @@ defmodule Shopify.Metafield do
   @plural "metafields"
 
   @plural_to_singular %{
-    "blogs"        => "blog",
-    "collections"  => "collection",
-    "customers"    => "customer",
+    "blogs" => "blog",
+    "collections" => "collection",
+    "customers" => "customer",
     "draft_orders" => "draft_order",
-    "orders"       => "order",
-    "pages"        => "page",
-    "products"     => "product",
-    "variants"     => "variant",
-    "articles"     => "article"
+    "orders" => "order",
+    "pages" => "page",
+    "products" => "product",
+    "variants" => "variant",
+    "articles" => "article"
   }
 
   use Shopify.Resource,
@@ -56,17 +56,26 @@ defmodule Shopify.Metafield do
   end
 
   ~w(blogs collections customers draft_orders orders pages products)
-  |> Enum.each(fn (name) ->
+  |> Enum.each(fn name ->
     singular_name = @plural_to_singular[name]
+
     def unquote(:"all_#{singular_name}_metafields")(session, parent_id, params \\ %{}) do
       session
-      |> Request.new(metafields_url_for_object(unquote(name), parent_id), params, plural_resource())
+      |> Request.new(
+        metafields_url_for_object(unquote(name), parent_id),
+        params,
+        plural_resource()
+      )
       |> Client.get()
     end
 
     def unquote(:"find_#{singular_name}_metafield")(session, parent_id, metafield_id) do
       session
-      |> Request.new(metafield_url_for_object(unquote(name), parent_id, metafield_id), %{}, singular_resource())
+      |> Request.new(
+        metafield_url_for_object(unquote(name), parent_id, metafield_id),
+        %{},
+        singular_resource()
+      )
       |> Client.get()
     end
 
@@ -80,15 +89,30 @@ defmodule Shopify.Metafield do
       body = new_resource |> to_json
 
       session
-      |> Request.new(metafields_url_for_object(unquote(name), parent_id), %{}, singular_resource(), body)
+      |> Request.new(
+        metafields_url_for_object(unquote(name), parent_id),
+        %{},
+        singular_resource(),
+        body
+      )
       |> Client.post()
     end
 
-    def unquote(:"update_#{singular_name}_metafield")(session, parent_id, metafield_id, updated_resource) do
+    def unquote(:"update_#{singular_name}_metafield")(
+          session,
+          parent_id,
+          metafield_id,
+          updated_resource
+        ) do
       body = updated_resource |> to_json
 
       session
-      |> Request.new(metafield_url_for_object(unquote(name), parent_id, metafield_id), %{}, singular_resource(), body)
+      |> Request.new(
+        metafield_url_for_object(unquote(name), parent_id, metafield_id),
+        %{},
+        singular_resource(),
+        body
+      )
       |> Client.put()
     end
 
@@ -100,23 +124,48 @@ defmodule Shopify.Metafield do
   end)
 
   [["blogs", "articles"], ["products", "variants"]]
-  |> Enum.each(fn ([parent_name, child_name]) ->
+  |> Enum.each(fn [parent_name, child_name] ->
     singular_name = "#{@plural_to_singular[parent_name]}_#{@plural_to_singular[child_name]}"
+
     def unquote(:"all_#{singular_name}_metafields")(session, parent_id, child_id, params \\ %{}) do
       session
-      |> Request.new(metafields_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id), params, plural_resource())
+      |> Request.new(
+        metafields_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id),
+        params,
+        plural_resource()
+      )
       |> Client.get()
     end
 
     def unquote(:"find_#{singular_name}_metafield")(session, parent_id, child_id, metafield_id) do
       session
-      |> Request.new(metafield_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id, metafield_id), %{}, singular_resource())
+      |> Request.new(
+        metafield_url_for_object(
+          unquote(parent_name),
+          parent_id,
+          unquote(child_name),
+          child_id,
+          metafield_id
+        ),
+        %{},
+        singular_resource()
+      )
       |> Client.get()
     end
 
     def unquote(:"count_#{singular_name}_metafields")(session, parent_id, child_id) do
       session
-      |> Request.new(metafield_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id, "count"), %{}, nil)
+      |> Request.new(
+        metafield_url_for_object(
+          unquote(parent_name),
+          parent_id,
+          unquote(child_name),
+          child_id,
+          "count"
+        ),
+        %{},
+        nil
+      )
       |> Client.get()
     end
 
@@ -124,21 +173,53 @@ defmodule Shopify.Metafield do
       body = new_resource |> to_json
 
       session
-      |> Request.new(metafields_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id), %{}, singular_resource(), body)
+      |> Request.new(
+        metafields_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id),
+        %{},
+        singular_resource(),
+        body
+      )
       |> Client.post()
     end
 
-    def unquote(:"update_#{singular_name}_metafield")(session, parent_id, child_id, metafield_id, updated_resource) do
+    def unquote(:"update_#{singular_name}_metafield")(
+          session,
+          parent_id,
+          child_id,
+          metafield_id,
+          updated_resource
+        ) do
       body = updated_resource |> to_json
 
       session
-      |> Request.new(metafield_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id, metafield_id), %{}, singular_resource(), body)
+      |> Request.new(
+        metafield_url_for_object(
+          unquote(parent_name),
+          parent_id,
+          unquote(child_name),
+          child_id,
+          metafield_id
+        ),
+        %{},
+        singular_resource(),
+        body
+      )
       |> Client.put()
     end
 
     def unquote(:"delete_#{singular_name}_metafield")(session, parent_id, child_id, metafield_id) do
       session
-      |> Request.new(metafield_url_for_object(unquote(parent_name), parent_id, unquote(child_name), child_id, metafield_id), %{}, nil)
+      |> Request.new(
+        metafield_url_for_object(
+          unquote(parent_name),
+          parent_id,
+          unquote(child_name),
+          child_id,
+          metafield_id
+        ),
+        %{},
+        nil
+      )
       |> Client.delete()
     end
   end)
@@ -169,6 +250,7 @@ defmodule Shopify.Metafield do
 
   @doc false
   defp metafield_url_for_object(parent_name, parent_id, child_name, child_id, metafield_id) do
-    parent_name <> "/#{parent_id}/" <> child_name <> "/#{child_id}/" <> @plural <> "/#{metafield_id}.json"
+    parent_name <>
+      "/#{parent_id}/" <> child_name <> "/#{child_id}/" <> @plural <> "/#{metafield_id}.json"
   end
 end

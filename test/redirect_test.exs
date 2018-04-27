@@ -7,7 +7,10 @@ defmodule Shopify.RedirectTest do
     assert {:ok, response} = Shopify.session() |> Redirect.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/redirects/1.json", "redirect", Redirect.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/redirects/1.json", "redirect", Redirect.empty_resource())
+
     assert fixture == response.data
   end
 
@@ -15,7 +18,10 @@ defmodule Shopify.RedirectTest do
     assert {:ok, response} = Shopify.session() |> Redirect.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/redirects.json", "redirects", [Redirect.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/redirects.json", "redirects", [Redirect.empty_resource()])
+
     assert fixture == response.data
   end
 
@@ -28,11 +34,16 @@ defmodule Shopify.RedirectTest do
   end
 
   test "client can request to create an redirect" do
-    fixture = Fixture.load("../test/fixtures/redirects/1.json", "redirect", Redirect.empty_resource())
+    fixture =
+      Fixture.load("../test/fixtures/redirects/1.json", "redirect", Redirect.empty_resource())
+
     assert {:ok, response} = Shopify.session() |> Redirect.create(fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/redirects/1.json", "redirect", Redirect.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/redirects/1.json", "redirect", Redirect.empty_resource())
+
     assert fixture == response.data
   end
 

@@ -7,7 +7,14 @@ defmodule Shopify.SmartCollectionTest do
     assert {:ok, response} = Shopify.session() |> SmartCollection.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/smart_collections/1.json", "smart_collection", SmartCollection.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/smart_collections/1.json",
+        "smart_collection",
+        SmartCollection.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -15,7 +22,12 @@ defmodule Shopify.SmartCollectionTest do
     assert {:ok, response} = Shopify.session() |> SmartCollection.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/smart_collections.json", "smart_collections", [SmartCollection.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/smart_collections.json", "smart_collections", [
+        SmartCollection.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
@@ -28,11 +40,24 @@ defmodule Shopify.SmartCollectionTest do
   end
 
   test "client can request to create an smart_collection" do
-    fixture = Fixture.load("../test/fixtures/smart_collections/1.json", "smart_collection", SmartCollection.empty_resource())
+    fixture =
+      Fixture.load(
+        "../test/fixtures/smart_collections/1.json",
+        "smart_collection",
+        SmartCollection.empty_resource()
+      )
+
     assert {:ok, response} = Shopify.session() |> SmartCollection.create(fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/smart_collections/1.json", "smart_collection", SmartCollection.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/smart_collections/1.json",
+        "smart_collection",
+        SmartCollection.empty_resource()
+      )
+
     assert fixture == response.data
   end
 

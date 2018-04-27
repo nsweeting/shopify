@@ -14,7 +14,7 @@ defmodule Shopify.Redirect do
     ]
 
   alias Shopify.{
-    Redirect,
+    Redirect
   }
 
   defstruct [
@@ -25,8 +25,7 @@ defmodule Shopify.Redirect do
 
   @doc false
   def empty_resource do
-    %Redirect{
-    }
+    %Redirect{}
   end
 
   @doc false

@@ -3,11 +3,12 @@ defmodule Shopify.Event do
   @singular "event"
   @plural "events"
 
-  use Shopify.Resource, import: [
-    :find,
-    :all,
-    :count
-  ]
+  use Shopify.Resource,
+    import: [
+      :find,
+      :all,
+      :count
+    ]
 
   defstruct [
     :arguments,
