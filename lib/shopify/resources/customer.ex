@@ -39,7 +39,9 @@ defmodule Shopify.Customer do
     :tax_exempt,
     :total_spent,
     :updated_at,
-    :verified_email
+    :verified_email,
+    :send_email_invite,
+    :send_email_welcome
   ]
 
   @doc false

@@ -1,0 +1,29 @@
+{
+  "smart_collection": {
+    "id": 482865238,
+    "handle": "smart-ipods",
+    "title": "Smart iPods",
+    "updated_at": "2008-02-01T19:00:00-05:00",
+    "body_html": "<p>The best selling ipod ever</p>",
+    "published_at": "2008-02-01T19:00:00-05:00",
+    "sort_order": "manual",
+    "template_suffix": null,
+    "products_count": 0,
+    "disjunctive": false,
+    "rules": [
+      {
+        "column": "type",
+        "relation": "equals",
+        "condition": "Cult Products"
+      }
+    ],
+    "published_scope": "web",
+    "image": {
+      "created_at": "2018-03-21T11:32:36-04:00",
+      "alt": "iPod Nano 8gb",
+      "width": 123,
+      "height": 456,
+      "src": "https://cdn.shopify.com/s/files/1/0006/9093/3842/collections/ipod_nano_8gb.jpg?v=1521646356"
+    }
+  }
+}
