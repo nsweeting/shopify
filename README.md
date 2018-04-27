@@ -261,6 +261,7 @@ Or for `Shopify.Product.find(1)`
 - Fullfillment
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
+- Metafield
 - OAuth.AccessScope (all)
 - Option
 - Order (find, all, create, update, delete, count)
