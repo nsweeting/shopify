@@ -1,7 +1,7 @@
 defmodule Shopify.FulfillmentTest do
   use ExUnit.Case, async: true
 
-  alias Shopify.Fulfillment
+  alias Shopify.Order.Fulfillment
 
   test "client can request a single fulfillment" do
     assert {:ok, response} = Shopify.session() |> Fulfillment.find(1, 1)

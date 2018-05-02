@@ -258,7 +258,7 @@ Or for `Shopify.Product.find(1)`
 - DraftOrder (find, all, create, update, delete, count, complete, send_invoice) *`send_invoice` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
 - DraftOrder.DraftOrderInvoice (create)
 - Event (find, all, count)
-- Fullfillment (find, all, count, create, update, complete, open, cancel)
+- Order.Fullfillment (find, all, count, create, update, complete, open, cancel)
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
 - Location (find, all, count)
