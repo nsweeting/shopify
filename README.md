@@ -260,6 +260,7 @@ Or for `Shopify.Product.find(1)`
 - Event (find, all, count)
 - Order.Fullfillment (find, all, count, create, update, complete, open, cancel)
 - Order.Fullfillment.Event (find, all, delete)
+- FulfillmentService (find, all, create, update, delete)
 - Image (ProductImage) (find, all, create, update, delete, count)
 - LineItem
 - Location (find, all, count)
