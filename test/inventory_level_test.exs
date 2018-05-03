@@ -60,4 +60,22 @@ defmodule Shopify.InventoryLevelTest do
     assert success == :error
     assert resp.code == 422
   end
+
+  test "client can request to set available inventory at a location" do
+    params = %{inventory_item_id: 123, location_id: 123, available: 5}
+
+    assert {:ok, resp} = Shopify.session() |> InventoryLevel.set(params)
+    fixture = Fixture.load("../test/fixtures/inventory_levels/set.json", "inventory_level", InventoryLevel.empty_resource())
+    assert resp.code == 200
+    assert resp.data == fixture
+  end
+
+  test "client responds with error 422 if parameters missing for set/2" do
+    params = %{inventory_item_id: 123}
+
+    {success, resp} = Shopify.session() |> InventoryLevel.set(params)
+
+    assert success == :error
+    assert resp.code == 422
+  end
 end

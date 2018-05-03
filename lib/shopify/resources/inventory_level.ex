@@ -99,6 +99,29 @@ defmodule Shopify.InventoryLevel do
   def connect(%Shopify.Session{}, _),
     do: unprocessable_entity(@missing_connect_parameters)
 
+  @doc """
+  Sets available inventory for a given inventory item at given location.
+
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+  ## Parameters
+    - session: A `%Shopify.Session{}` struct.
+    - params: Any additional query params.
+
+  ## Examples
+      iex> Shopify.session |> Shopify.InventoryLevel.set(%{inventory_item_id: 123, location_id: 123, available: 5})
+      {:ok, %Shopify.Response{}}
+  """
+  @spec set(%Shopify.Session{}, map) :: %Shopify.Response{}
+  def set(%Shopify.Session{} = session, %{inventory_item_id: _, location_id: _, available: _} = inventory) do
+    session
+    |> Request.new(@plural <> "/set.json", inventory, singular_resource())
+    |> Client.post()
+  end
+
+  def set(%Shopify.Session{}, _),
+    do: unprocessable_entity(@missing_connect_parameters)
+
   @doc false
   def find_url(id), do: @plural <> "/#{id}.json"
 
