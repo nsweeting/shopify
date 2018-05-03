@@ -1,0 +1,8 @@
+{
+  "inventory_level": {
+    "inventory_item_id": 123,
+    "location_id": 123,
+    "available": 5,
+    "updated_at": "2018-04-27T15:24:20-04:00"
+  }
+}
