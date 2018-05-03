@@ -47,7 +47,9 @@ defmodule Shopify.Request do
   defp add_query(full_url, params) when map_size(params) == 0, do: full_url
 
   defp add_query(full_url, params) do
-    query = URI.encode_query(params)
+    query = params
+      |> scrub_params()
+      |> URI.encode_query()
 
     if String.contains?(full_url, "?") do
       full_url <> "&" <> query
@@ -55,4 +57,18 @@ defmodule Shopify.Request do
       full_url <> "?" <> query
     end
   end
+
+  defp scrub_params(params) do
+    do_scrub_params(%{}, Map.keys(params), params)
+  end
+
+  defp do_scrub_params(scrubbed, [], _), do: scrubbed
+  defp do_scrub_params(scrubbed, [key | rest], params) do
+    scrubbed
+    |> Enum.into(%{key => scrub_value(params[key])})
+    |> do_scrub_params(rest, params)
+  end
+
+  defp scrub_value(val) when is_list(val), do: Enum.join(val, ",")
+  defp scrub_value(val), do: val
 end
