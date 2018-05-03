@@ -262,6 +262,7 @@ Or for `Shopify.Product.find(1)`
 - Order.Fullfillment.Event (find, all, delete)
 - FulfillmentService (find, all, create, update, delete)
 - Image (ProductImage) (find, all, create, update, delete, count)
+- InventoryLevel (all, delete)
 - LineItem
 - Location (find, all, count)
 - Metafield
