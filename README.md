@@ -272,6 +272,7 @@ Or for `Shopify.Product.find(1)`
 - Option
 - Order (find, all, create, update, delete, count)
 - Order.Event (all)
+- Order.Risk (create, find, all, update, delete)
 - PaymentDetails
 - PriceRule (find, all, create, update, delete)
 - PriceRule.DiscountCode (find, all, create, update, delete)
