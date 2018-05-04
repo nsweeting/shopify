@@ -11,9 +11,9 @@ defmodule Shopify.MarketingEvent.Engagement do
     :clicks_count,
     :shares_count,
     :favorites_count,
-    :comments_count ,
+    :comments_count,
     :ad_spend,
-    :is_cumulative,
+    :is_cumulative
   ]
 
   @doc false

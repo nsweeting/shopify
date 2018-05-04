@@ -24,7 +24,7 @@ defmodule Shopify.Order.Fulfillment do
   end
 
   @doc false
-  def find_url(top_id, nest_id), do: base_url(top_id)<> "/#{nest_id}.json"
+  def find_url(top_id, nest_id), do: base_url(top_id) <> "/#{nest_id}.json"
 
   @doc false
   def all_url(top_id), do: base_url(top_id) <> ".json"
@@ -40,7 +40,8 @@ defmodule Shopify.Order.Fulfillment do
     |> Client.post()
   end
 
-  defp non_rest_url(top_id, nest_id, sub_url), do: base_url(top_id) <> "/#{nest_id}/#{sub_url}.json"
+  defp non_rest_url(top_id, nest_id, sub_url),
+    do: base_url(top_id) <> "/#{nest_id}/#{sub_url}.json"
 
   @doc """
   Request to mark a fulfillment as complete.

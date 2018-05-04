@@ -36,10 +36,12 @@ defmodule Shopify.Order.Fulfillment.Event do
   end
 
   @doc false
-  def all_url(order_id, fulfillment_id), do:  base_url(order_id, fulfillment_id) <> ".json"
+  def all_url(order_id, fulfillment_id), do: base_url(order_id, fulfillment_id) <> ".json"
 
   @doc false
-  def find_url(order_id, fulfillment_id, event_id), do: base_url(order_id, fulfillment_id) <> "/#{event_id}.json"
+  def find_url(order_id, fulfillment_id, event_id),
+    do: base_url(order_id, fulfillment_id) <> "/#{event_id}.json"
 
-  defp base_url(order_id, fulfillment_id), do: "orders/#{order_id}/fulfillments/#{fulfillment_id}/events"
+  defp base_url(order_id, fulfillment_id),
+    do: "orders/#{order_id}/fulfillments/#{fulfillment_id}/events"
 end

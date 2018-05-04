@@ -2,8 +2,7 @@ defmodule Shopify.Policy do
   @plural "policies"
   @singular "policy"
 
-  use Shopify.Resource,
-    import: [:all]
+  use Shopify.Resource, import: [:all]
 
   defstruct [
     :title,

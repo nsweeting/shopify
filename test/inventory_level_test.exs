@@ -2,12 +2,22 @@ defmodule Shopify.InventoryLevelTest do
   use ExUnit.Case, async: true
 
   alias Shopify.InventoryLevel
+
   test "client can request all inventory_levels" do
-    params = %{inventory_item_ids: [808950810, 39072856], location_ids: [905684977, 487838322]}
+    params = %{
+      inventory_item_ids: [808_950_810, 39_072_856],
+      location_ids: [905_684_977, 487_838_322]
+    }
+
     assert {:ok, response} = Shopify.session() |> InventoryLevel.all(params)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/inventory_levels.json", "inventory_levels", [InventoryLevel.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/inventory_levels.json", "inventory_levels", [
+        InventoryLevel.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
@@ -29,7 +39,14 @@ defmodule Shopify.InventoryLevelTest do
     params = %{inventory_item_id: 123, location_id: 123, available_adjustment: 123}
 
     assert {:ok, resp} = Shopify.session() |> InventoryLevel.adjust(params)
-    fixture = Fixture.load("../test/fixtures/inventory_levels/adjust.json", "inventory_level", InventoryLevel.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/inventory_levels/adjust.json",
+        "inventory_level",
+        InventoryLevel.empty_resource()
+      )
+
     assert resp.code == 200
     assert resp.data == fixture
   end
@@ -47,7 +64,14 @@ defmodule Shopify.InventoryLevelTest do
     params = %{inventory_item_id: 123, location_id: 123}
 
     assert {:ok, resp} = Shopify.session() |> InventoryLevel.connect(params)
-    fixture = Fixture.load("../test/fixtures/inventory_levels/connect.json", "inventory_level", InventoryLevel.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/inventory_levels/connect.json",
+        "inventory_level",
+        InventoryLevel.empty_resource()
+      )
+
     assert resp.code == 200
     assert resp.data == fixture
   end
@@ -65,7 +89,14 @@ defmodule Shopify.InventoryLevelTest do
     params = %{inventory_item_id: 123, location_id: 123, available: 5}
 
     assert {:ok, resp} = Shopify.session() |> InventoryLevel.set(params)
-    fixture = Fixture.load("../test/fixtures/inventory_levels/set.json", "inventory_level", InventoryLevel.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/inventory_levels/set.json",
+        "inventory_level",
+        InventoryLevel.empty_resource()
+      )
+
     assert resp.code == 200
     assert resp.data == fixture
   end

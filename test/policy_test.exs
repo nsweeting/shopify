@@ -7,7 +7,10 @@ defmodule Shopify.PolicyTest do
     assert {:ok, response} = Shopify.session() |> Policy.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/policies.json", "policies", [Policy.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/policies.json", "policies", [Policy.empty_resource()])
+
     assert fixture == response.data
   end
 end

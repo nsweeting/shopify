@@ -7,7 +7,14 @@ defmodule Shopify.MarketingEventTest do
     assert {:ok, response} = Shopify.session() |> MarketingEvent.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/marketing_events/1.json", "marketing_event", MarketingEvent.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/marketing_events/1.json",
+        "marketing_event",
+        MarketingEvent.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -15,7 +22,12 @@ defmodule Shopify.MarketingEventTest do
     assert {:ok, response} = Shopify.session() |> MarketingEvent.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/marketing_events.json", "marketing_events", [MarketingEvent.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/marketing_events.json", "marketing_events", [
+        MarketingEvent.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
@@ -28,11 +40,24 @@ defmodule Shopify.MarketingEventTest do
   end
 
   test "client can request to create an marketing_event" do
-    fixture = Fixture.load("../test/fixtures/marketing_events/1.json", "marketing_event", MarketingEvent.empty_resource())
+    fixture =
+      Fixture.load(
+        "../test/fixtures/marketing_events/1.json",
+        "marketing_event",
+        MarketingEvent.empty_resource()
+      )
+
     assert {:ok, response} = Shopify.session() |> MarketingEvent.create(fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/marketing_events/1.json", "marketing_event", MarketingEvent.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/marketing_events/1.json",
+        "marketing_event",
+        MarketingEvent.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -52,8 +77,14 @@ defmodule Shopify.MarketingEventTest do
   end
 
   test "client can request the engagements" do
-    fixture = Fixture.load("../test/fixtures/marketing_events/1/engagements.json", "engagements", [MarketingEvent.Engagement.empty_resource()])
-    assert {success, resp} = Shopify.session() |> MarketingEvent.create_multiple_engagements(1, fixture)
+    fixture =
+      Fixture.load("../test/fixtures/marketing_events/1/engagements.json", "engagements", [
+        MarketingEvent.Engagement.empty_resource()
+      ])
+
+    assert {success, resp} =
+             Shopify.session() |> MarketingEvent.create_multiple_engagements(1, fixture)
+
     assert success == :ok
     assert resp.data == fixture
   end

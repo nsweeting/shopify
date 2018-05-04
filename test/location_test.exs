@@ -7,7 +7,10 @@ defmodule Shopify.LocationTest do
     assert {:ok, response} = Shopify.session() |> Location.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/locations/1.json", "location", Location.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/locations/1.json", "location", Location.empty_resource())
+
     assert fixture == response.data
   end
 
@@ -15,7 +18,10 @@ defmodule Shopify.LocationTest do
     assert {:ok, response} = Shopify.session() |> Location.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/locations.json", "locations", [Location.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/locations.json", "locations", [Location.empty_resource()])
+
     assert fixture == response.data
   end
 

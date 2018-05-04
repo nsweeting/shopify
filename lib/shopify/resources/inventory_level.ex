@@ -40,12 +40,12 @@ defmodule Shopify.InventoryLevel do
   """
   @spec all(%Shopify.Session{}, map) :: %Shopify.Response{}
   def all(session, params)
+
   def all(%Shopify.Session{} = session, %{inventory_item_ids: _} = params),
     do: do_all(session, params)
-  def all(%Shopify.Session{} = session, %{location_ids: _} = params),
-    do: do_all(session, params)
-  def all(%Shopify.Session{}, _params),
-    do: unprocessable_entity(@missing_all_params_msg)
+
+  def all(%Shopify.Session{} = session, %{location_ids: _} = params), do: do_all(session, params)
+  def all(%Shopify.Session{}, _params), do: unprocessable_entity(@missing_all_params_msg)
 
   defp do_all(session, params) do
     session
@@ -67,14 +67,16 @@ defmodule Shopify.InventoryLevel do
       {:ok, %Shopify.Response{}}
   """
   @spec adjust(%Shopify.Session{}, map) :: %Shopify.Response{}
-  def adjust(%Shopify.Session{} = session, %{inventory_item_id: _, location_id: _, available_adjustment: _} = inventory_level) do
+  def adjust(
+        %Shopify.Session{} = session,
+        %{inventory_item_id: _, location_id: _, available_adjustment: _} = inventory_level
+      ) do
     session
     |> Request.new(@plural <> "/adjust.json", inventory_level, singular_resource())
     |> Client.post()
   end
 
-  def adjust(%Shopify.Session{}, _),
-    do: unprocessable_entity(@missing_adjustment_parameters)
+  def adjust(%Shopify.Session{}, _), do: unprocessable_entity(@missing_adjustment_parameters)
 
   @doc """
   Connects a given inventory with a location.
@@ -96,8 +98,7 @@ defmodule Shopify.InventoryLevel do
     |> Client.post()
   end
 
-  def connect(%Shopify.Session{}, _),
-    do: unprocessable_entity(@missing_connect_parameters)
+  def connect(%Shopify.Session{}, _), do: unprocessable_entity(@missing_connect_parameters)
 
   @doc """
   Sets available inventory for a given inventory item at given location.
@@ -113,14 +114,16 @@ defmodule Shopify.InventoryLevel do
       {:ok, %Shopify.Response{}}
   """
   @spec set(%Shopify.Session{}, map) :: %Shopify.Response{}
-  def set(%Shopify.Session{} = session, %{inventory_item_id: _, location_id: _, available: _} = inventory) do
+  def set(
+        %Shopify.Session{} = session,
+        %{inventory_item_id: _, location_id: _, available: _} = inventory
+      ) do
     session
     |> Request.new(@plural <> "/set.json", inventory, singular_resource())
     |> Client.post()
   end
 
-  def set(%Shopify.Session{}, _),
-    do: unprocessable_entity(@missing_connect_parameters)
+  def set(%Shopify.Session{}, _), do: unprocessable_entity(@missing_connect_parameters)
 
   @doc false
   def find_url(id), do: @plural <> "/#{id}.json"
@@ -128,6 +131,5 @@ defmodule Shopify.InventoryLevel do
   @doc false
   def all_url, do: @plural <> ".json"
 
-  defp unprocessable_entity(msg),
-    do: Shopify.Response.new(422, msg, empty_resource())
+  defp unprocessable_entity(msg), do: Shopify.Response.new(422, msg, empty_resource())
 end

@@ -51,7 +51,11 @@ defmodule Shopify.MarketingEvent do
   @doc """
   Alias for `Shopify.MarketingEvent.Engagement.create_multiple/3`
   """
-  @spec create_multiple_engagements(%Shopify.Session{}, integer, list(%Shopify.MarketingEvent.Engagement{})) :: %Shopify.Response{}
+  @spec create_multiple_engagements(
+          %Shopify.Session{},
+          integer,
+          list(%Shopify.MarketingEvent.Engagement{})
+        ) :: %Shopify.Response{}
   def create_multiple_engagements(%Shopify.Session{} = session, marketing_event_id, engagements) do
     __MODULE__.Engagement.create_multiple(session, marketing_event_id, engagements)
   end

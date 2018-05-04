@@ -71,7 +71,7 @@ defmodule Shopify.Adapters.Mock do
     # for their JSON REST-API, if they ever decide to put a second value in the top level
     # it will get a lot harder to know what the resource name is.
     resource = raw_resource |> Map.values() |> List.first()
-    key = raw_resource |> Map.keys |> List.first
+    key = raw_resource |> Map.keys() |> List.first()
     put_id(key, resource)
   end
 

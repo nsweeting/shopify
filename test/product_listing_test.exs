@@ -7,7 +7,14 @@ defmodule Shopify.ProductListingTest do
     assert {:ok, response} = Shopify.session() |> ProductListing.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/product_listings/1.json", "product_listing", ProductListing.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/product_listings/1.json",
+        "product_listing",
+        ProductListing.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -15,7 +22,12 @@ defmodule Shopify.ProductListingTest do
     assert {:ok, response} = Shopify.session() |> ProductListing.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/product_listings.json", "product_listings", [ProductListing.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/product_listings.json", "product_listings", [
+        ProductListing.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
@@ -28,11 +40,24 @@ defmodule Shopify.ProductListingTest do
   end
 
   test "client can request to create an product_listing" do
-    fixture = Fixture.load("../test/fixtures/product_listings/1.json", "product_listing", ProductListing.empty_resource())
+    fixture =
+      Fixture.load(
+        "../test/fixtures/product_listings/1.json",
+        "product_listing",
+        ProductListing.empty_resource()
+      )
+
     assert {:ok, response} = Shopify.session() |> ProductListing.create(fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/product_listings/1.json", "product_listing", ProductListing.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/product_listings/1.json",
+        "product_listing",
+        ProductListing.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -55,6 +80,6 @@ defmodule Shopify.ProductListingTest do
     {success, resp} = Shopify.session() |> ProductListing.product_ids()
 
     assert success == :ok
-    assert resp.data == [921728736, 632910392]
+    assert resp.data == [921_728_736, 632_910_392]
   end
 end

@@ -7,7 +7,14 @@ defmodule Shopify.Order.Fulfillment.EventTest do
     assert {:ok, response} = Shopify.session() |> Event.find(1, 1, 1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/orders/1/fulfillments/1/events/1.json", "fulfillment_event", Event.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/orders/1/fulfillments/1/events/1.json",
+        "fulfillment_event",
+        Event.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -15,16 +22,34 @@ defmodule Shopify.Order.Fulfillment.EventTest do
     assert {:ok, response} = Shopify.session() |> Event.all(1, 1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/orders/1/fulfillments/1/events.json", "fulfillment_events", [Event.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/orders/1/fulfillments/1/events.json", "fulfillment_events", [
+        Event.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
   test "client can request to create a event" do
-    fixture = Fixture.load("../test/fixtures/orders/1/fulfillments/1/events/1.json", "fulfillment_event", Event.empty_resource())
+    fixture =
+      Fixture.load(
+        "../test/fixtures/orders/1/fulfillments/1/events/1.json",
+        "fulfillment_event",
+        Event.empty_resource()
+      )
+
     assert {:ok, response} = Shopify.session() |> Event.create(1, 1, fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/orders/1/fulfillments/1/events/1.json", "fulfillment_event", Event.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/orders/1/fulfillments/1/events/1.json",
+        "fulfillment_event",
+        Event.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
