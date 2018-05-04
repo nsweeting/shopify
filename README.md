@@ -275,6 +275,7 @@ Or for `Shopify.Product.find(1)`
 - Order.Risk (create, find, all, update, delete)
 - Page (create, find, all, update, delete, count)
 - PaymentDetails
+- Policy (all)
 - PriceRule (find, all, create, update, delete)
 - PriceRule.DiscountCode (find, all, create, update, delete)
 - Product (find, all, create, update, delete, count)
