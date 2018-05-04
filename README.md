@@ -257,6 +257,7 @@ Or for `Shopify.Product.find(1)`
 - DiscountCode
 - DraftOrder (find, all, create, update, delete, count, complete, send_invoice) *`send_invoice` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
 - DraftOrder.DraftOrderInvoice (create)
+- MarketingEvent.Engagement (create_multiple)
 - Event (find, all, count)
 - Order.Fullfillment (find, all, count, create, update, complete, open, cancel)
 - Order.Fullfillment.Event (find, all, delete)
