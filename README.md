@@ -266,6 +266,7 @@ Or for `Shopify.Product.find(1)`
 - InventoryLevel (all, delete)
 - LineItem
 - Location (find, all, count)
+- MarketingEvent (find, all, count, create, update, delete, create_multiple_engagements) *`create_multiple_engagements` is an alias of `MarketingEvent.Engagement.create_multiple/3`*
 - Metafield
 - OAuth.AccessScope (all)
 - Option

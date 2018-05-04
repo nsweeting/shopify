@@ -50,4 +50,11 @@ defmodule Shopify.MarketingEventTest do
     assert 200 == response.code
     assert nil == response.data
   end
+
+  test "client can request the engagements" do
+    fixture = Fixture.load("../test/fixtures/marketing_events/1/engagements.json", "engagements", [MarketingEvent.Engagement.empty_resource()])
+    assert {success, resp} = Shopify.session() |> MarketingEvent.create_multiple_engagements(1, fixture)
+    assert success == :ok
+    assert resp.data == fixture
+  end
 end

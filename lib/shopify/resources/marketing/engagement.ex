@@ -37,9 +37,12 @@ defmodule Shopify.MarketingEvent.Engagement do
   def create_multiple(%Shopify.Session{} = session, marketing_event_id, engagements) do
     body = engagements |> to_json()
 
-    url = "marketing_events/#{marketing_event_id}/" <> @plural <> ".json"
     session
-    |> Request.new(url, %{}, %{"engagements" => [empty_resource()]}, body)
+    |> Request.new(all_url(marketing_event_id), %{}, %{"engagements" => [empty_resource()]}, body)
     |> Client.post()
   end
+
+  @doc false
+  def all_url(marketing_event_id),
+    do: "marketing_events/#{marketing_event_id}/" <> @plural <> ".json"
 end

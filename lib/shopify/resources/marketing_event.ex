@@ -47,4 +47,12 @@ defmodule Shopify.MarketingEvent do
 
   @doc false
   def count_url, do: @plural <> "/count.json"
+
+  @doc """
+  Alias for `Shopify.MarketingEvent.Engagement.create_multiple/3`
+  """
+  @spec create_multiple_engagements(%Shopify.Session{}, integer, list(%Shopify.MarketingEvent.Engagement{})) :: %Shopify.Response{}
+  def create_multiple_engagements(%Shopify.Session{} = session, marketing_event_id, engagements) do
+    __MODULE__.Engagement.create_multiple(session, marketing_event_id, engagements)
+  end
 end
