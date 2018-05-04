@@ -280,6 +280,7 @@ Or for `Shopify.Product.find(1)`
 - PriceRule.DiscountCode (find, all, create, update, delete)
 - Product (find, all, create, update, delete, count)
 - Product.Event (all)
+- ProductListing (find, all, create, update, delete, count, product_ids)
 - RecurringApplicationCharge (find, all, create, activate, delete)
 - Redirect (find, all, create, update, delete, count)
 - ScriptTag (find, all, create, count, delete)
