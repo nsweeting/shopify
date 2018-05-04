@@ -10,7 +10,8 @@ defmodule Shopify.Policy do
     :body,
     :created_at,
     :updated_at,
-    :url
+    :url,
+    :id
   ]
 
   @doc false

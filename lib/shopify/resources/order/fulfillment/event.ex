@@ -4,6 +4,8 @@ defmodule Shopify.Order.Fulfillment.Event do
 
   use Shopify.Resource
 
+  defstruct %Shopify.Event{} |> Map.keys() |> List.delete(:__struct__)
+
   @doc false
   def empty_resource, do: Shopify.Event.empty_resource()
 

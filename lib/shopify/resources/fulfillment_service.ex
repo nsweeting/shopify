@@ -13,6 +13,7 @@ defmodule Shopify.FulfillmentService do
     ]
 
   defstruct [
+    :id,
     :callback_url,
     :format,
     :handle,

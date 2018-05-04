@@ -17,6 +17,7 @@ defmodule Shopify.CarrierService do
   }
 
   defstruct [
+    :id,
     :active,
     :callback_url,
     :carrier_service_type,

@@ -14,6 +14,7 @@ defmodule Shopify.CollectionListing do
   }
 
   defstruct [
+    :id,
     :collection_id,
     :body_html,
     :default_product_image,
