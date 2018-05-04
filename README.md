@@ -284,6 +284,7 @@ Or for `Shopify.Product.find(1)`
 - RecurringApplicationCharge (find, all, create, activate, delete)
 - Redirect (find, all, create, update, delete, count)
 - Refund (create, find, all)
+- Report (create, find, all, update, delete)
 - ScriptTag (find, all, create, count, delete)
 - ShippingAddress
 - ShippingLine
