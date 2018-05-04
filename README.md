@@ -283,6 +283,7 @@ Or for `Shopify.Product.find(1)`
 - ProductListing (find, all, create, update, delete, count, product_ids)
 - RecurringApplicationCharge (find, all, create, activate, delete)
 - Redirect (find, all, create, update, delete, count)
+- Refund (create, find, all)
 - ScriptTag (find, all, create, count, delete)
 - ShippingAddress
 - ShippingLine
