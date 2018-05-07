@@ -1,10 +1,12 @@
 defmodule Shopify.Mixfile do
   use Mix.Project
 
+  @version "0.2.0"
+
   def project do
     [
       app: :shopify,
-      version: "0.1.7",
+      version: @version,
       elixir: "~> 1.4-rc",
       description: description(),
       package: package(),
@@ -29,7 +31,7 @@ defmodule Shopify.Mixfile do
 
   defp description do
     """
-    An Elixir Shopify API client. Work in progress.
+    An Elixir Shopify API client
     """
   end
 
