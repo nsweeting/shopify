@@ -2,8 +2,6 @@
 
 [![Hex.pm](https://img.shields.io/hexpm/v/shopify.svg)](https://hex.pm/packages/shopify)
 
-**Currently a Work in Progress**
-
 This package allows Elixir developers to easily access the admin Shopify API.
 
 ## Installation
@@ -12,7 +10,7 @@ The package can be installed by adding `shopify` to your list of dependencies in
 
 ```elixir
 def deps do
-  [{:shopify, "~> 0.1.7"}]
+  [{:shopify, "~> 0.2.0"}]
 end
 ```
 
