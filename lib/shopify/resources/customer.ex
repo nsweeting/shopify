@@ -63,4 +63,11 @@ defmodule Shopify.Customer do
 
   @doc false
   def search_url, do: @plural <> "/search.json"
+
+  @doc false
+  def orders(session, id, params \\ %{}) do
+    session
+    |> Request.new(@plural <> "/#{id}/orders.json", params, Shopify.Order.plural_resource())
+    |> Client.get()
+  end
 end
