@@ -86,4 +86,12 @@ defmodule Shopify.CustomerTest do
     assert 200 == response.code
     assert customer_invite == response.data
   end
+
+  test "client can create an account activation" do
+    assert {:ok, response} = Shopify.session() |> Customer.account_activation_url(1)
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+    fixture = Fixture.load("../test/fixtures/customers/1/account_activation_url.json", "account_activation_url", %{"account_activation_url" => ""})
+    assert fixture == response.data
+  end
 end

@@ -77,6 +77,13 @@ defmodule Shopify.Customer do
   end
 
   @doc false
+  def account_activation_url(session, id) do
+    session
+    |> Request.new(@plural <> "/#{id}/account_activation_url.json", %{}, %{"account_activation_url" => ""})
+    |> Client.post()
+  end
+
+  @doc false
   def send_invite(session, id) do
     session
     |> Request.new(invite_url(id), %{}, CustomerInvite.singular_resource())
