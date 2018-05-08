@@ -79,7 +79,7 @@ defmodule Shopify.Customer do
   @doc false
   def account_activation_url(session, id) do
     session
-    |> Request.new(@plural <> "/#{id}/account_activation_url.json", %{}, %{"account_activation_url" => ""})
+    |> Request.new(@plural <> "/#{id}/account_activation_url.json", %{})
     |> Client.post()
   end
 
