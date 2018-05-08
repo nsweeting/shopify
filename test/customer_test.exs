@@ -1,8 +1,11 @@
 defmodule Shopify.CustomerTest do
   use ExUnit.Case, async: true
 
-  alias Shopify.Customer
-  alias Shopify.Order
+  alias Shopify.{
+    Customer,
+    Order,
+    CustomerInvite
+  }
 
   test "client can request a single customer" do
     assert {:ok, response} = Shopify.session() |> Customer.find(1)
@@ -58,5 +61,29 @@ defmodule Shopify.CustomerTest do
     assert 200 == response.code
     fixture = Fixture.load("../test/fixtures/customers/1/orders.json", "orders", [Order.empty_resource()])
     assert fixture == response.data
+  end
+
+  test "client can send an invite to customer" do
+    assert {:ok, response} = Shopify.session() |> Customer.send_invite(1)
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+    fixture = Fixture.load("../test/fixtures/customers/1/send_invite.json", "customer_invite", CustomerInvite.empty_resource())
+    assert fixture == response.data
+  end
+
+  test "client can send a custom invite to customer" do
+    customer_invite = %CustomerInvite{
+      to: "new_test_email@shopify.com",
+      from: "noaccesssteve@jobs.com",
+      bcc: [
+        "noaccesssteve@jobs.com"
+      ],
+      subject: "Welcome to my new shop",
+      custom_message: "My awesome new store"
+    }
+    assert {:ok, response} = Shopify.session() |> Customer.send_invite(1, customer_invite)
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+    assert customer_invite == response.data
   end
 end
