@@ -3,8 +3,9 @@ defmodule Shopify.PageTest do
 
   alias Shopify.Page
 
+  @tag :asdf
   test "client can request a single page" do
-    assert {:ok, response} = Shopify.session() |> Page.find(1)
+    assert {:ok, response} = Shopify.session() |> Page.find(1, %{a: "a"})
     assert %Shopify.Response{} = response
     assert 200 == response.code
     fixture = Fixture.load("../test/fixtures/pages/1.json", "page", Page.empty_resource())
