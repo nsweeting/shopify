@@ -3,7 +3,6 @@ defmodule Shopify.CustomerTest do
 
   alias Shopify.{
     Customer,
-    Order,
     CustomerInvite
   }
 
@@ -59,7 +58,7 @@ defmodule Shopify.CustomerTest do
     assert {:ok, response} = Shopify.session() |> Customer.orders(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers/1/orders.json", "orders", [Order.empty_resource()])
+    fixture = Fixture.load("../test/fixtures/customers/1/orders.json", "orders", [Customer.Order.empty_resource()])
     assert fixture == response.data
   end
 

@@ -72,8 +72,7 @@ defmodule Shopify.Customer do
   @doc false
   def orders(session, id, params \\ %{}) do
     session
-    |> Request.new(@plural <> "/#{id}/orders.json", params, Order.plural_resource())
-    |> Client.get()
+    |> Customer.Order.all(id, params)
   end
 
   @doc false
@@ -90,6 +89,7 @@ defmodule Shopify.Customer do
     |> Client.post()
   end
 
+  @doc false
   def send_invite(session, id, %CustomerInvite{} = custom_invite) do
     session
     |> Request.new(invite_url(id), %{}, CustomerInvite.singular_resource(), CustomerInvite.to_json(custom_invite))
