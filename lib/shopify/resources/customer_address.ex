@@ -8,7 +8,8 @@ defmodule Shopify.CustomerAddress do
       :find,
       :all,
       :create,
-      :delete
+      :delete,
+      :update
     ]
 
   alias Shopify.{
@@ -29,8 +30,7 @@ defmodule Shopify.CustomerAddress do
     :name,
     :province_code,
     :country_code,
-    :country_name,
-    :id
+    :country_name
   ]
 
   @doc false
