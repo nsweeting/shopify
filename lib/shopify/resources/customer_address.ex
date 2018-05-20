@@ -30,7 +30,9 @@ defmodule Shopify.CustomerAddress do
     :name,
     :province_code,
     :country_code,
-    :country_name
+    :country_name,
+    :id,
+    :default
   ]
 
   @doc false
