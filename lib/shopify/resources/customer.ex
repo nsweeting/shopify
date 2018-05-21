@@ -16,7 +16,9 @@ defmodule Shopify.Customer do
 
   alias Shopify.{
     Customer,
-    Address
+    Address,
+    Order,
+    CustomerInvite
   }
 
   defstruct [
@@ -63,4 +65,34 @@ defmodule Shopify.Customer do
 
   @doc false
   def search_url, do: @plural <> "/search.json"
+
+  @doc false
+  def invite_url(id), do: @plural <> "/#{id}/send_invite.json"
+
+  @doc false
+  def orders(session, id, params \\ %{}) do
+    session
+    |> Customer.Order.all(id, params)
+  end
+
+  @doc false
+  def account_activation_url(session, id) do
+    session
+    |> Request.new(@plural <> "/#{id}/account_activation_url.json", %{})
+    |> Client.post()
+  end
+
+  @doc false
+  def send_invite(session, id) do
+    session
+    |> Request.new(invite_url(id), %{}, CustomerInvite.singular_resource())
+    |> Client.post()
+  end
+
+  @doc false
+  def send_invite(session, id, %CustomerInvite{} = custom_invite) do
+    session
+    |> Request.new(invite_url(id), %{}, CustomerInvite.singular_resource(), CustomerInvite.to_json(custom_invite))
+    |> Client.post()
+  end
 end
