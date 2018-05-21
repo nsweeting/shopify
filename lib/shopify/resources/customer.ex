@@ -17,7 +17,6 @@ defmodule Shopify.Customer do
   alias Shopify.{
     Customer,
     Address,
-    Order,
     CustomerInvite
   }
 
