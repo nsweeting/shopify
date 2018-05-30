@@ -153,6 +153,10 @@ session = Shopify.session("shop-name", "access-token")
 
 # 'message' is a text description of the error.
 {:error, %Shopify.Response{code: 404, data: message}} = session |> Shopify.Product.find(1)
+
+# Failed requests return %Shopify.Error struct
+{:error, %Shopify.Error{reason: :econnrefused, source: :httpoison}} = session |> Shopify.Product.find(1)
+
 ```
 
 The `%Shopify.Response{}` struct contains two fields: code and data. Code is the HTTP
