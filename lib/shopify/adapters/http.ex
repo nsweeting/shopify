@@ -27,4 +27,8 @@ defmodule Shopify.Adapters.HTTP do
   def handle_response({:ok, %HTTPoison.Response{status_code: code, body: body}}, resource) do
     Shopify.Response.new(code, body, resource)
   end
+
+  def handle_response({:error, %HTTPoison.Error{reason: reason}}, _resource) do
+    {:error, %Shopify.Error{reason: reason, source: :httpoison}}
+  end
 end
