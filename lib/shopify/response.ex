@@ -1,6 +1,8 @@
 defmodule Shopify.Response do
   @moduledoc false
 
+  @type t :: %__MODULE__{code: integer, data: map | list(map)}
+
   alias Shopify.Response
 
   defstruct [
