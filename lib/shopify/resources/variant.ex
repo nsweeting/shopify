@@ -28,6 +28,7 @@ defmodule Shopify.Variant do
     :weight,
     :weight_unit,
     :id,
+    :inventory_item_id,
     :inventory_management,
     :inventory_policy,
     :inventory_quantity,

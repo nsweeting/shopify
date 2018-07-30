@@ -45,7 +45,8 @@ defmodule Shopify.Shop do
     :iana_timezone,
     :zip,
     :has_storefront,
-    :setup_required
+    :setup_required,
+    :multi_location_enabled
   ]
 
   @doc """
@@ -55,7 +56,7 @@ defmodule Shopify.Shop do
 
   ## Parameters
     - session: A `%Shopify.Session{}` struct.
-    
+
   ## Examples
       iex> Shopify.session |> Shopify.Shop.current
       {:ok, %Shopify.Shop{}}
