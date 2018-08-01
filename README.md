@@ -1,5 +1,6 @@
 # Shopify API
 
+[![Build Status](https://travis-ci.org/nsweeting/shopify.svg?branch=master)](https://travis-ci.org/nsweeting/shopify)
 [![Hex.pm](https://img.shields.io/hexpm/v/shopify.svg)](https://hex.pm/packages/shopify)
 
 This package allows Elixir developers to easily access the admin Shopify API.
