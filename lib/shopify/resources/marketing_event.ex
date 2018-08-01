@@ -55,7 +55,7 @@ defmodule Shopify.MarketingEvent do
           %Shopify.Session{},
           integer,
           list(%Shopify.MarketingEvent.Engagement{})
-        ) :: %Shopify.Response{}
+        ) :: {:ok, Shopify.Response.t()} | {:error, Shopify.Response.t()}
   def create_multiple_engagements(%Shopify.Session{} = session, marketing_event_id, engagements) do
     __MODULE__.Engagement.create_multiple(session, marketing_event_id, engagements)
   end

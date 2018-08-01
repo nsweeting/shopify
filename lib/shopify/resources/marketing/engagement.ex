@@ -33,7 +33,8 @@ defmodule Shopify.MarketingEvent.Engagement do
       iex> Shopify.session |> Shopify.MarketingEvent.Engagement.create_multiple(1, [%Shopify.MarketingEvent.Engagement{occurred_on: "2018-12-01"}])
       {:ok, %Shopify.Response{}}
   """
-  @spec create_multiple(%Shopify.Session{}, integer, list(%__MODULE__{})) :: %Shopify.Response{}
+  @spec create_multiple(%Shopify.Session{}, integer, list(%__MODULE__{})) ::
+          {:ok, Shopify.Response.t()} | {:error, Shopify.Response.t()}
   def create_multiple(%Shopify.Session{} = session, marketing_event_id, engagements) do
     body = engagements |> to_json()
 

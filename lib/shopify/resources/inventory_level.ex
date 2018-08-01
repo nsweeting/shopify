@@ -38,7 +38,8 @@ defmodule Shopify.InventoryLevel do
       iex> Shopify.session |> Shopify.InventoryLevel.all(%{inventory_item_ids: [123]})
       {:ok, %Shopify.Response{}}
   """
-  @spec all(%Shopify.Session{}, map) :: %Shopify.Response{}
+  @spec all(%Shopify.Session{}, map) ::
+          {:ok, Shopify.Response.t()} | {:error, Shopify.Response.t()}
   def all(session, params)
 
   def all(%Shopify.Session{} = session, %{inventory_item_ids: _} = params),
@@ -66,7 +67,8 @@ defmodule Shopify.InventoryLevel do
       iex> Shopify.session |> Shopify.InventoryLevel.adjust(%{inventory_item_id: 123, location_id: 123, available_adjustment: 123})
       {:ok, %Shopify.Response{}}
   """
-  @spec adjust(%Shopify.Session{}, map) :: %Shopify.Response{}
+  @spec adjust(%Shopify.Session{}, map) ::
+          {:ok, Shopify.Response.t()} | {:error, Shopify.Response.t()}
   def adjust(
         %Shopify.Session{} = session,
         %{inventory_item_id: _, location_id: _, available_adjustment: _} = inventory_level
@@ -91,7 +93,8 @@ defmodule Shopify.InventoryLevel do
       iex> Shopify.session |> Shopify.InventoryLevel.connect(%{inventory_item_id: 123, location_id: 123})
       {:ok, %Shopify.Response{}}
   """
-  @spec connect(%Shopify.Session{}, map) :: %Shopify.Response{}
+  @spec connect(%Shopify.Session{}, map) ::
+          {:ok, Shopify.Response.t()} | {:error, Shopify.Response.t()}
   def connect(%Shopify.Session{} = session, %{inventory_item_id: _, location_id: _} = connection) do
     session
     |> Request.new(@plural <> "/connect.json", connection, singular_resource())
@@ -113,7 +116,8 @@ defmodule Shopify.InventoryLevel do
       iex> Shopify.session |> Shopify.InventoryLevel.set(%{inventory_item_id: 123, location_id: 123, available: 5})
       {:ok, %Shopify.Response{}}
   """
-  @spec set(%Shopify.Session{}, map) :: %Shopify.Response{}
+  @spec set(%Shopify.Session{}, map) ::
+          {:ok, Shopify.Response.t()} | {:error, Shopify.Response.t()}
   def set(
         %Shopify.Session{} = session,
         %{inventory_item_id: _, location_id: _, available: _} = inventory
