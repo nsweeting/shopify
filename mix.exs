@@ -7,7 +7,7 @@ defmodule Shopify.Mixfile do
     [
       app: :shopify,
       version: @version,
-      elixir: "~> 1.4-rc",
+      elixir: "~> 1.4",
       description: description(),
       package: package(),
       build_embedded: Mix.env() == :prod,
