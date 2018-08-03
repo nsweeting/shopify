@@ -91,7 +91,12 @@ defmodule Shopify.Customer do
   @doc false
   def send_invite(session, id, %CustomerInvite{} = custom_invite) do
     session
-    |> Request.new(invite_url(id), %{}, CustomerInvite.singular_resource(), CustomerInvite.to_json(custom_invite))
+    |> Request.new(
+      invite_url(id),
+      %{},
+      CustomerInvite.singular_resource(),
+      CustomerInvite.to_json(custom_invite)
+    )
     |> Client.post()
   end
 end

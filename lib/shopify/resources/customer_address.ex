@@ -51,7 +51,12 @@ defmodule Shopify.CustomerAddress do
   @doc false
   def default(session, top_id, nest_id) do
     session
-    |> Request.new("customers/#{top_id}/" <> @plural <> "/#{nest_id}/default.json", %{}, singular_resource(), "")
+    |> Request.new(
+      "customers/#{top_id}/" <> @plural <> "/#{nest_id}/default.json",
+      %{},
+      singular_resource(),
+      ""
+    )
     |> Client.put()
   end
 end

@@ -10,7 +10,10 @@ defmodule Shopify.CustomerTest do
     assert {:ok, response} = Shopify.session() |> Customer.find(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers/1.json", "customer", Customer.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/customers/1.json", "customer", Customer.empty_resource())
+
     assert fixture == response.data
   end
 
@@ -18,7 +21,10 @@ defmodule Shopify.CustomerTest do
     assert {:ok, response} = Shopify.session() |> Customer.all()
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers.json", "customers", [Customer.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/customers.json", "customers", [Customer.empty_resource()])
+
     assert fixture == response.data
   end
 
@@ -31,11 +37,16 @@ defmodule Shopify.CustomerTest do
   end
 
   test "client can request to create a customer" do
-    fixture = Fixture.load("../test/fixtures/customers/1.json", "customer", Customer.empty_resource())
+    fixture =
+      Fixture.load("../test/fixtures/customers/1.json", "customer", Customer.empty_resource())
+
     assert {:ok, response} = Shopify.session() |> Customer.create(fixture)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers/1.json", "customer", Customer.empty_resource())
+
+    fixture =
+      Fixture.load("../test/fixtures/customers/1.json", "customer", Customer.empty_resource())
+
     assert fixture == response.data
   end
 
@@ -58,7 +69,12 @@ defmodule Shopify.CustomerTest do
     assert {:ok, response} = Shopify.session() |> Customer.orders(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers/1/orders.json", "orders", [Customer.Order.empty_resource()])
+
+    fixture =
+      Fixture.load("../test/fixtures/customers/1/orders.json", "orders", [
+        Customer.Order.empty_resource()
+      ])
+
     assert fixture == response.data
   end
 
@@ -66,7 +82,14 @@ defmodule Shopify.CustomerTest do
     assert {:ok, response} = Shopify.session() |> Customer.send_invite(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers/1/send_invite.json", "customer_invite", CustomerInvite.empty_resource())
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/customers/1/send_invite.json",
+        "customer_invite",
+        CustomerInvite.empty_resource()
+      )
+
     assert fixture == response.data
   end
 
@@ -80,6 +103,7 @@ defmodule Shopify.CustomerTest do
       subject: "Welcome to my new shop",
       custom_message: "My awesome new store"
     }
+
     assert {:ok, response} = Shopify.session() |> Customer.send_invite(1, customer_invite)
     assert %Shopify.Response{} = response
     assert 200 == response.code
@@ -90,7 +114,14 @@ defmodule Shopify.CustomerTest do
     assert {:ok, response} = Shopify.session() |> Customer.account_activation_url(1)
     assert %Shopify.Response{} = response
     assert 200 == response.code
-    fixture = Fixture.load("../test/fixtures/customers/1/account_activation_url.json", "account_activation_url", %{})
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/customers/1/account_activation_url.json",
+        "account_activation_url",
+        %{}
+      )
+
     assert fixture == response.data
   end
 end
