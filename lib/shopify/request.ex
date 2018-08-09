@@ -7,7 +7,8 @@ defmodule Shopify.Request do
           resource: map,
           body: String.t(),
           headers: list,
-          query_params: map
+          query_params: map,
+          opts: Keyword.t()
         }
 
   @headers [
@@ -22,7 +23,8 @@ defmodule Shopify.Request do
     :resource,
     :body,
     :headers,
-    :query_params
+    :query_params,
+    :opts
   ]
 
   def new(session, path, params \\ %{}, resource, body \\ nil) do
@@ -31,8 +33,9 @@ defmodule Shopify.Request do
       path: path,
       resource: resource,
       body: body,
-      headers: session |> build_headers,
-      query_params: params
+      headers: build_headers(session),
+      query_params: params,
+      opts: session.req_opts
     }
   end
 
