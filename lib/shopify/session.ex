@@ -1,8 +1,7 @@
 defmodule Shopify.Session do
   @moduledoc false
 
-  alias Shopify.Config
-  alias Shopify.Session
+  alias Shopify.{Config, Session}
 
   defstruct [
     :type,
