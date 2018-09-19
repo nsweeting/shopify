@@ -4,10 +4,26 @@ defmodule Shopify.Order.Fulfillment.Event do
 
   use Shopify.Resource
 
-  defstruct %Shopify.Event{} |> Map.keys() |> List.delete(:__struct__)
+  defstruct [
+    :id,
+    :fulfillment_id,
+    :status,
+    :message,
+    :happened_at,
+    :city,
+    :province,
+    :country,
+    :zip,
+    :address1,
+    :latitude,
+    :longitude,
+    :shop_id,
+    :estimated_delivery_at,
+    :order_id
+  ]
 
   @doc false
-  def empty_resource, do: Shopify.Event.empty_resource()
+  def empty_resource, do: %__MODULE__{}
 
   def all(%Shopify.Session{} = session, order_id, fulfillment_id, params \\ %{}) do
     session
