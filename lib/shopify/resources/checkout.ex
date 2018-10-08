@@ -6,6 +6,9 @@ defmodule Shopify.Checkout do
   use Shopify.Resource,
     import: [
       :all,
+      :find,
+      :create,
+      :update,
       :count
     ]
 
@@ -35,7 +38,6 @@ defmodule Shopify.Checkout do
     :discount_codes,
     :email,
     :gateway,
-    :id,
     :landing_site,
     :line_items,
     :note,
@@ -52,7 +54,14 @@ defmodule Shopify.Checkout do
     :total_price,
     :total_tax,
     :total_weight,
-    :updated_at
+    :updated_at,
+    :order,
+    :order_id,
+    :customer_id,
+    :location_id,
+    :device_id,
+    :shopify_payments_account_id,
+    :user_id
   ]
 
   @doc false
@@ -70,7 +79,8 @@ defmodule Shopify.Checkout do
       ],
       shipping_lines: [%ShippingLine{}],
       tax_lines: [%TaxLine{}],
-      discount_codes: [%DiscountCode{}]
+      discount_codes: [%DiscountCode{}],
+      order: %Checkout.Order{}
     }
   end
 
@@ -78,5 +88,28 @@ defmodule Shopify.Checkout do
   def all_url, do: @plural <> ".json"
 
   @doc false
+  def find_url(token), do: @plural <> "/#{token}.json"
+
+  @doc false
   def count_url, do: @plural <> "/count.json"
+
+  @doc """
+  Requests to mark a comment as complete.
+
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+  ## Parameters
+    - session: A `%Shopify.Session{}` struct.
+    - token: A checkout token.
+
+  ## Examples
+      iex> Shopify.session |> Shopify.Checkout.complete("asdfasdfasdf")
+      {:ok, %Shopify.Response{}}
+  """
+  @spec complete(%Shopify.Session{}, binary) :: {:ok, %__MODULE__{}} | {:error, map}
+  def complete(session, token) do
+    session
+    |> Request.new(@plural <> "/#{token}/complete.json", empty_resource())
+    |> Client.post()
+  end
 end
