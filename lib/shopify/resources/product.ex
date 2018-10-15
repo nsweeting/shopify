@@ -33,6 +33,7 @@ defmodule Shopify.Product do
     :tags,
     :template_suffix,
     :title,
+    :metafields,
     :metafields_global_title_tag,
     :metafields_global_description_tag,
     :updated_at,
