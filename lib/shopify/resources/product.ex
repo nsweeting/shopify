@@ -38,7 +38,8 @@ defmodule Shopify.Product do
     :metafields_global_description_tag,
     :updated_at,
     :variants,
-    :vendor
+    :vendor,
+    :published
   ]
 
   @doc false
