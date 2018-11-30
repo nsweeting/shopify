@@ -1,7 +1,7 @@
 defmodule Shopify.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
 
   def project do
     [
@@ -57,7 +57,7 @@ defmodule Shopify.Mixfile do
     [
       {:httpoison, "~> 1.0.0"},
       {:poison, "~> 3.0"},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 end
