@@ -13,6 +13,7 @@ defmodule Shopify.InventoryItem do
   defstruct [
     :id,
     :sku,
+    :cost,
     :tracked,
     :created_at,
     :updated_at
