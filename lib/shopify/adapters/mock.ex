@@ -90,5 +90,6 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def oauth_auth(_) do
+    {:passed, request}
   end
 end
