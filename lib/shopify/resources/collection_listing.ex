@@ -3,7 +3,7 @@ defmodule Shopify.CollectionListing do
   @singular "collection_listing"
   @plural "collection_listings"
 
-  use Shopify.NestedResource,
+  use Shopify.Resource,
     import: [
       :find,
       :all
