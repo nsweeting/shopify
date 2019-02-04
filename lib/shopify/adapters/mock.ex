@@ -90,6 +90,9 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def oauth_auth(request) do
-    {:passed, request}
+    case request.headers[:"X-Shopify-Access-Token"] do
+      "test" -> {:passed, request}
+      _ -> {:failed, request}
+    end
   end
 end
