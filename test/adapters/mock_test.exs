@@ -35,4 +35,16 @@ defmodule Shopify.Adapters.Mocktest do
 
     assert length(resource) == 1
   end
+
+  test "it can use oauth when token is \"test\"" do
+    assert {:ok, _} =
+             Shopify.session("shop-name.myshopify.com", "test")
+             |> Shopify.Product.all()
+  end
+
+  test "it fails authentication when oauth token is anything other than \"test\"" do
+    assert {:error, _} =
+             Shopify.session("shop-name.myshopify.com", "fail")
+             |> Shopify.Product.all()
+  end
 end

@@ -182,6 +182,13 @@ config :shopify, [
 ]
 ```
 
+When using oauth, make sure the token passed is `test`, otherwise authentication will fail.
+
+```
+Shopify.session("my-shop.myshopify.com", "test")
+|> Product.all()
+```
+
 ### Test Adapter
 
 This plugin provides a test adapter called `Shopify.Adapters.Mock` to use out of the box. It makes certain assumptions about your fixtures and is limited to the responses provided in corresponding fixture files, and for create actions it will put the resource id as 1.
