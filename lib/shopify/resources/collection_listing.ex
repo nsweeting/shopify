@@ -3,7 +3,7 @@ defmodule Shopify.CollectionListing do
   @singular "collection_listing"
   @plural "collection_listings"
 
-  use Shopify.NestedResource,
+  use Shopify.Resource,
     import: [
       :find,
       :all
@@ -32,10 +32,10 @@ defmodule Shopify.CollectionListing do
   end
 
   @doc false
-  def find_url(top_id, nest_id) do
-    "applications/#{top_id}/" <> @plural <> "/#{nest_id}.json"
+  def find_url(id) do
+    @plural <> "/#{id}.json"
   end
 
   @doc false
-  def all_url(top_id), do: "applications/#{top_id}/" <> @plural <> ".json"
+  def all_url(), do: @plural <> ".json"
 end
