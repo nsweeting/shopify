@@ -39,9 +39,7 @@ defmodule Shopify.PriceRule do
   ]
 
   @doc false
-  def empty_resource do
-    %Shopify.PriceRule{}
-  end
+  def empty_resource, do: %Shopify.PriceRule{}
 
   @doc false
   def find_url(id), do: @plural <> "/#{id}.json"
