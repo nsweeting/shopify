@@ -24,6 +24,7 @@ defmodule Shopify.Customer do
     :accepts_marketing,
     :addresses,
     :created_at,
+    :currency,
     :default_address,
     :email,
     :phone,
