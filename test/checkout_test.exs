@@ -59,7 +59,7 @@ defmodule Shopify.CheckoutTest do
     assert 123 == response.data.customer_id
   end
 
-  test "client can request to patch update a product" do
+  test "client can request to patch update a checkout" do
     update = %{customer_id: 123}
 
     assert {:ok, response} =
