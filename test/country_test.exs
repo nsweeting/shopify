@@ -55,6 +55,12 @@ defmodule Shopify.CountryTest do
     assert "Update" == response.data.code
   end
 
+  test "client can request to patch update an country" do
+    update = %{code: "Update"}
+    assert {:ok, response} = Shopify.session() |> Country.patch_update(1, update)
+    assert "Update" == response.data.code
+  end
+
   test "client can request to delete an country" do
     assert {:ok, response} = Shopify.session() |> Country.delete(1)
     assert %Shopify.Response{} = response

@@ -36,6 +36,12 @@ defmodule Shopify.ThemeTest do
     assert "Update" == response.data.name
   end
 
+  test "client can request to patch update an theme" do
+    update = %{name: "Update"}
+    assert {:ok, response} = Shopify.session() |> Theme.patch_update(1, update)
+    assert "Update" == response.data.name
+  end
+
   test "client can request to delete an theme" do
     assert {:ok, response} = Shopify.session() |> Theme.delete(1)
     assert %Shopify.Response{} = response

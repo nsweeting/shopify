@@ -55,6 +55,12 @@ defmodule Shopify.CommentTest do
     assert "Update" == response.data.author
   end
 
+  test "client can request to patch update a comment" do
+    update = %{author: "Update"}
+    assert {:ok, response} = Shopify.session() |> Comment.patch_update(1, update)
+    assert "Update" == response.data.author
+  end
+
   test "client can mark a comment as spam" do
     assert {:ok, response} = Shopify.session() |> Comment.spam(1)
     assert %Shopify.Response{} = response

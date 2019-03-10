@@ -55,6 +55,12 @@ defmodule Shopify.RedirectTest do
     assert "Update" == response.data.path
   end
 
+  test "client can request to patch update an redirect" do
+    update = %{path: "Update"}
+    assert {:ok, response} = Shopify.session() |> Redirect.patch_update(1, update)
+    assert "Update" == response.data.path
+  end
+
   test "client can request to delete an redirect" do
     assert {:ok, response} = Shopify.session() |> Redirect.delete(1)
     assert %Shopify.Response{} = response

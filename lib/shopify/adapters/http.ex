@@ -22,6 +22,12 @@ defmodule Shopify.Adapters.HTTP do
     |> handle_response(request.resource)
   end
 
+  def patch(request) do
+    request.full_url
+    |> HTTPoison.patch(request.body || "", request.headers, merge_options(request.opts))
+    |> handle_response(request.resource)
+  end
+
   def delete(request) do
     request.full_url
     |> HTTPoison.delete(request.headers, merge_options(request))

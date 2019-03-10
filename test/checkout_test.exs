@@ -59,6 +59,16 @@ defmodule Shopify.CheckoutTest do
     assert 123 == response.data.customer_id
   end
 
+  test "client can request to patch update a product" do
+    update = %{customer_id: 123}
+
+    assert {:ok, response} =
+             Shopify.session()
+             |> Checkout.patch_update("exuw7apwoycchjuwtiqg8nytfhphr62a", update)
+
+    assert 123 == response.data.customer_id
+  end
+
   test "client can request to complete a checkout without payment" do
     assert {:ok, response} =
              Shopify.session() |> Checkout.complete("exuw7apwoycchjuwtiqg8nytfhphr62a")

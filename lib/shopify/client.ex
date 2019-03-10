@@ -9,5 +9,7 @@ defmodule Shopify.Client do
 
   def put(request), do: Config.client_adapter().put(request)
 
+  def patch(request), do: Config.client_adapter().patch(request)
+
   def delete(request), do: Config.client_adapter().delete(request)
 end

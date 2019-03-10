@@ -69,6 +69,12 @@ defmodule Shopify.SmartCollectionTest do
     assert "Update" == response.data.title
   end
 
+  test "client can request to patch update an smart_collection" do
+    update = %{title: "Update"}
+    assert {:ok, response} = Shopify.session() |> SmartCollection.patch_update(1, update)
+    assert "Update" == response.data.title
+  end
+
   test "client can request to delete an smart_collection" do
     assert {:ok, response} = Shopify.session() |> SmartCollection.delete(1)
     assert %Shopify.Response{} = response

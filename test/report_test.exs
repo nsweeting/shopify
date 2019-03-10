@@ -36,6 +36,12 @@ defmodule Shopify.ReportTest do
     assert "Update" == response.data.name
   end
 
+  test "client can request to patch update a report" do
+    update = %{name: "Update"}
+    assert {:ok, response} = Shopify.session() |> Report.patch_update(1, update)
+    assert "Update" == response.data.name
+  end
+
   test "client can request to delete a report" do
     assert {:ok, response} = Shopify.session() |> Report.delete(1)
     assert %Shopify.Response{} = response

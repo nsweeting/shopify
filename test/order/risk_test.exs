@@ -47,6 +47,12 @@ defmodule Shopify.RiskTest do
     assert "Update" == response.data.message
   end
 
+  test "client can request to patch update an risk" do
+    update = %{message: "Update"}
+    assert {:ok, response} = Shopify.session() |> Order.Risk.patch_update(1, 1, update)
+    assert "Update" == response.data.message
+  end
+
   test "client can request to delete an risk" do
     assert {:ok, response} = Shopify.session() |> Order.Risk.delete(1, 1)
     assert %Shopify.Response{} = response

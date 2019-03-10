@@ -35,6 +35,12 @@ defmodule Shopify.Adapters.Mock do
     |> respond
   end
 
+  def patch(request) do
+    request
+    |> authorize
+    |> respond
+  end
+
   def delete(request) do
     auth = request |> authorize
 

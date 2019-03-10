@@ -58,6 +58,12 @@ defmodule Shopify.CustomerTest do
     assert "Update" == response.data.first_name
   end
 
+  test "client can request to patch update a customer" do
+    update = %{first_name: "Update"}
+    assert {:ok, response} = Shopify.session() |> Customer.patch_update(1, update)
+    assert "Update" == response.data.first_name
+  end
+
   test "client can request to delete a customer" do
     assert {:ok, response} = Shopify.session() |> Customer.delete(1)
     assert %Shopify.Response{} = response

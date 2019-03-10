@@ -9,6 +9,7 @@ defmodule Shopify.Adapters.Base do
 
   @callback get(Shopify.Request.t()) :: success | error
   @callback put(Shopify.Request.t()) :: success | error
+  @callback patch(Shopify.Request.t()) :: success | error
   @callback post(Shopify.Request.t()) :: success | error
   @callback delete(Shopify.Request.t()) :: success | error
 end

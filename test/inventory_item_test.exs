@@ -38,4 +38,10 @@ defmodule Shopify.InventoryItemTest do
     assert {:ok, response} = Shopify.session() |> InventoryItem.update(1, update)
     assert "Update" == response.data.sku
   end
+
+  test "client can request to patch update a inventory_item" do
+    update = %{sku: "Update"}
+    assert {:ok, response} = Shopify.session() |> InventoryItem.patch_update(1, update)
+    assert "Update" == response.data.sku
+  end
 end

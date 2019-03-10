@@ -69,6 +69,12 @@ defmodule Shopify.ProductListingTest do
     assert "ipod-dont-touch" == response.data.handle
   end
 
+  test "client can request to patch update an product_listing" do
+    update = %{handle: "ipod-dont-touch"}
+    assert {:ok, response} = Shopify.session() |> ProductListing.patch_update(1, update)
+    assert "ipod-dont-touch" == response.data.handle
+  end
+
   test "client can request to delete an product_listing" do
     assert {:ok, response} = Shopify.session() |> ProductListing.delete(1)
     assert %Shopify.Response{} = response

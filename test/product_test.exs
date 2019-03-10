@@ -55,6 +55,12 @@ defmodule Shopify.ProductTest do
     assert "Update" == response.data.title
   end
 
+  test "client can request to patch update a product" do
+    update = %{title: "Update"}
+    assert {:ok, response} = Shopify.session() |> Product.patch_update(1, update)
+    assert "Update" == response.data.title
+  end
+
   test "client can request to delete a product" do
     assert {:ok, response} = Shopify.session() |> Product.delete(1)
     assert %Shopify.Response{} = response

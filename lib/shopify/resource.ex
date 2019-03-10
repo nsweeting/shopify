@@ -131,11 +131,33 @@ defmodule Shopify.Resource do
             {:ok, %Shopify.Response{}}
         """
         def update(session, id, updated_resource) do
-          body = updated_resource |> to_json
+          body = updated_resource |> to_json()
 
           session
           |> Request.new(find_url(id), %{}, singular_resource(), body)
           |> Client.put()
+        end
+
+        @doc """
+        Requests to partly update a resource by id.
+
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+        ## Parameters
+          - session: A `%Shopify.Session{}` struct.
+          - id: The id of the resource.
+          - update_args: A map of the attributes being updated.
+
+        ## Examples
+            iex> Shopify.session |> Shopify.Product.patch_update(id, %{title: "Update"})
+            {:ok, %Shopify.Response{data: %Shopify.Product{title: "Update"}}}
+        """
+        def patch_update(session, id, update_args) do
+          body = update_args |> to_patch_json()
+
+          session
+          |> Request.new(find_url(id), %{}, singular_resource(), body)
+          |> Client.patch()
         end
       end
 
@@ -181,7 +203,12 @@ defmodule Shopify.Resource do
         |> Map.from_struct()
         |> Enum.filter(fn {_, v} -> v != nil end)
         |> Enum.into(%{})
-        |> singular_resource
+        |> to_patch_json()
+      end
+
+      def to_patch_json(resource) do
+        resource
+        |> singular_resource()
         |> Poison.encode!()
       end
     end

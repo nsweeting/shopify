@@ -44,6 +44,12 @@ defmodule Shopify.OrderTest do
     assert "Update" == response.data.reference
   end
 
+  test "client can request to patch update an order" do
+    update = %{reference: "Update"}
+    assert {:ok, response} = Shopify.session() |> Order.patch_update(1, update)
+    assert "Update" == response.data.reference
+  end
+
   test "client can request to delete an order" do
     assert {:ok, response} = Shopify.session() |> Order.delete(1)
     assert %Shopify.Response{} = response

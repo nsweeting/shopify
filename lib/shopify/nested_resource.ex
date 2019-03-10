@@ -109,15 +109,38 @@ defmodule Shopify.NestedResource do
           - updated_resource: A struct of the resource being updated.
 
         ## Examples
-            iex> Shopify.session |> Shopify.CustomerAddress.update(customer_id, address_id)
+            iex> Shopify.session |> Shopify.CustomerAddress.update(customer_id, address_id, %Shopify.CustomerAddress{})
             {:ok, %Shopify.Response{}}
         """
         def update(%Session{} = session, top_id, nest_id, updated_resource) do
-          body = updated_resource |> to_json
+          body = updated_resource |> to_json()
 
           session
           |> Request.new(find_url(top_id, nest_id), %{}, singular_resource(), body)
           |> Client.put()
+        end
+
+        @doc """
+        Requests to partly update a resource by id.
+
+        Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+        ## Parameters
+          - session: A `%Shopify.Session{}` struct.
+          - top_id: The id of the top-level resource.
+          - nest_id: The id of the nested-level resource.
+          - update_args: A map of the attributes being updated.
+
+        ## Examples
+            iex> Shopify.session |> Shopify.CustomerAddress.update(customer_id, address_id, %{zip: "123"})
+            {:ok, %Shopify.Response{data: %Shopify.CustomerAddress{zip: "123"}}}
+        """
+        def patch_update(session, top_id, nest_id, update_args) do
+          body = update_args |> to_patch_json()
+
+          session
+          |> Request.new(find_url(top_id, nest_id), %{}, singular_resource(), body)
+          |> Client.patch()
         end
       end
 
@@ -174,6 +197,18 @@ defmodule Shopify.NestedResource do
       def to_json(resources) when is_list(resources) do
         resources
         |> Enum.map(&scrub_resource/1)
+        |> plural_resource()
+        |> Poison.encode!()
+      end
+
+      def to_patch_json(resource) when is_map(resource) do
+        resource
+        |> singular_resource()
+        |> Poison.encode!()
+      end
+
+      def to_patch_json(resource) when is_list(resource) do
+        resource
         |> plural_resource()
         |> Poison.encode!()
       end

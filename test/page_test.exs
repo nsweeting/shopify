@@ -44,6 +44,12 @@ defmodule Shopify.PageTest do
     assert "Update" == response.data.title
   end
 
+  test "client can request to patch update a page" do
+    update = %{title: "Update"}
+    assert {:ok, response} = Shopify.session() |> Page.patch_update(1, update)
+    assert "Update" == response.data.title
+  end
+
   test "client can request to delete a page" do
     assert {:ok, response} = Shopify.session() |> Page.delete(1)
     assert %Shopify.Response{} = response

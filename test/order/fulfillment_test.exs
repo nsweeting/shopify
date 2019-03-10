@@ -69,6 +69,12 @@ defmodule Shopify.FulfillmentTest do
     assert "Update" == response.data.tracking_company
   end
 
+  test "client can request to patch update a fulfillment" do
+    update = %{tracking_company: "Update"}
+    assert {:ok, response} = Shopify.session() |> Fulfillment.patch_update(1, 1, update)
+    assert "Update" == response.data.tracking_company
+  end
+
   test "client can request to complete a fulfillment" do
     assert {:ok, response} = Shopify.session() |> Fulfillment.complete(1, 1)
     assert %Shopify.Response{} = response

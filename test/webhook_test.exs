@@ -55,6 +55,12 @@ defmodule Shopify.WebhookTest do
     assert "Update" == response.data.topic
   end
 
+  test "client can request to patch update a webhook" do
+    update = %{topic: "Update"}
+    assert {:ok, response} = Shopify.session() |> Webhook.patch_update(1, update)
+    assert "Update" == response.data.topic
+  end
+
   test "client can request to delete a webhook" do
     assert {:ok, response} = Shopify.session() |> Webhook.delete(1)
     assert %Shopify.Response{} = response

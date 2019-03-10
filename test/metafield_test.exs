@@ -55,6 +55,12 @@ defmodule Shopify.MetafieldTest do
     assert "Update" == response.data.value
   end
 
+  test "client can request to patch update a metafield" do
+    update = %{value: "Update"}
+    assert {:ok, response} = Shopify.session() |> Metafield.patch_update(1, update)
+    assert "Update" == response.data.value
+  end
+
   test "client can request to delete a metafield" do
     assert {:ok, response} = Shopify.session() |> Metafield.delete(1)
     assert %Shopify.Response{} = response

@@ -69,6 +69,12 @@ defmodule Shopify.CustomerSavedSearchTest do
     assert "Update" == response.data.name
   end
 
+  test "client can request to patch update an customer_saved_search" do
+    update = %{name: "Update"}
+    assert {:ok, response} = Shopify.session() |> CustomerSavedSearch.patch_update(1, update)
+    assert "Update" == response.data.name
+  end
+
   test "client can request to delete an customer_saved_search" do
     assert {:ok, response} = Shopify.session() |> CustomerSavedSearch.delete(1)
     assert %Shopify.Response{} = response

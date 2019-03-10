@@ -72,6 +72,12 @@ defmodule Shopify.DraftOrderTest do
     assert "Update" == response.data.status
   end
 
+  test "client can request to patch update an draft_order" do
+    update = %{status: "Update"}
+    assert {:ok, response} = Shopify.session() |> DraftOrder.patch_update(1, update)
+    assert "Update" == response.data.status
+  end
+
   test "client can request to delete an draft_order" do
     assert {:ok, response} = Shopify.session() |> DraftOrder.delete(1)
     assert %Shopify.Response{} = response

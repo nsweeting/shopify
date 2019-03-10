@@ -69,6 +69,12 @@ defmodule Shopify.MarketingEventTest do
     assert "Update" == response.data.utm_source
   end
 
+  test "client can request to patch update an marketing_event" do
+    update = %{utm_source: "Update"}
+    assert {:ok, response} = Shopify.session() |> MarketingEvent.patch_update(1, update)
+    assert "Update" == response.data.utm_source
+  end
+
   test "client can request to delete an marketing_event" do
     assert {:ok, response} = Shopify.session() |> MarketingEvent.delete(1)
     assert %Shopify.Response{} = response

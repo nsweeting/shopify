@@ -61,6 +61,12 @@ defmodule Shopify.FulfillmentServiceTest do
     assert "Update" == response.data.name
   end
 
+  test "client can request to patch update a fulfillment_service" do
+    update = %{name: "Update"}
+    assert {:ok, response} = Shopify.session() |> FulfillmentService.patch_update(1, update)
+    assert "Update" == response.data.name
+  end
+
   test "client can request to delete a fulfillment_service" do
     assert {:ok, response} = Shopify.session() |> FulfillmentService.delete(1)
     assert %Shopify.Response{} = response

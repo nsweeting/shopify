@@ -63,6 +63,12 @@ defmodule Shopify.PriceRule.DiscountCodeTest do
     assert "123Code" == response.data.code
   end
 
+  test "client can request to patch update a price_rule" do
+    update = %{code: "123Code"}
+    assert {:ok, response} = Shopify.session() |> DiscountCode.patch_update(1, 1, update)
+    assert "123Code" == response.data.code
+  end
+
   test "client can request to delete a price rule" do
     assert {:ok, response} = Shopify.session() |> DiscountCode.delete(1, 1)
     assert %Shopify.Response{} = response
