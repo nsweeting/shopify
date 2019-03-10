@@ -164,6 +164,36 @@ The `%Shopify.Response{}` struct contains two fields: code and data. Code is the
 status code that is returned from Shopify. A successful request will either set the data field
 with a single struct, or list of structs of the resource or resources requested.
 
+## `update` VS `patch_update`
+
+The main difference between `update` and `patch_update` is that `patch update` works with a map, instead of a struct.
+In most use cases, `update` and `patch_update` could be used interchangeably:
+
+```elixir
+session |> Shopify.Product.update(123123, %Shopify.Product{tags: "updated,tags"})
+# or
+session |> Shopify.Product.patch_update(123123, %{tags: "updated,tags"})
+```
+
+However, structs can not be initialized without all keys, meaning `%Shopify.Product{tags: "updated,tags"}` will result
+in a struct that populates all other keys with nil `%Shopify.Product{tags: "updated,tags", title: nil, id: nil, ...}`.
+For that reason, the Shopify package will ignore all `nil` values in a struct, so we do not accidentally set a value to null.
+As a result, updates with `nil` values are only possible using `patch_update`
+
+```elixir
+session |> Shopify.Product.update(123123, %Shopify.Product{tags: nil}) # does nothing!
+# VS
+session |> Shopify.Product.patch_update(123123, %{tags: nil}) # will reset the tags
+```
+
+The other important difference is `patch_update` does not provide key validations.
+
+```elixir
+session |> Shopify.Product.update(123123, %Shopify.Product{tgas: nil}) # will raise an error
+# VS
+session |> Shopify.Product.patch_update(123123, %{tgas: nil}) # will not complain at all, making it harder to debug
+```
+
 ## Testing
 
 For testing a mock adapter can be configured to use fixture json files instead of doing real requests.
@@ -245,68 +275,68 @@ Or for `Shopify.Product.find(1)`
 - Address
 - ApplicationCharge (find, all, create, activate)
 - ApplicationCredit (find, all, create)
-- Article (find, all, create, update, delete, count)
+- Article (find, all, create, update, patch_update, delete, count)
 - Article.Author (all)
 - Article.Tag (all)
 - Attribute
 - BillingAddress
-- Blog (find, all, create, update, delete, count)
-- CarrierService (find, all, create, update, delete)
+- Blog (find, all, create, update, patch_update, delete, count)
+- CarrierService (find, all, create, update, patch_update, delete)
 - Checkout (all, count)
 - ClientDetails
 - Collect (find, all, create, delete, count)
 - CollectionListing (find, all)
-- Comment (find, all, create, update, spam, not_spam, approve, remove, restore)
-- Country (find, all, create, update, delete, count)
-- Country.Province (find, all, update, count)
-- CustomCollection (find, all, create, update, delete, count)
-- Customer (find, all, create, update, delete, count, search)
+- Comment (find, all, create, update, patch_update, spam, not_spam, approve, remove, restore)
+- Country (find, all, create, update, patch_update, delete, count)
+- Country.Province (find, all, update, patch_update, count)
+- CustomCollection (find, all, create, update, patch_update, delete, count)
+- Customer (find, all, create, update, patch_update, delete, count, search)
 - CustomerAddress (find, all, create, delete)
-- CustomerSavedSearch (find, all, create, update, delete, count)
+- CustomerSavedSearch (find, all, create, update, patch_update, delete, count)
 - CustomerSavedSearch.Customer (all)
 - DiscountCode
-- DraftOrder (find, all, create, update, delete, count, complete, send_invoice) *`send_invoice` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
+- DraftOrder (find, all, create, update, patch_update, delete, count, complete, send_invoice) *`send_invoice` is an alias of `DraftOrder.DraftOrderInvoice.create/3`*
 - DraftOrder.DraftOrderInvoice (create)
 - MarketingEvent.Engagement (create_multiple)
 - Event (find, all, count)
-- Order.Fullfillment (find, all, count, create, update, complete, open, cancel)
+- Order.Fullfillment (find, all, count, create, update, patch_update, complete, open, cancel)
 - Order.Fullfillment.Event (find, all, delete)
-- FulfillmentService (find, all, create, update, delete)
-- Image (ProductImage) (find, all, create, update, delete, count)
+- FulfillmentService (find, all, create, update, patch_update, delete)
+- Image (ProductImage) (find, all, create, update, patch_update, delete, count)
 - InventoryLevel (all, delete)
 - LineItem
 - Location (find, all, count)
-- MarketingEvent (find, all, count, create, update, delete, create_multiple_engagements) *`create_multiple_engagements` is an alias of `MarketingEvent.Engagement.create_multiple/3`*
+- MarketingEvent (find, all, count, create, update, patch_update, delete, create_multiple_engagements) *`create_multiple_engagements` is an alias of `MarketingEvent.Engagement.create_multiple/3`*
 - Metafield
 - OAuth.AccessScope (all)
 - Option
-- Order (find, all, create, update, delete, count)
+- Order (find, all, create, update, patch_update, delete, count)
 - Order.Event (all)
-- Order.Risk (create, find, all, update, delete)
-- Page (create, find, all, update, delete, count)
+- Order.Risk (create, find, all, update, patch_update, delete)
+- Page (create, find, all, update, patch_update, delete, count)
 - PaymentDetails
 - Policy (all)
-- PriceRule (find, all, create, update, delete)
-- PriceRule.DiscountCode (find, all, create, update, delete)
-- Product (find, all, create, update, delete, count)
+- PriceRule (find, all, create, update, patch_update, delete)
+- PriceRule.DiscountCode (find, all, create, update, patch_update, delete)
+- Product (find, all, create, update, patch_update, delete, count)
 - Product.Event (all)
-- ProductListing (find, all, create, update, delete, count, product_ids)
+- ProductListing (find, all, create, update, patch_update, delete, count, product_ids)
 - RecurringApplicationCharge (find, all, create, activate, delete)
-- Redirect (find, all, create, update, delete, count)
+- Redirect (find, all, create, update, patch_update, delete, count)
 - Refund (create, find, all)
-- Report (create, find, all, update, delete)
+- Report (create, find, all, update, patch_update, delete)
 - ScriptTag (find, all, create, count, delete)
 - ShippingAddress
 - ShippingLine
 - Shop (current)
-- SmartCollection (find, all, create, count, update, delete)
+- SmartCollection (find, all, create, count, update, patch_update, delete)
 - TaxLine
-- Theme (find, all, create, update, delete)
+- Theme (find, all, create, update, patch_update, delete)
 - Theme.Asset (find, all, delete)
 - Transaction (find, all, create, count)
 - UsageCharge (find, all, create)
-- Variant (find, all, create, update, delete, count)
-- Webhook (find, all, create, update, delete, count)
+- Variant (find, all, create, update, patch_update, delete, count)
+- Webhook (find, all, create, update, patch_update, delete, count)
 
 ## Contributors
 
