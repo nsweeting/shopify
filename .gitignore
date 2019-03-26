@@ -23,3 +23,7 @@ erl_crash.dump
 *.ez
 
 test_scripts.ex
+
+# IDEs
+.idea
+*.iml
