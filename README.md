@@ -11,7 +11,7 @@ The package can be installed by adding `shopify` to your list of dependencies in
 
 ```elixir
 def deps do
-  [{:shopify, "~> 0.2.1"}]
+  [{:shopify, "~> 0.2"}]
 end
 ```
 
@@ -180,6 +180,13 @@ config :shopify, [
   client_adapter: Shopify.Adapters.Mock, # Use included Mock adapter
   fixtures_path: Path.expand("../test/fixtures/shopify", __DIR__) # Use fixures in this directory
 ]
+```
+
+When using oauth, make sure the token passed is `test`, otherwise authentication will fail.
+
+```
+Shopify.session("my-shop.myshopify.com", "test")
+|> Product.all()
 ```
 
 ### Test Adapter

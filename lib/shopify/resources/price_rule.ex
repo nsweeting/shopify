@@ -34,13 +34,12 @@ defmodule Shopify.PriceRule do
     :entitled_collection_ids,
     :entitled_country_ids,
     :prerequisite_saved_search_ids,
+    :prerequisite_customer_ids,
     :discount_codes
   ]
 
   @doc false
-  def empty_resource do
-    %Shopify.PriceRule{}
-  end
+  def empty_resource, do: %Shopify.PriceRule{}
 
   @doc false
   def find_url(id), do: @plural <> "/#{id}.json"
