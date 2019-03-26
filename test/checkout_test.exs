@@ -75,6 +75,22 @@ defmodule Shopify.CheckoutTest do
     assert fixture == response.data
   end
 
+  test "client can request a checkout's shipping_rates" do
+    assert {:ok, response} =
+             Shopify.session() |> Checkout.shipping_rates("exuw7apwoycchjuwtiqg8nytfhphr62a")
+
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+
+    fixture =
+      Fixture.load(
+        "../test/fixtures/checkouts/exuw7apwoycchjuwtiqg8nytfhphr62a/shipping_rates.json",
+        Checkout.empty_resource()
+      )
+
+    assert fixture == response.data
+  end
+
   test "client can request a checkouts count" do
     assert {:ok, response} = Shopify.session() |> Checkout.count()
     assert %Shopify.Response{} = response
