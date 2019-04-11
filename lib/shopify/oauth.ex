@@ -55,4 +55,34 @@ defmodule Shopify.OAuth do
     |> Request.new("oauth/access_token", %{}, %Shopify.OAuth{}, body)
     |> Client.post()
   end
+
+  @doc """
+  Validates the hmac signature of a Shopify request using the Session's secret
+
+  Returns `Shopify.Session` or `nil`
+
+  ## Parameters
+    - session: A %Shopify.Session{} struct.
+    - params: A map of additional query params.
+    
+  ## Examples
+      iex> Shopify.session("shop-name") |> Shopify.OAuth.authenticate(params)
+      %Shopify.Session{}
+      
+  """
+  def authenticate(session, params) do
+    case valid_hmac?(session.client_secret, params) do
+      true -> session
+      _    -> nil
+    end
+  end
+
+  defp valid_hmac?(secret, params) do
+    hmac  = params["hmac"]
+    query = params |> Map.delete("hmac") |> URI.encode_query
+
+    :crypto.hmac(:sha256, secret, query)
+    |> Base.encode16(case: :lower)
+    |> String.equivalent?(hmac)
+  end
 end
