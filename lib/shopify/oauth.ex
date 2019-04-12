@@ -79,10 +79,38 @@ defmodule Shopify.OAuth do
 
   defp valid_hmac?(secret, params) do
     hmac  = params["hmac"]
-    query = params |> Map.delete("hmac") |> URI.encode_query
 
-    :crypto.hmac(:sha256, secret, query)
+    :crypto.hmac(:sha256, secret, query_string(params))
     |> Base.encode16(case: :lower)
     |> String.equivalent?(hmac)
+  end
+
+  defp query_string(query, nil) do
+    query
+  end
+
+  defp query_string(query, ids) do
+    # Convert the ids to a string representing and array of numeric strings:
+    # ["1", "2", "3"]
+    ids = ids
+    |> Enum.map(fn x -> "\"#{x}\"" end)
+    |> Enum.join(", ")
+
+    # Concatenate the ids back to the query - they must not be URI encoded!
+    # https://community.shopify.com/c/Shopify-APIs-SDKs/HMAC-calculation-vs-ids-arrays/m-p/261154
+    "ids=[#{ids}]&#{query}"
+  end
+
+  defp query_string(params) when is_map(params) do
+    # Extract the ids
+    ids = params["ids"]
+
+    # Remove the ids & hmac parameters and make a query string
+    query = params
+    |> Map.delete("ids")
+    |> Map.delete("hmac")
+    |> URI.encode_query
+
+    query_string(query, ids)
   end
 end
