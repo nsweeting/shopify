@@ -28,6 +28,7 @@ defmodule Shopify.PriceRule do
     :updated_at,
     :prerequisite_subtotal_range,
     :prerequisite_shipping_price_range,
+    :prerequisite_quantity_range,
     :title,
     :entitled_product_ids,
     :entitled_variant_ids,
