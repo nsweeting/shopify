@@ -18,6 +18,7 @@ defmodule Shopify.Image do
   }
 
   defstruct [
+    :alt,
     :created_at,
     :id,
     :position,
