@@ -94,6 +94,26 @@ defmodule Shopify.Checkout do
   def count_url, do: @plural <> "/count.json"
 
   @doc """
+  Retrieves a list of shipping rates for a token.
+
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+  ## Parameters
+    - session: A `%Shopify.Session{}` struct.
+    - token: A checkout token.
+
+  ## Examples
+      iex> Shopify.session |> Shopify.Checkout.shipping_rates("asdfasdfasdf")
+      {:ok, %Shopify.Response{}}
+  """
+  @spec shipping_rates(%Shopify.Session{}, binary) :: {:ok, %__MODULE__{}} | {:error, map}
+  def shipping_rates(session, token) do
+    session
+    |> Request.new(@plural <> "/#{token}/shipping_rates.json", empty_resource())
+    |> Client.get()
+  end
+
+  @doc """
   Requests to mark a comment as complete.
 
   Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`

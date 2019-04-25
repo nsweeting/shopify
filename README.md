@@ -192,6 +192,28 @@ The other important difference is `patch_update` does not provide key validation
 session |> Shopify.Product.update(123123, %Shopify.Product{tgas: nil}) # will raise an error
 # VS
 session |> Shopify.Product.patch_update(123123, %{tgas: nil}) # will not complain at all, making it harder to debug
+
+## Multipass 
+
+The [Multipass](https://help.shopify.com/en/api/reference/plus/multipass) is available to Shopify Plus plans. It allows your non-Shopify site to be the source of truth for authentication and login. After your site has successfully authenticated a user, redirect their browser to Shopify using the special Multipass URL: this will upsert the customer data in Shopify and log them in.
+
+Unlike other API requests, this does not require a session: it relies on a shared secret to do decryption.
+
+Your customer data must at a minimum provide an email address and a current datetime in 8601 format.
+
+```elixir
+customer_data = %{
+  email: "something@test.shopify.com",
+  created_at: DateTime.to_iso8601(Timex.now())
+}
+
+# From your store's checkout settings
+multipass_secret = Application.get_env("MULTIPASS_SECRET")
+
+url = Shopify.Multipass.get_url("myteststore", customer_data, multipass_secret)
+
+# Redirect the browser immediately to the resulting URL:
+"https://myteststore.myshopify.com/account/login/multipass/moaqEVx1Yu9hsvYvVpj-LeRYDtOo6ikicfTZd8tR8-xBMRg8tFjGEfllEcjj2VdbsezmT0XuEdglyQzi_biQPkfLJnP1dkxhNtfzwtt6IMQzu3W0qCPzbrUMD_gLaytPVP-zZZuYiSBqEMNdvzFg3zf0TOQHwbizX2D7It02sFI7ZpTRhfX4m_crV0b-DmmF"
 ```
 
 ## Testing

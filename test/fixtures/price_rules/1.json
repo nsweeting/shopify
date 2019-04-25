@@ -24,6 +24,9 @@
         ],
         "prerequisite_subtotal_range": null,
         "prerequisite_shipping_price_range": null,
+        "prerequisite_quantity_range": {
+            "greater_than_or_equal_to": 2
+        },
         "title": "74NSJ3SK08M0"
     }
 }
