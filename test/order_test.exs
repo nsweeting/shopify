@@ -50,4 +50,22 @@ defmodule Shopify.OrderTest do
     assert 200 == response.code
     assert nil == response.data
   end
+
+  test "client can request to close an order" do
+    assert {:ok, response} = Shopify.session() |> Order.close(1)
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+  end
+
+  test "client can request to open an order" do
+    assert {:ok, response} = Shopify.session() |> Order.open(1)
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+  end
+
+  test "client can request to cancel an order" do
+    assert {:ok, response} = Shopify.session() |> Order.open(1)
+    assert %Shopify.Response{} = response
+    assert 200 == response.code
+  end
 end
