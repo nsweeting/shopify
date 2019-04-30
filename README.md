@@ -137,6 +137,26 @@ new_product = %Shopify.Product{
 {:ok, _} = session |> Shopify.Product.delete(id)
 ```
 
+## API Versioning
+
+Shopify supports [API versioning](https://help.shopify.com/en/api/versioning). By
+default, if you dont specify an api version, your request defaults to the oldest
+supported stable version.
+
+You can specify a default version through application config.
+
+```elixir
+config :shopify, [
+  api_version: "2019-04"
+]
+```
+
+You can also set a specific version per session.
+
+```elixir
+Shopify.session("shop-name", "access-token") |> Shopify.Session.put_api_version("2019-04")
+```
+
 ## Handling Responses
 
 Responses are all returned in the form of a two-item tuple. Any response that has a status
@@ -207,7 +227,7 @@ config :shopify, [
 
 When using oauth, make sure the token passed is `test`, otherwise authentication will fail.
 
-```
+```elixir
 Shopify.session("my-shop.myshopify.com", "test")
 |> Product.all()
 ```
