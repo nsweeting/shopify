@@ -58,6 +58,7 @@ defmodule Shopify.Order do
     :order_number,
     :payment_details,
     :payment_gateway_names,
+    :phone,
     :processed_at,
     :processing_method,
     :referring_site,
