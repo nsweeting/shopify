@@ -176,12 +176,18 @@ defmodule Shopify.Resource do
       end
 
       @doc false
-      def to_json(resource) do
+      def to_json(%{__struct__: _} = resource) do
         resource
         |> Map.from_struct()
         |> Enum.filter(fn {_, v} -> v != nil end)
         |> Enum.into(%{})
-        |> singular_resource
+        |> singular_resource()
+        |> Poison.encode!()
+      end
+
+      def to_json(resource) do
+        resource
+        |> singular_resource()
         |> Poison.encode!()
       end
     end

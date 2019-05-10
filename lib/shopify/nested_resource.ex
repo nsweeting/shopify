@@ -166,24 +166,27 @@ defmodule Shopify.NestedResource do
       @doc false
       def to_json(resource) when is_map(resource) do
         resource
-        |> scrub_resource()
+        |> maybe_scrub_resource()
         |> singular_resource()
         |> Poison.encode!()
       end
 
       def to_json(resources) when is_list(resources) do
         resources
-        |> Enum.map(&scrub_resource/1)
+        |> Enum.map(&maybe_scrub_resource/1)
         |> plural_resource()
         |> Poison.encode!()
       end
 
-      defp scrub_resource(resource) do
+      defp maybe_scrub_resource(%{__struct__: _} = resource) do
         resource
         |> Map.from_struct()
         |> Enum.filter(fn {_, v} -> v != nil end)
         |> Enum.into(%{})
       end
+
+      defp maybe_scrub_resource(resource),
+        do: resource
     end
   end
 end
