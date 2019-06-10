@@ -11,16 +11,18 @@ defmodule Shopify.Session do
     :access_token,
     :client_id,
     :client_secret,
+    :api_version,
     :req_opts
   ]
 
   @type t :: %__MODULE__{
           type: :basic | :oauth,
-          shop_name: binary,
-          api_key: binary | nil,
-          password: binary | nil,
-          access_token: binary | nil,
-          client_id: binary | nil,
+          shop_name: binary(),
+          api_key: binary() | nil,
+          password: binary() | nil,
+          access_token: binary() | nil,
+          client_id: binary() | nil,
+          api_version: binary() | nil,
           req_opts: Keyword.t() | nil
         }
 
@@ -30,7 +32,8 @@ defmodule Shopify.Session do
       type: :basic,
       shop_name: Shopify.scrub_shop_name(shop_name),
       api_key: api_key,
-      password: password
+      password: password,
+      api_version: Config.get(:api_version)
     }
   end
 
@@ -39,7 +42,8 @@ defmodule Shopify.Session do
     %Session{
       type: :oauth,
       shop_name: Shopify.scrub_shop_name(shop_name),
-      access_token: access_token
+      access_token: access_token,
+      api_version: Config.get(:api_version)
     }
   end
 
@@ -49,13 +53,23 @@ defmodule Shopify.Session do
       type: :oauth,
       shop_name: Shopify.scrub_shop_name(shop_name),
       client_id: Config.get(:client_id),
-      client_secret: Config.get(:client_secret)
+      client_secret: Config.get(:client_secret),
+      api_version: Config.get(:api_version)
     }
   end
 
   @spec new() :: Shopify.Session.t()
   def new do
-    new(Shopify.scrub_shop_name(Config.shop_name()), Config.api_key(), Config.password())
+    Config.shop_name()
+    |> Shopify.scrub_shop_name()
+    |> new(Config.api_key(), Config.password())
+  end
+
+  @spec put_api_version(session :: Shopify.Session.t(), api_version :: binary() | nil) ::
+          Shopify.Session.t()
+  def put_api_version(%Session{} = session, api_version)
+      when is_binary(api_version) or is_nil(api_version) do
+    %{session | api_version: api_version}
   end
 
   @spec put_req_opt(session :: Shopify.Session.t(), atom, any) :: Shopify.Session.t()
