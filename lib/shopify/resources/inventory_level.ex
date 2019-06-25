@@ -13,10 +13,9 @@ defmodule Shopify.InventoryLevel do
     ]
 
   defstruct [
-    :id,
-    :sku,
-    :tracked,
-    :created_at,
+    :available,
+    :inventory_item_id,
+    :location_id,
     :updated_at
   ]
 
