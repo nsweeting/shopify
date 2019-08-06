@@ -1,7 +1,7 @@
 defmodule Shopify.Mixfile do
   use Mix.Project
 
-  @version "0.2.3"
+  @version "0.3.1"
 
   def project do
     [

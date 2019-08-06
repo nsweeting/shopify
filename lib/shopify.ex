@@ -29,6 +29,7 @@ defmodule Shopify do
       %Shopify.Session{
         access_token: nil,
         api_key: "my-api-key",
+        api_version: nil,
         client_id: nil,
         client_secret: nil,
         password: "my-password",
@@ -50,6 +51,7 @@ defmodule Shopify do
       %Shopify.Session{
         access_token: "access-token",
         api_key: nil,
+        api_version: nil,
         client_id: nil,
         client_secret: nil,
         password: nil,
