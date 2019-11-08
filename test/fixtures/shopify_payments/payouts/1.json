@@ -1,0 +1,21 @@
+{
+  "payout": {
+    "id": 1,
+    "status": "paid",
+    "date": "2019-11-07",
+    "currency": "USD",
+    "amount": "1175.07",
+    "summary": {
+      "adjustments_fee_amount": "-30.00",
+      "adjustments_gross_amount": "63.22",
+      "charges_fee_amount": "32.69",
+      "charges_gross_amount": "1114.54",
+      "refunds_fee_amount": "0.00",
+      "refunds_gross_amount": "0.00",
+      "reserved_funds_fee_amount": "0.00",
+      "reserved_funds_gross_amount": "0.00",
+      "retried_payouts_fee_amount": "0.00",
+      "retried_payouts_gross_amount": "0.00"
+    }
+  }
+}
