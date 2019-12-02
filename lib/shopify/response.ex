@@ -7,15 +7,16 @@ defmodule Shopify.Response do
 
   defstruct [
     :code,
-    :data
+    :data,
+    :headers
   ]
 
-  def new(%{body: body, code: code}, resource) when code < 300 do
-    {:ok, %Response{code: code, data: resource |> parse_json(body)}}
+  def new(%{body: body, code: code, headers: headers}, resource) when code < 300 do
+    {:ok, %Response{code: code, data: resource |> parse_json(body), headers: headers}}
   end
 
-  def new(%{body: body, code: code}, error) do
-    {:error, %Response{code: code, data: error |> parse_json(body)}}
+  def new(%{body: body, code: code, headers: headers}, error) do
+    {:error, %Response{code: code, data: error |> parse_json(body), headers: headers}}
   end
 
   defp parse_json(_res, body) when is_nil(body) or body == "" do
