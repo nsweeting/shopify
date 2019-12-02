@@ -39,13 +39,13 @@ defmodule Shopify.Adapters.Mock do
     auth = request |> authorize
 
     case auth do
-      {:passed, _} -> Response.new(200, nil, request.resource)
+      {:passed, _} -> Response.new(%{code: 200, body: nil}, request.resource)
       {:failed, _} -> respond(auth)
     end
   end
 
   def respond({:failed, request}) do
-    Response.new(401, nil, request.resource)
+    Response.new(%{code: 401, body: nil}, request.resource)
   end
 
   def respond({:passed, request}) do
@@ -55,11 +55,11 @@ defmodule Shopify.Adapters.Mock do
   end
 
   def respond({:ok, body}, request) do
-    Response.new(200, body, request.resource)
+    Response.new(%{code: 200, body: body}, request.resource)
   end
 
   def respond({:error, _}, request) do
-    Response.new(404, nil, request.resource)
+    Response.new(%{code: 404, body: nil}, request.resource)
   end
 
   def load_resource(%Request{path: path, body: nil}) do

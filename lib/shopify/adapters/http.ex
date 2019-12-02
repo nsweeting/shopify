@@ -29,7 +29,7 @@ defmodule Shopify.Adapters.HTTP do
   end
 
   def handle_response({:ok, %HTTPoison.Response{status_code: code, body: body}}, resource) do
-    Shopify.Response.new(code, body, resource)
+    Shopify.Response.new(%{body: body, code: code}, resource)
   end
 
   def handle_response({:error, %HTTPoison.Error{reason: reason}}, _resource) do

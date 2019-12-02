@@ -10,11 +10,11 @@ defmodule Shopify.Response do
     :data
   ]
 
-  def new(code, body, resource) when code < 300 do
+  def new(%{body: body, code: code}, resource) when code < 300 do
     {:ok, %Response{code: code, data: resource |> parse_json(body)}}
   end
 
-  def new(code, body, error) do
+  def new(%{body: body, code: code}, error) do
     {:error, %Response{code: code, data: error |> parse_json(body)}}
   end
 
