@@ -58,14 +58,14 @@ To gain access to a shop via OAuth, first, generate a permission url based on yo
 
 ```elixir
 params = %{scope: "read_orders,read_products", redirect_uri: "http://my-redirect_uri.com/"}
-permission_url = "shop-name" |> Shopify.session() |> Shopify.OAuth.permission_url(params)
+permission_url = "shop-name" |> Shopify.session() |> Shopify.OAuth.authenticate(params) |> Shopify.OAuth.permission_url(params)
 ```
 
 After a shop has authorized access, they will be redirected to your URI above. The redirect will include
 a payload that contains a 'code'. We can now generate an access token.
 
 ```elixir
-{:ok, %Shopify.Response{data: oauth}} = "shop-name" |> Shopify.session() |> Shopify.OAuth.request_token(code)
+{:ok, %Shopify.Response{data: oauth}} = "shop-name" |> Shopify.session() |> Shopify.OAuth.authenticate(params) |> Shopify.OAuth.request_token(code)
 ```
 
 We can now easily create a new OAuth API session.
