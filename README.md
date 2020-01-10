@@ -235,7 +235,7 @@ Lets say you have a test config file in `your_project/config/test.exs` and tests
 config :shopify, [
   shop_name: "test",
   api_key: "test-key",
-  password: "test-paswword",
+  password: "test-password",
   client_secret: "test-secret",
   client_adapter: Shopify.Adapters.Mock, # Use included Mock adapter
   fixtures_path: Path.expand("../test/fixtures/shopify", __DIR__) # Use fixures in this directory

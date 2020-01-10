@@ -84,7 +84,7 @@ defmodule Shopify.Adapters.Mock do
 
   def basic_auth(request) do
     case URI.parse(request.full_url) do
-      %URI{userinfo: "test:test"} -> {:passed, request}
+      %URI{userinfo: "test-key:test-password"} -> {:passed, request}
       %URI{userinfo: _} -> {:failed, request}
     end
   end
