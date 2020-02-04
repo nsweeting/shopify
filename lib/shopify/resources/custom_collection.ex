@@ -29,7 +29,8 @@ defmodule Shopify.CustomCollection do
     :sort_order,
     :template_suffix,
     :title,
-    :updated_at
+    :updated_at,
+    :collects
   ]
 
   @doc false
