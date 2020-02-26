@@ -5,11 +5,14 @@ defmodule Shopify.CustomerSavedSearch do
   use Shopify.Resource, import: [:all, :find, :create, :update, :delete, :count]
 
   defstruct [
-    :created_at,
-    :id,
-    :name,
-    :query,
-    :updated_at
+    :accepts_marketing,
+    :country,
+    :last_abandoned_order_date,
+    :last_order_date,
+    :orders_count,
+    :state,
+    :tag,
+    :total_spent
   ]
 
   @doc false
