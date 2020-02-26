@@ -19,6 +19,7 @@ defmodule Shopify.PriceRule do
     :customer_selection,
     :target_type,
     :target_selection,
+    :allocation_limit
     :allocation_method,
     :once_per_customer,
     :usage_limit,
@@ -36,7 +37,8 @@ defmodule Shopify.PriceRule do
     :entitled_country_ids,
     :prerequisite_saved_search_ids,
     :prerequisite_customer_ids,
-    :discount_codes
+    :discount_codes,
+    :prerequisite_to_entitlement_quantity_ratio
   ]
 
   @doc false
