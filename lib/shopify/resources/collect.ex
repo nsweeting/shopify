@@ -19,7 +19,6 @@ defmodule Shopify.Collect do
   defstruct [
     :collection_id,
     :created_at,
-    :featured,
     :id,
     :position,
     :product_id,
