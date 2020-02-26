@@ -15,7 +15,6 @@ defmodule Shopify.Event do
     :body,
     :created_at,
     :id,
-    :description,
     :path,
     :message,
     :subject_id,
