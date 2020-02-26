@@ -20,6 +20,7 @@ defmodule Shopify.Webhook do
 
   defstruct [
     :address,
+    :api_version,
     :created_at,
     :fields,
     :format,
