@@ -22,6 +22,7 @@ defmodule Shopify.Customer do
 
   defstruct [
     :accepts_marketing,
+    :accepts_marketing_updated_at,
     :addresses,
     :created_at,
     :currency,
@@ -34,11 +35,14 @@ defmodule Shopify.Customer do
     :last_name,
     :last_order_id,
     :last_order_name,
+    :metafield,
+    :marketing_opt_in_level,
     :note,
     :orders_count,
     :state,
     :tags,
     :tax_exempt,
+    :tax_exemptions,
     :total_spent,
     :updated_at,
     :verified_email,

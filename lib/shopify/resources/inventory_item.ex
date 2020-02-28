@@ -14,6 +14,11 @@ defmodule Shopify.InventoryItem do
     :id,
     :sku,
     :cost,
+    :country_code_of_origin,
+    :country_harmonized_system_codes,
+    :harmonized_system_code,
+    :province_code_of_origin,
+    :requires_shipping,
     :tracked,
     :created_at,
     :updated_at

@@ -14,7 +14,7 @@ defmodule Shopify.SmartCollection do
     ]
 
   alias Shopify.{
-    CustomCollection
+    SmartCollection
   }
 
   defstruct [
@@ -30,12 +30,13 @@ defmodule Shopify.SmartCollection do
     :sort_order,
     :template_suffix,
     :title,
-    :updated_at
+    :updated_at,
+    :products_manually_sorted_count 
   ]
 
   @doc false
   def empty_resource do
-    %CustomCollection{}
+    %SmartCollection{}
   end
 
   @doc false

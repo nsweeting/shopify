@@ -28,6 +28,7 @@ defmodule Shopify.Variant do
     :weight,
     :weight_unit,
     :id,
+    :image_id,
     :inventory_item_id,
     :inventory_management,
     :inventory_policy,
@@ -36,11 +37,12 @@ defmodule Shopify.Variant do
     :option2,
     :option3,
     :position,
+    :presentment_prices,
     :price,
     :product_id,
-    :requires_shipping,
     :sku,
     :taxable,
+    :tax_code,
     :title,
     :updated_at
   ]

@@ -4,8 +4,11 @@ defmodule Shopify.DiscountCode do
   @derive [Poison.Encoder]
 
   defstruct [
-    :amount,
     :code,
-    :type
-  ]
+    :created_at,
+    :updated_at,
+    :id,
+    :price_rule_id,
+    :usage_count
+  ]  
 end
