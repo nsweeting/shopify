@@ -13,7 +13,7 @@ defmodule Shopify.Request do
 
   @headers [
     "Content-Type": "application/json",
-    "Keep-Alive": "timeout=15, max=100",
+    "Keep-Alive": "timeout=#{Shopify.Config.request_timeout()}, max=100",
     "user-agent": "ShopifyElixir/#{Shopify.Config.version()}"
   ]
 
