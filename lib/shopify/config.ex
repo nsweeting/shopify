@@ -13,6 +13,8 @@ defmodule Shopify.Config do
 
   def password, do: get(:password)
 
+  def request_timeout, do: get(:request_timeout)
+
   def version, do: Mix.Project.config()[:version]
 
   def fixtures_path do
