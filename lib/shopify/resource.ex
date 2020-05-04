@@ -20,6 +20,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.find(id)
             {:ok, %Shopify.Response{}}
         """
+        @spec find(%Shopify.Session{}, map) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def find(session, id, params \\ %{}) do
           session
           |> Request.new(find_url(id), params, singular_resource())
@@ -41,6 +43,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.all
             {:ok, %Shopify.Response{}}
         """
+        @spec all(%Shopify.Session{}, map) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def all(session, params \\ %{}) do
           session
           |> Request.new(all_url(), params, plural_resource())
@@ -62,6 +66,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.count
             {:ok, %Shopify.Response{}}
         """
+        @spec count(%Shopify.Session{}, map) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def count(session, params \\ %{}) do
           session
           |> Request.new(count_url(), params, nil)
@@ -83,7 +89,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.search
             {:ok, %Shopify.Response{}}
         """
-        @spec search(%Shopify.Session{}, map) :: {:ok, list} | {:error, map}
+        @spec search(%Shopify.Session{}, map) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def search(session, params \\ %{}) do
           session
           |> Request.new(search_url(), params, plural_resource())
@@ -105,7 +112,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.create(%Shopify.Product{})
             {:ok, %Shopify.Response{}}
         """
-        @spec create(%Shopify.Session{}, map) :: {:ok, list} | {:error, map}
+        @spec create(%Shopify.Session{}, map) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def create(session, new_resource) do
           body = new_resource |> to_json
 
@@ -130,6 +138,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.update(id, %Shopify.Product{})
             {:ok, %Shopify.Response{}}
         """
+        @spec update(%Shopify.Session{}, String.t(), map) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def update(session, id, updated_resource) do
           body = updated_resource |> to_json
 
@@ -153,6 +163,8 @@ defmodule Shopify.Resource do
             iex> Shopify.session |> Shopify.Product.delete(id)
             {:ok, %Shopify.Response{}}
         """
+        @spec delete(%Shopify.Session{}, String.t()) ::
+                {:ok, Shopify.Response.t()} | {:error, Shopify.Error.t()}
         def delete(session, id) do
           session
           |> Request.new(find_url(id), %{}, nil)
