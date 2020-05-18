@@ -14,7 +14,7 @@ defmodule Shopify.SmartCollection do
     ]
 
   alias Shopify.{
-    CustomCollection
+    SmartCollection
   }
 
   defstruct [
@@ -35,7 +35,7 @@ defmodule Shopify.SmartCollection do
 
   @doc false
   def empty_resource do
-    %CustomCollection{}
+    %SmartCollection{}
   end
 
   @doc false
