@@ -15,19 +15,19 @@ defmodule Shopify.Enumerable do
 
     def reduce(%Shopify.Enumerable{}, {:halt, acc}, _fun), do: {:halted, acc}
 
-    def reduce(%Shopify.Enumerable{} = e, {:suspend, acc}, fun) do
-      {:suspended, acc, &reduce(e, &1, fun)}
+    def reduce(%Shopify.Enumerable{} = enum, {:suspend, acc}, fun) do
+      {:suspended, acc, &reduce(enum, &1, fun)}
     end
 
     def reduce(%Shopify.Enumerable{data: [], params: nil}, {:cont, acc}, _fun) do
       {:done, acc}
     end
 
-    def reduce(%Shopify.Enumerable{data: []} = e, {:cont, acc}, fun) do
-      case e.middleware.(fn -> e.func.(e.session, e.params) end) do
+    def reduce(%Shopify.Enumerable{data: []} = enum, {:cont, acc}, fun) do
+      case enum.middleware.(fn -> enum.func.(enum.session, enum.params) end) do
         {:ok, %Response{data: data} = resp} ->
           reduce(
-            %{e | data: data, params: Pagination.next_page_params(resp)},
+            %{enum | data: data, params: Pagination.next_page_params(resp)},
             {:cont, acc},
             fun
           )
@@ -37,8 +37,8 @@ defmodule Shopify.Enumerable do
       end
     end
 
-    def reduce(%Shopify.Enumerable{data: [h | t]} = e, {:cont, acc}, fun) do
-      reduce(%{e | data: t}, fun.(h, acc), fun)
+    def reduce(%Shopify.Enumerable{data: [h | t]} = enum, {:cont, acc}, fun) do
+      reduce(%{enum | data: t}, fun.(h, acc), fun)
     end
   end
 end
