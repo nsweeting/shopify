@@ -37,8 +37,8 @@ defmodule Shopify.Enumerable do
       end
     end
 
-    def reduce(%Shopify.Enumerable{data: [h | t]} = enum, {:cont, acc}, fun) do
-      reduce(%{enum | data: t}, fun.(h, acc), fun)
+    def reduce(%Shopify.Enumerable{data: [head | tail]} = enum, {:cont, acc}, fun) do
+      reduce(%{enum | data: tail}, fun.(head, acc), fun)
     end
   end
 end
