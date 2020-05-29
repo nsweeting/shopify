@@ -135,4 +135,83 @@ defmodule Shopify.Order do
 
   @doc false
   def count_url, do: @plural <> "/count.json"
+
+  defp non_rest_url(id, sub_url), do: @plural <> "/#{id}/#{sub_url}.json"
+
+  defp non_rest_post(session, id, sub_url, opts \\ %{}) do
+    session
+    |> Request.new(non_rest_url(id, sub_url), opts, empty_resource())
+    |> Client.post()
+  end
+
+  @doc """
+  Requests to close an order, see https://help.shopify.com/en/api/reference/orders/order#close.
+
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+  ## Parameters
+    - session: A `%Shopify.Session{}` struct.
+    - id: The id of the resource.
+
+  ## Examples
+      iex> Shopify.session |> Shopify.Order.close(1)
+      {:ok, %Shopify.Response{}}
+  """
+  @spec close(%Shopify.Session{}, integer) :: {:ok, %__MODULE__{}} | {:error, map}
+  def close(session, id) do
+    session |> non_rest_post(id, "close")
+  end
+
+  @doc """
+  Requests to open an order, see https://help.shopify.com/en/api/reference/orders/order#open.
+
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+  ## Parameters
+    - session: A `%Shopify.Session{}` struct.
+    - id: The id of the resource.
+
+  ## Examples
+      iex> Shopify.session |> Shopify.Order.open(1)
+      {:ok, %Shopify.Response{}}
+  """
+  @spec open(%Shopify.Session{}, integer) :: {:ok, %__MODULE__{}} | {:error, map}
+  def open(session, id) do
+    session |> non_rest_post(id, "open")
+  end
+
+  @doc """
+  Requests to open an order, see https://help.shopify.com/en/api/reference/orders/order#cancel.
+  amount
+
+  Returns `{:ok, %Shopify.Response{}}` or `{:error, %Shopify.Response{}}`
+
+  ### Options
+  * *amount* The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status.
+
+  * *currency* The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
+
+  * *restock* (_deprecated_) Whether to restock refunded items back to your store's inventory.
+
+  * *reason* The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
+
+  * *email* Whether to send an email to the customer notifying them of the cancellation.
+
+  * *refund* The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
+
+  ## Parameters
+    - session: A `%Shopify.Session{}` struct.
+    - id: The id of the resource.
+
+  ## Examples
+      iex> Shopify.session() |> Shopify.Order.cancel(1)
+      {:ok, %Shopify.Response{}}
+
+      iex> Shopify.session() |> Shopify.Order.cancel(1, %{restock: true, amount: 120, currency: "USD"})
+      {:ok, %Shopify.Response{}}
+  """
+  @spec cancel(%Shopify.Session{}, integer) :: {:ok, %__MODULE__{}} | {:error, map}
+  def cancel(session, id, opts \\ %{}) do
+    session |> non_rest_post(id, "cancel", opts)
+  end
 end
