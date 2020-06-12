@@ -51,7 +51,8 @@ defmodule Shopify.DraftOrder do
     :completed_at,
     :created_at,
     :updated_at,
-    :status
+    :status,
+    :use_customer_default_address
   ]
 
   @doc false
