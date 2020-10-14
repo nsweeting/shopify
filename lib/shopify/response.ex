@@ -28,6 +28,7 @@ defmodule Shopify.Response do
       {:ok, %Shopify.OAuth{} = oauth} -> oauth
       {:ok, resource} -> parse_resource(resource)
       {:error, _} -> nil
+      {:error, _, _} -> nil # Poison 3.x bug
     end
   end
 
