@@ -134,5 +134,6 @@ defmodule Shopify.InventoryLevel do
   @doc false
   def all_url, do: @plural <> ".json"
 
-  defp unprocessable_entity(msg), do: Shopify.Response.new(%{body: msg, code: 422, headers: []}, empty_resource())
+  defp unprocessable_entity(msg),
+    do: Shopify.Response.new(%{body: msg, code: 422, headers: []}, empty_resource())
 end

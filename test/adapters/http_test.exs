@@ -10,13 +10,16 @@ defmodule Shopify.Adapters.HTTPTest do
   end
 
   test "it returns correct Response struct" do
-    result = {:ok, %HTTPoison.Response{
-      body: "{\"product\":{\"id\":123}}",
-      headers: [{"X-Shopify-Shop-Api-Call-Limit", "1/80"}],
-      status_code: 200
-    }}
+    result =
+      {:ok,
+       %HTTPoison.Response{
+         body: "{\"product\":{\"id\":123}}",
+         headers: [{"X-Shopify-Shop-Api-Call-Limit", "1/80"}],
+         status_code: 200
+       }}
 
-    assert {:ok, %Response{} = response} = HTTP.handle_response(result, %{"product" => %Product{}})
+    assert {:ok, %Response{} = response} =
+             HTTP.handle_response(result, %{"product" => %Product{}})
 
     assert response.code == 200
     assert response.data == %Product{id: 123}
