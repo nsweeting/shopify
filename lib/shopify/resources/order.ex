@@ -30,6 +30,9 @@ defmodule Shopify.Order do
   }
 
   defstruct [
+    :send_receipt,
+    :send_fulfillment_receipt,
+    :inventory_behaviour,
     :billing_address,
     :browser_ip,
     :buyer_accepts_marketing,
