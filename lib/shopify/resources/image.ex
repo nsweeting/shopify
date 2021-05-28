@@ -25,7 +25,9 @@ defmodule Shopify.Image do
     :product_id,
     :src,
     :updated_at,
-    :variant_ids
+    :variant_ids,
+    :width,
+    :height
   ]
 
   @doc false

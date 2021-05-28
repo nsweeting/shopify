@@ -26,7 +26,8 @@ defmodule Shopify.Page do
     :published_at,
     :template_suffix,
     :published,
-    :metafields
+    :metafields,
+    :collects
   ]
 
   @doc false
