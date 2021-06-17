@@ -81,11 +81,12 @@ defmodule Shopify.Multipass do
     initialization_vector = :crypto.strong_rand_bytes(block_size)
 
     initialization_vector <>
-      :crypto.block_encrypt(
-        :aes_cbc128,
+      :crypto.crypto_one_time(
+        :aes_128_cbc,
         encryption_key,
         initialization_vector,
-        pad(message, block_size)
+        pad(message, block_size),
+        true
       )
   end
 
@@ -94,7 +95,7 @@ defmodule Shopify.Multipass do
   """
   @spec sign(binary, binary) :: binary
   def sign(cipher_text, signature_key) do
-    signature = :crypto.hmac(:sha256, signature_key, cipher_text)
+    signature = :crypto.mac(:hmac, :sha256, signature_key, cipher_text)
     cipher_text <> signature
   end
 

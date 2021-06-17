@@ -44,7 +44,7 @@ defmodule Shopify.Webhook do
       
   """
   def authenticate(hmac, body) when is_binary(hmac) and is_binary(body) do
-    :crypto.hmac(:sha256, Config.get(:client_secret), body)
+    :crypto.mac(:hmac, :sha256, Config.get(:client_secret), body)
     |> Base.encode64()
     |> String.equivalent?(hmac)
   end
