@@ -64,13 +64,19 @@ defmodule Shopify.WebhookTest do
 
   test "authorized webhooks will return true" do
     body = ~s({"foo": "bar"})
-    hmac = :crypto.hmac(:sha256, Shopify.Config.get(:client_secret), body) |> Base.encode64()
+
+    hmac =
+      :crypto.mac(:hmac, :sha256, Shopify.Config.get(:client_secret), body) |> Base.encode64()
+
     assert Webhook.authenticate(hmac, body)
   end
 
   test "unauthorized webhooks will return false" do
     body = ~s({"foo": "bar"})
-    hmac = :crypto.hmac(:sha256, Shopify.Config.get(:client_secret), body) |> Base.encode64()
+
+    hmac =
+      :crypto.mac(:hmac, :sha256, Shopify.Config.get(:client_secret), body) |> Base.encode64()
+
     refute Webhook.authenticate(hmac, ~s({"foo": "baz"}))
   end
 end
