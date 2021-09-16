@@ -1,5 +1,13 @@
 # Shopify API
 
+## :fire: This package is unmaintained! :fire:
+
+We are really sorry, but the rapid rate Shopify is updating their REST API makes it very labor intensive. We would have to keep multiple branches, for every ShopifyAPI version, and make sure all of them are up to date at least security and function wise.
+
+My recommendation is to use the GraphQL API.
+
+If you insist on using REST and prebuilt structs, feel free to fork this repo as a blue print.
+
 [![Build Status](https://travis-ci.org/nsweeting/shopify.svg?branch=master)](https://travis-ci.org/nsweeting/shopify)
 [![Hex.pm](https://img.shields.io/hexpm/v/shopify.svg)](https://hex.pm/packages/shopify)
 
