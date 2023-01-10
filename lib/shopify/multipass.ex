@@ -5,8 +5,7 @@ defmodule Shopify.Multipass do
   [https://help.shopify.com/en/api/reference/plus/multipass](https://help.shopify.com/en/api/reference/plus/multipass)
   """
 
-  # The size of the crypto used by http://erlang.org/doc/man/crypto.html#block_encrypt-4
-  # Refer to the erlang docs as to which block sizes are allowed
+  # The size of the crypto used
   @block_size 16
 
   @doc ~S"""
@@ -64,7 +63,6 @@ defmodule Shopify.Multipass do
   @doc ~S"""
   Pads the message string with extra bytes to ensure it is evenly divisible by
   the block size.
-  See [http://erlang.org/doc/man/crypto.html#block_encrypt-4](http://erlang.org/doc/man/crypto.html#block_encrypt-4)
   """
   @spec pad(binary, integer) :: binary
   def pad(string, block_size \\ @block_size) do
@@ -81,11 +79,12 @@ defmodule Shopify.Multipass do
     initialization_vector = :crypto.strong_rand_bytes(block_size)
 
     initialization_vector <>
-      :crypto.block_encrypt(
-        :aes_cbc128,
+      :crypto.crypto_one_time(
+        :aes_128_cbc,
         encryption_key,
         initialization_vector,
-        pad(message, block_size)
+        pad(message, block_size),
+        true
       )
   end
 
@@ -94,7 +93,7 @@ defmodule Shopify.Multipass do
   """
   @spec sign(binary, binary) :: binary
   def sign(cipher_text, signature_key) do
-    signature = :crypto.hmac(:sha256, signature_key, cipher_text)
+    signature = :crypto.mac(:hmac, :sha256, signature_key, cipher_text)
     cipher_text <> signature
   end
 
